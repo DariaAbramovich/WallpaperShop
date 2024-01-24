@@ -3,19 +3,20 @@ import Swiper from 'swiper';
 
 import 'swiper/css';
 import './products.scss'
-import wapllpaper1 from './../../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg'
-import wapllpaper2 from './../../assets/image/wallpaper/1084306_arteks_648ad40ba35b6.jpeg'
-import wapllpaper3 from './../../assets/image/wallpaper/1084308_arteks_648ad4843db18.jpeg'
-import wapllpaper4 from './../../assets/image/wallpaper/1084408_arteks_648ad7f9b835a.jpeg'
-import wapllpaper5 from './../../assets/image/wallpaper/32906_elysium_61507a01cc276.jpeg'
-import wapllpaper7 from './../../assets/image/wallpaper/7047444_aspect__6489a1ac6ff98.jpeg'
-import wapllpaper8 from './../../assets/image/wallpaper/7047544_aspect__64886e29ab91d.jpeg'
-import wapllpaper9 from './../../assets/image/wallpaper/7047764_aspect__6489a6c063ea1.jpeg'
+import wapllpaper1 from './../../../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg'
+import wapllpaper2 from './../../../assets/image/wallpaper/1084306_arteks_648ad40ba35b6.jpeg'
+import wapllpaper3 from './../../../assets/image/wallpaper/1084308_arteks_648ad4843db18.jpeg'
+import wapllpaper4 from './../../../assets/image/wallpaper/1084408_arteks_648ad7f9b835a.jpeg'
+import wapllpaper5 from './../../../assets/image/wallpaper/32906_elysium_61507a01cc276.jpeg'
+import wapllpaper7 from './../../../assets/image/wallpaper/7047444_aspect__6489a1ac6ff98.jpeg'
+import wapllpaper8 from './../../../assets/image/wallpaper/7047544_aspect__64886e29ab91d.jpeg'
+import wapllpaper9 from './../../../assets/image/wallpaper/7047764_aspect__6489a6c063ea1.jpeg'
 
-import plas from './../../assets/icon/Plus.png';
-import btn_left from './../../assets/icon/arrov-left.svg'
-import btn_right from './../../assets/icon/arrov-right.svg'
-export const Products = () => {
+import plas from './../../../assets/icon/Plus.png';
+import btn_left from './../../../assets/icon/arrov-left.svg'
+import btn_right from './../../../assets/icon/arrov-right.svg'
+
+const ProductsComponent = () => {
     const swiper = new Swiper('.swiper', {
         slidesPerView: 4,
         spaceBetween: 40,   
@@ -306,3 +307,5 @@ export const Products = () => {
         </>
     )
 }
+
+export default ProductsComponent;

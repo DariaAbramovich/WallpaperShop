@@ -1,13 +1,13 @@
+import { Container } from '../../components/container'
 import { Navbar } from '../Navbar/navbar'
 import { Search } from '../Search/search'
+import { ProductsContainer } from './Products/products.container'
 import './home.scss'
 
-
-
-
-export const Home = () => {
+const HomeComponent = () => {
     return (
         <>
+           
             <header className="header">
                 <div className="container">
                     <Navbar />
@@ -17,9 +17,11 @@ export const Home = () => {
                         <Search />
                     </div>
                 </div>
-                
             </header>
+            <ProductsContainer/>
+           
         </>
     )
 }
+export default HomeComponent;
 

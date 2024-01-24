@@ -7,7 +7,7 @@ html, body{
 
 }
 body{
-    padding-bottom: 50vh;
+    /* padding-bottom: 50vh; */
 }
 
 .container{
@@ -17,7 +17,6 @@ body{
 }
 .container-small{
     max-width: 1094px;
-
 }
 .none{
     display: none !important;
