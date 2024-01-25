@@ -1,0 +1,75 @@
+// .header__search {
+//     margin: 0px auto;
+//     margin-top: -100px; 
+// }
+
+.cataloge{
+    margin-top: 50px;
+   
+}
+.cataloge-wrapper{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    gap: 15px;
+    margin-left: -50px;
+
+}
+.cataloge-filter{
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent rgb(148, 148, 148) transparent transparent;
+    margin-right: 30px;
+}
+.filter-title{
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: var(--font-footer-accent);
+    font-size: 19px;
+    letter-spacing: -0.232px;
+}
+
+.filter__param{
+    font-size: 18px;
+    color: rgb(55, 55, 55);
+}
+.input-price{
+    margin: 15px;
+    margin-bottom: 25px;
+  
+}
+.price__from{
+    height: 25px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent transparent  rgb(148, 148, 148) transparent;
+    margin-bottom: 15px;
+}
+.price__to{
+    height: 25px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent transparent  rgb(148, 148, 148) transparent;
+   
+}
+
+.brend-form{
+    margin: 15px;
+}
+// 
+
+.catalog-title{
+    font-size: 22px;
+    font-weight: 500;
+    padding-bottom: 30px;
+
+}
+.cataloge-cards{
+    // background-color: aquamarine;    
+}
+.card-wrapper{
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr;
+    // gap: 10px 0;
+    margin-left: 30px;
+}
+

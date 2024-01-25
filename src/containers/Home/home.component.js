@@ -7,7 +7,6 @@ import './home.scss'
 const HomeComponent = () => {
     return (
         <>
-           
             <header className="header">
                 <div className="container">
                     <Navbar />

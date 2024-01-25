@@ -1,6 +1,5 @@
 
 .search-form{
-
     display: flex;
     gap: 10px;
     max-width: 344px;
@@ -24,7 +23,7 @@
 }
 .search-form__input:hover{
     color: #000000;
-    font-weight: 400;
+    font-weight: 500;
 }
 .search-form__btn{
     flex-shrink: 0;

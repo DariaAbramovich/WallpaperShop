@@ -1,4 +1,5 @@
 import {ThemeProvider} from "styled-components";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import 'swiper/css';
 import './css/App.css';
 import './css/reset.css';
@@ -6,6 +7,7 @@ import './css/base.css';
 import './css/vars.css';
 
 import { HomeContainer } from './containers/Home/home.container';
+import { CatalogeContainer } from "./containers/cataloge/cataloge.container";
 
 
 const colors = {
@@ -32,15 +34,32 @@ const theme = {
   ...colors,
   ...breakpoints,
 }
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomeContainer/>
+  },
+  {
+    path: "cataloge/",
+    element: <CatalogeContainer/>,
+    // loader: async ({ params }) => {
+    //   try {
+    //     return await MovieService.getMovieDetailed(params.movieId);
+    //   }
+    //   catch (e) {
+    //     console.error(e);
+    //     return {data: {}};
+    //   }
+    // },
+  },
+]);
 
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-
-        <HomeContainer />
-
+        <RouterProvider router={router} />
       </div>
     </ThemeProvider>
   );

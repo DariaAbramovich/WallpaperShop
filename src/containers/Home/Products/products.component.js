@@ -253,7 +253,7 @@ const ProductsComponent = () => {
                                             <h3 className="card__title">
                                                 Sakarias Armchair
                                             </h3>
-                                            <div className="card__footer">
+                                            <div className="card__cofooter">
                                                 <div className="card__price" data-value="BY">
                                                     392
                                                 </div>
@@ -301,7 +301,7 @@ const ProductsComponent = () => {
                         </div>
 
                     </div>  
-                    <div className="products__link"> <a className="read-more large" href="#">Vie all</a></div>
+                    <div className="products__link"> <a className="read-more large" href="cataloge">Vie all</a></div>
                 </div>
             </section>
         </>
