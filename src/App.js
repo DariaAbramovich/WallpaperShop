@@ -8,6 +8,8 @@ import './css/vars.css';
 
 import { HomeContainer } from './containers/Home/home.container';
 import { CatalogeContainer } from "./containers/cataloge/cataloge.container";
+import { ShopData } from "./core/api";
+import { AddProductContainer } from "./containers/adminPart/addProduct/addProduct.container";
 
 
 const colors = {
@@ -42,16 +44,13 @@ const router = createBrowserRouter([
   {
     path: "cataloge/",
     element: <CatalogeContainer/>,
-    // loader: async ({ params }) => {
-    //   try {
-    //     return await MovieService.getMovieDetailed(params.movieId);
-    //   }
-    //   catch (e) {
-    //     console.error(e);
-    //     return {data: {}};
-    //   }
-    // },
+   
   },
+  {
+    path: "/constructor/",
+    element: <AddProductContainer/>
+  }
+
 ]);
 
 

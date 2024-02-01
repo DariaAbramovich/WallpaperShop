@@ -2,6 +2,26 @@
 //     margin: 0px auto;
 //     margin-top: -100px; 
 // }
+.search-position{
+    margin-top: -130px;
+    margin-left: 400px;
+}
+.search__wrapper{
+    display: flex;
+    gap: 10px;
+    max-width: 444px;
+    padding: 8px 8px 8px 20px;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+
+    border-radius: 42px;
+    border: 0.862px solid rgba(104, 104, 104, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+
+}
+
 
 .cataloge{
     margin-top: 50px;

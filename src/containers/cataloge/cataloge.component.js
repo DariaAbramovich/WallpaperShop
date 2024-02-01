@@ -1,12 +1,33 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { Card } from "../../components/card.js";
-import { Search } from "../Search/search";
+import { Search, SearchRe } from "../Search/search";
 import './cataloge.scss'
 
 
-const CatalogeComponent = () => (
+
+
+const CatalogeComponent = () => {
+    const [productData, setProductData] = useState([]);
+    useEffect ( ()=>{
+        const getProductData = async ()=>{
+            const reqData = await fetch('http://localhost/api/index.php')
+            const resData = await reqData.json();
+            console.log(resData);
+            setProductData(resData);
+        }
+        getProductData()
+},[])
+
+    
+    return(
     <>
         <div className="container">
-            <Search />
+            <div className="search-position">
+                <div className="search__wrapper">
+                    <Search />
+                </div>
+            </div>
             <div className="cataloge">
                 <div className="cataloge-wrapper">
                     <div className="cataloge-filter">
@@ -271,6 +292,21 @@ const CatalogeComponent = () => (
                     <div className="cataloge-cards">
                         <h3 className="catalog-title">Каталог</h3>
                         <div className="card-wrapper">
+                            {
+                               
+                                productData.map((pData, index)=>{
+                                    console.log('movie', pData)
+                                    
+                                    const {NameProduct, Type, PriceProduct, PhotoProduct} = pData;
+                                    
+                                    return (
+                                        <Card nameproduct={NameProduct} type={Type} priceProduct={PriceProduct} photoProduct={PhotoProduct} />
+                                        // <Card key={index}>
+                                      )
+                                })
+                               
+                            }
+                    
                             <Card />
                             <Card />
                             <Card />
@@ -284,5 +320,7 @@ const CatalogeComponent = () => (
             </div >
         </div>
     </>
-)
+    )
+}
+
 export default CatalogeComponent;

@@ -13,12 +13,14 @@ const HomeComponent = () => {
                     <div className="header__content">
                         <h1 className="header__title">Безупречная жизнь начинается дома.</h1>
                         <p>Воплощайте вместе с нами свои самые яркие мечты!</p>
-                        <Search />
+                        <div className="header__search search-form">
+                            <Search />
+                        </div>
                     </div>
                 </div>
             </header>
-            <ProductsContainer/>
-           
+            <ProductsContainer />
+
         </>
     )
 }

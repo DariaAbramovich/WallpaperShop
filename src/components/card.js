@@ -25,7 +25,7 @@ const CardImageWrapper = styled.div`
     text-align: center;
 `;
 
-const CardImage = styled.img`
+const CardImage = styled.div`
     margin-top: -50px;
 `;
 
@@ -105,24 +105,27 @@ const CardName = styled.div`
     font-weight: 500;
 `
 
-export const Card = () => (
+
+export const Card = ({nameproduct, type, priceProduct, photoProduct}) => (
     <CardWrapper>
         <CardLink to={`/product/`}>
 
             <CardImageWrapper>
-                <CardImage src={image} />
+                <CardImage>
+                  <img src={`http://localhost/api/${photoProduct}`} alt=""/>
+                </CardImage>
             </CardImageWrapper>
 
             <CardDescription>
                 <CardCategory>
-                    category
+                   {type}
                 </CardCategory>
                 <CardName >
-                Флизелиновые обои Аспект 70474-66
+               {nameproduct}
                 </CardName>
                 <CardFooter>
                     <CardPrice>
-                        987 руб
+                        {priceProduct} руб
                     </CardPrice>
                     <CardBtn>
                     <img src={plas} alt="" />
