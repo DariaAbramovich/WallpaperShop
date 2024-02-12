@@ -27,14 +27,7 @@ const RegistredComponent = () => {
     const [errorEmail, setErrorEmail] = useState("Поле почта не должно быть пустым");
     const [errorLogin, setErrorLogin] = useState("Поле логин не должно быть пустым");
     const [errorPassword, setErrorPassword] = useState("Поле пароль не должно быть пустым");
-
-    const [error, setError] = useState("");
-    const [msg, setMsg] = useState("");
-    useEffect(() => {
-        setTimeout(function () {
-            setMsg("");
-        }, 1500)
-    }, [msg])
+   
 
     const [inputs, setInputs] = useState({})
 
@@ -57,6 +50,71 @@ const RegistredComponent = () => {
             setErrorName("Некорректное имя");
         }
     }
+    const surnameHangler = (e) =>{
+        setSurName(e.target.value);
+        const re = /^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$/;
+        if(re.test(e.target.value)){
+            setErrorSurName("");
+            const name = e.target.name;
+            const value = e.target.value;
+            setInputs(values => ({ ...values, [name]: value }))
+        }
+        else{
+            setErrorSurName("Некорректная фамилия");
+        }
+    }
+    const phoneHangler = (e) =>{
+        setPhone(e.target.value);
+        const re = /^\+?(\d{1,3})?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/;
+        if(re.test(e.target.value)){
+            setErrorPhone("");
+            const name = e.target.name;
+            const value = e.target.value;
+            setInputs(values => ({ ...values, [name]: value }))
+        }
+        else{
+            setErrorPhone("Некорректный телефон");
+        }
+    }
+    const emailHangler = (e) =>{
+        setEmail(e.target.value);
+        const re = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
+        if(re.test(e.target.value)){
+            setErrorEmail("");
+            const name = e.target.name;
+            const value = e.target.value;
+            setInputs(values => ({ ...values, [name]: value }))
+        }
+        else{
+            setErrorEmail("Некорректная почта");
+        }
+    }
+    const loginHangler = (e) =>{
+        setLogin(e.target.value);
+        const re = /^[a-z0-9_-]{3,16}$/;
+        if(re.test(e.target.value)){
+            setErrorLogin("");
+            const name = e.target.name;
+            const value = e.target.value;
+            setInputs(values => ({ ...values, [name]: value }))
+        }
+        else{
+            setErrorLogin("Некорректный логин");
+        }
+    }
+    const passnHangler = (e) =>{
+        setPassword(e.target.value);
+        const re = /^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$/;
+        if(re.test(e.target.value)){
+            setErrorPassword("");
+            const name = e.target.name;
+            const value = e.target.value;
+            setInputs(values => ({ ...values, [name]: value }))
+        }
+        else{
+            setErrorPassword("Ненадежный пароль");
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost/api/user.php', inputs).
@@ -65,19 +123,28 @@ const RegistredComponent = () => {
                 console.log(inputs)
                 // navigate('/')
             })
-            .then((response) => {
-                setMsg(response[0].result);
-                console.log(response)
-
-            }).catch((err) => {
-                console.log(err);
-            })
+           
     }
 
     const blurHandler = (e) =>{
         switch(e.target.name){
             case 'name':
                 setDirtyName(true);
+            break;
+            case 'surName':
+                setDirtySurName(true);
+            break;
+            case 'phone':
+                setDirtyPhone(true);
+            break;
+            case 'email':
+                setDirtyEmail(true);
+            break;
+            case 'login':
+                setDirtyLogin(true);
+            break;
+            case 'password':
+                setDirtyPassword(true);
             break;
         }
     }
@@ -195,55 +262,75 @@ const RegistredComponent = () => {
 
                     <div className="plase-input">
                         <label className="labels">Фамилия</label>
+                        { (dirtySurName && errorSurName) && <div style={{color:'red'}}>{errorSurName}</div>}
+
                         <input
                             className="reg-input"
                             type="text"
                             name='surName'
                             id='surName'
-                            onChange={handleCange}
+                            onChange={e => surnameHangler(e)}
+                            value={surName}
+                            onBlur={e => blurHandler(e)}
                             placeholder="введите фамилию" />
                     </div>
 
                     <div className="plase-input">
                         <label className="labels">Телефон</label>
+                        { (dirtyPhone && errorPhone) && <div style={{color:'red'}}>{errorPhone}</div>}
+
                         <input
                             className="reg-input"
                             type="text"
                             name='phone'
                             id='phone'
-                            onChange={handleCange}
+                            onChange={e => phoneHangler(e)}
+                            value={phone}
+                            onBlur={e => blurHandler(e)}
                             placeholder="+375 ХХ ХХХ ХХ ХХ" />
                     </div>
 
                     <div className="plase-input">
                         <label className="labels">Почта</label>
+                        { (dirtyEmail && errorEmail) && <div style={{color:'red'}}>{errorEmail}</div>}
+
                         <input
                             className="reg-input"
                             type="text"
                             name='email'
                             id='email'
-                            onChange={handleCange}
+                            onChange={e => emailHangler(e)}
+                            value={email}
+                            onBlur={e => blurHandler(e)}
                             placeholder="gmail@gmail.com" />
                     </div>
 
                     <div className="plase-input">
                         <label className="labels">Логин</label>
+                        { (dirtyLogin && errorLogin) && <div style={{color:'red'}}>{errorLogin}</div>}
+
                         <input
                             className="reg-input"
                             type="text"
                             name='login'
                             id='login'
-                            onChange={handleCange}
+                            onChange={e => loginHangler(e)}
+                            value={login}
+                            onBlur={e => blurHandler(e)}
                             placeholder="введите логин" />
                     </div>
                     <div className="plase-input">
                         <label className="labels">Пароль</label>
+                        { (dirtyPassword && errorPassword) && <div style={{color:'red'}}>{errorPassword}</div>}
+
                         <input
                             className="reg-input"
                             type="password"
                             name='password'
                             id='password'
-                            onChange={handleCange}
+                            onChange={e => passnHangler(e)}
+                            value={password}
+                            onBlur={e => blurHandler(e)}
                             placeholder="введите пароль" />
                     </div>
                     <div>
