@@ -106,26 +106,26 @@ const CardName = styled.div`
 `
 
 
-export const Card = ({nameproduct, type, priceProduct, photoProduct}) => (
+export const Card = ({nameproduct, photoProduct}) => (
     <CardWrapper>
         <CardLink to={`/product/`}>
 
             <CardImageWrapper>
                 <CardImage>
-                  <img src={`http://localhost/api/${photoProduct}`} alt=""/>
+                  <img src={photoProduct} alt=""/>
                 </CardImage>
             </CardImageWrapper>
 
             <CardDescription>
                 <CardCategory>
-                   {type}
+                   type
                 </CardCategory>
                 <CardName >
                {nameproduct}
                 </CardName>
                 <CardFooter>
                     <CardPrice>
-                        {priceProduct} руб
+                        priceProduct руб
                     </CardPrice>
                     <CardBtn>
                     <img src={plas} alt="" />

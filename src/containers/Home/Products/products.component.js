@@ -17,6 +17,8 @@ import btn_left from './../../../assets/icon/arrov-left.svg'
 import btn_right from './../../../assets/icon/arrov-right.svg'
 
 const ProductsComponent = () => {
+
+    
     const swiper = new Swiper('.swiper', {
         slidesPerView: 4,
         spaceBetween: 40,   

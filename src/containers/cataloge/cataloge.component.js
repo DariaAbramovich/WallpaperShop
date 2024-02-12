@@ -6,20 +6,32 @@ import './cataloge.scss'
 
 
 
-
 const CatalogeComponent = () => {
+//     const [productData, setProductData] = useState([]);
+//     useEffect ( ()=>{
+//         const getProductData = async ()=>{
+//             const reqData = await fetch('http://localhost/api/index.php')
+//             const resData = await reqData.json();
+//             console.log(resData);
+//             setProductData(resData);
+//         }
+//         getProductData()
+// },[])
+    const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
-    useEffect ( ()=>{
-        const getProductData = async ()=>{
-            const reqData = await fetch('http://localhost/api/index.php')
-            const resData = await reqData.json();
-            console.log(resData);
-            setProductData(resData);
-        }
-        getProductData()
-},[])
-
+    useEffect(()=>{
+        getProducts();
+    },[])
+    const  getProducts = (e) => {
     
+        axios.get('http://localhost/api/product.php', inputs).
+            then(function (response) {
+                console.log(response.data);
+                setProductData(response.data);
+              
+            })
+    }
+
     return(
     <>
         <div className="container">
@@ -297,10 +309,10 @@ const CatalogeComponent = () => {
                                 productData.map((pData, index)=>{
                                     console.log('movie', pData)
                                     
-                                    const {NameProduct, Type, PriceProduct, PhotoProduct} = pData;
-                                    
+                                    const {NameProduct, Photo} = pData;
+                                    console.log('photo:',Photo);
                                     return (
-                                        <Card nameproduct={NameProduct} type={Type} priceProduct={PriceProduct} photoProduct={PhotoProduct} />
+                                        <Card nameproduct={NameProduct} photoProduct={Photo} />
                                         // <Card key={index}>
                                       )
                                 })

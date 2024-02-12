@@ -10,11 +10,12 @@ import { HomeContainer } from './containers/Home/home.container';
 import { CatalogeContainer } from "./containers/cataloge/cataloge.container";
 import { ShopData } from "./core/api";
 import { AddProductContainer } from "./containers/adminPart/addProduct/addProduct.container";
+import { LoginContainer } from "./containers/LogIn/login.container";
+import { RegistredContainer } from "./containers/LogIn/Registred/registred.container";
 
 
 const colors = {
-  white: '#fff',
-  // bgColor: '#191919',
+  bgColor: '#0D1B39',
   // bgColorLight: '#212121',
   // bgColorAccent: '#3DD2CC',
   // textColor: '#666',
@@ -40,6 +41,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeContainer/>
+  },
+  {
+    path:'login/',
+    element: <LoginContainer/>
+  },
+  {
+    path:'registred/',
+    element: <RegistredContainer/>
   },
   {
     path: "cataloge/",

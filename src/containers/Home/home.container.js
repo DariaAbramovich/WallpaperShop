@@ -4,12 +4,8 @@ import { ProductsContainer } from './Products/products.container.js'
 import HomeCompanent from './home.component.js'
 
 export const HomeContainer = () => {
-    state = {
-        products: [],
-        isLoading: false,
-      }
+   
     return (
-        
         <>
         <HomeCompanent/>
         <Footer/>

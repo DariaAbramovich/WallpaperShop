@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap");
+
+.reg-wrapper{
+    padding: 22px;
+    background-color: var(  --bg-dark-blue);
+}
+.reg-form{
+    margin: 100px 350px;
+    background-color: rgb(233, 232, 232);
+    padding: 40px;
+    border-radius: 30px;
+}
+.reg-title{
+    color: var(   --accent);
+    font-size: 27px;
+    text-align: center;
+    padding: 0px 0 30px 0;
+    font-weight: 600;       
+}
+.labels{
+    // margin: 0 40px 0 0px;    
+    font-size: 18px;
+    margin: 10px 0px 10px 130px;
+    padding: 15px;
+}
+.plase-error{
+    color: rgb(164, 6, 6);
+    font-size: 17px;
+    padding : 10px;
+    text-align: center;
+}
+.reg-input{
+    
+    height: 60px;
+    width: 300px;
+    padding: 0 10px;
+    margin-left: -30px;
+    font-size: 17px;
+    border-style: solid;
+    border-width: 2px;
+    border-color:transparent transparent rgb(176, 176, 176) transparent;  
+    transition: 0.5s; 
+}
+.reg-input:hover{
+    font-size: 18px;
+    border-color:transparent transparent  var( --ui-orange) transparent; 
+}
+.plase-input{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.reg{
+    margin: 30px 0 0 260px;
+    padding: 18px;
+    background-color: var( --bg-btn-dark-blue);
+    border-radius: 15px;
+    color: white;
+    width: 200px;
+    transition: 0.5s; 
+}
+.reg:hover{
+    background-color: var( --bg-btn);
+}
+.text-link-login{
+    margin: 30px 0 30px 240px;
+    color: var(   --text-muted);
+}
+.login-link{
+    color: var(  --text-card-dark-blue);
+    font-size: 17px;
+    transition: 0.5s; 
+}
+.login-link:hover{
+    color: var(   --accent);
+}
+
