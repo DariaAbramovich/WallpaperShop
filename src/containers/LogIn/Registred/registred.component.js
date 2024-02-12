@@ -7,6 +7,27 @@ import { Link } from "react-router-dom";
 
 const RegistredComponent = () => {
 
+    const [name, setName] = useState("");
+    const [surName, setSurName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [login, setLogin] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [dirtyName, setDirtyName] = useState(false);
+    const [dirtySurName, setDirtySurName] =useState(false);
+    const [dirtyPhone, setDirtyPhone] = useState(false);
+    const [dirtyEmail, setDirtyEmail] = useState(false);
+    const [dirtyLogin, setDirtyLogin] = useState(false);
+    const [dirtyPassword, setDirtyPassword] = useState(false);
+
+    const [errorName, setErrorName] = useState("Поле имя не должно быть пустым");
+    const [errorSurName, setErrorSurName] =useState("Поле фамилия не должно быть пустым");
+    const [errorPhone, setErrorPhone] = useState("Поле телефон не должно быть пустым");
+    const [errorEmail, setErrorEmail] = useState("Поле почта не должно быть пустым");
+    const [errorLogin, setErrorLogin] = useState("Поле логин не должно быть пустым");
+    const [errorPassword, setErrorPassword] = useState("Поле пароль не должно быть пустым");
+
     const [error, setError] = useState("");
     const [msg, setMsg] = useState("");
     useEffect(() => {
@@ -22,16 +43,20 @@ const RegistredComponent = () => {
         const value = e.target.value;
         setInputs(values => ({ ...values, [name]: value }))
     }
-    // function checkData() {
-    //     if (nameUser.value !== "" && surName.value !== "" && phone.value !== "" && email.value !== "" && login.value !== "" && password.value !== "") {
-
-    //     }
-    //     else {
-    //         setError(' All fields are required!');
-    //     }
-
-        
-    // }
+   
+    const nameHangler = (e) =>{
+        setName(e.target.value);
+        const re = /^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$/;
+        if(re.test(e.target.value)){
+            setErrorName("");
+            const name = e.target.name;
+            const value = e.target.value;
+            setInputs(values => ({ ...values, [name]: value }))
+        }
+        else{
+            setErrorName("Некорректное имя");
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost/api/user.php', inputs).
@@ -49,6 +74,13 @@ const RegistredComponent = () => {
             })
     }
 
+    const blurHandler = (e) =>{
+        switch(e.target.name){
+            case 'name':
+                setDirtyName(true);
+            break;
+        }
+    }
     // const handleSubmit = (e)=>{
     //     e.preventDefault();
     //     if(name !== "" && surName !== "" && phone !== "" && email !== "" && login !== "" &&  password !== "" ){
@@ -133,28 +165,31 @@ const RegistredComponent = () => {
     //     }
 
     // }
-
-
     return (
         <>
             <div className="reg-wrapper">
                 <form className="reg-form" onSubmit={handleSubmit}>
                     <h1 className="reg-title">Создание аккаунта</h1>
-                    <p className="plase-error">
+                    {/* <p className="plase-error">
                         {
                             msg !== "" ?
                                 <span>{msg}</span> :
                                 <span>{error}</span>
                         }
-                    </p>
+                    </p> */}
                     <div className="plase-input">
                         <label className="labels">Имя</label>
+                        { (dirtyName && errorName) && <div style={{color:'red'}}>{errorName}</div>}
                         <input
                             className="reg-input"
                             type="text"
                             name='name'
                             id='name'
-                            onChange={handleCange}
+                           
+                            onChange={e => nameHangler(e)}
+                            value={name}
+                            onBlur={e => blurHandler(e)}
+                           
                             placeholder="введите имя" />
                     </div>
 
