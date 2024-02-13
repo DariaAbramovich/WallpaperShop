@@ -1,0 +1,140 @@
+.basket-wrapper{
+
+}
+.baket-header-tile{
+
+    color: var(  --text-card-dark-blue);
+    font-size: 24px;
+    font-weight: 500;
+    margin: -80px 0;
+    margin-left: 100px;
+   
+}
+.product-container{
+    margin: 130px 0;
+    display: grid;
+    grid-template-columns: 9fr 2fr ;
+    gap: 30px;
+    // margin-left: 20px;
+   
+}
+.product-container_item{
+}
+.product-container_info{
+    width: 300px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+}
+.info_count{
+    color: var( --text-muted);
+    size: 16px;
+    padding: 20px;
+    
+}
+.info-price{
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+
+    color: var(  --text-card-dark-blue);
+    font-size: 24px;
+    font-weight: 600  
+}
+
+.info_btn{
+    width: 180px;
+    padding: 14px;
+    margin: 30px 50px;
+    color: white;
+    border-radius: 15px;
+    background-color: var(   --bg-btn-dark-blue);
+    transition: 0.5s;
+}
+.info_btn:hover{
+    background-color: var( --btn-accent);
+}
+// basket card 
+.basket-card_wrapper{
+    padding:  0px 10px;
+    margin: 0px 0 20px 0;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    
+}
+.wrapper_top{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    // gap: 10px;
+}
+
+.product-container_info{
+    height: 200px;
+    border-radius: 20px;
+}
+.img{
+    margin-top: 15px;
+    margin-left: 10px;
+    border-radius: 15px;
+    height: 130px;
+}
+.product_name{
+    margin: 15px 30px;
+    font-size: 17px;
+}
+.product_type{
+    margin: 10px 0;
+    color: var( --text-muted);
+    font-size: 16px;
+}
+.product_price{
+    margin: 55px 0;
+    margin-left: 40px;
+    // color: var(  --text-card-dark-blue);
+    font-size: 18px;
+    font-weight: 600;
+}
+.delete{
+    display: flex;
+    justify-content: space-between;
+}
+.img_delete{
+    width: 30px;
+    height: 30px;
+    margin: 0px 60px;
+    margin-top: -35px;
+    opacity: 0.3;
+    transition: 0.7s;
+}   
+.img_delete:hover{
+    opacity: 1;
+}
+
+// btns
+.wrapper_btns{
+    margin: 48px 0;
+    margin-left: 0px;
+    // background-color: aqua;
+}
+.btns_control_value{
+    display: flex;
+   
+}
+.btns_control{
+    padding: 3px;
+    font-size: 24px;
+    font-weight: 500;
+    width: 40px;
+    border-radius: 10px;
+    background-color: var(   --bg-btn-dark-blue);
+    color: white;
+    text-align: center;
+    transition: 0.5s;
+}
+.btns_control:hover{
+   background-color: var( --btn-accent);
+}
+.label_count{
+    font-size: 22px;
+    font-weight: 500;
+    margin: 5px 13px;
+}

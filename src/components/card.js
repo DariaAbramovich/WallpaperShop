@@ -1,12 +1,17 @@
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { connect } from 'react-redux';  
+import { addItem } from '../redux/cart/cart.actions';
 
 import plas from './../assets/icon/Plus.png'
 import image from './../assets/image/wallpaper/1084308_arteks_648ad4843db18.jpeg'
-import React from "react";
-import styled from "styled-components";
 import starIcon from './../assets/icon/Plus.png';
 import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg'
-import { Link } from "react-router-dom";
+
 import './../containers/cataloge/cataloge.scss'
+
+
 const CardWrapper = styled.div`
     border-radius: 15px;
     position: relative;
@@ -17,24 +22,16 @@ const CardWrapper = styled.div`
     width: 280px;
     margin: 40px 0;
 `;
-
 const CardImageWrapper = styled.div`
-
-
 `;
-
 const CardImage = styled.div`
-
 `;
-
-
 const CardTitle = styled.h4`
   font-size: 16px;
   font-weight: bold;
   color: white;
   margin: 15px 0;
 `;
-
 const CardLink = styled(Link)`
   &:hover {
     // opacity: 0.4;
@@ -48,8 +45,6 @@ const CardPhoto = styled.div`
     background-color: #FAFAFA;
     border-radius: 20px 20px 0 0;
     text-align: center;
-    
- 
 `;
 
 const CardDescription = styled.div`
@@ -81,10 +76,8 @@ const CardPrice = styled.div`
     color: var(--ui-dark-blue);
     font-size: 21px;
     font-weight: 600;
-
-   
 `
-const CardBtn = styled.div`
+const CardBtn = styled.button`
     position: relative; 
     z-index: 3;
     width: 48px;
@@ -104,42 +97,49 @@ const CardName = styled.div`
     font-size: 18px;
     font-weight: 400;
 `
-const CardArticle = styled.div`
+const Card = ({id,nameproduct,  type, priceProduct, photoProduct, inStock, addItem}) =>{
+    const item = {id,nameproduct,  type, priceProduct, photoProduct, inStock, addItem}
+    return(
+        <CardWrapper>
+            {/* <CardLink to={`/product/`}> */}
+    
+                <CardImageWrapper>
+                <div className='instock'>{inStock}</div>
+                    <CardImage>
+                        <CardPhoto>
+                        <img src={defaultImg} alt="" className='img-card'></img>
+                        </CardPhoto>
+                    </CardImage>
+                </CardImageWrapper>
+    
+                <CardDescription>
+                    <CardCategory>
+                       {type}
+                    </CardCategory>
+                    <CardName >
+                   {nameproduct}
+                    </CardName>
+                   
+                    <CardFooter>
+                        <CardPrice>
+                            {priceProduct} руб
+                        </CardPrice>
+                        <CardBtn onClick={() => addItem(item)}>
+                        <img src={plas} alt=""/>
+                        </CardBtn>
+                    </CardFooter>
+    
+                </CardDescription>
+    
+            {/* </CardLink> */}
+        </CardWrapper>
+    )
+}
 
-`
 
-export const Card = ({nameproduct,  type, priceProduct, photoProduct, inStock}) => (
-    <CardWrapper>
-        <CardLink to={`/product/`}>
+const mapDispatchToProps = dispatch => ({
+    addItem: item => dispatch(addItem(item))
+})
+  
 
-            <CardImageWrapper>
-            <div className='instock'>{inStock}</div>
-                <CardImage>
-                    <CardPhoto>
-                    <img src={defaultImg} alt="" className='img-card'></img>
-                    </CardPhoto>
-                </CardImage>
-            </CardImageWrapper>
-
-            <CardDescription>
-                <CardCategory>
-                   {type}
-                </CardCategory>
-                <CardName >
-               {nameproduct}
-                </CardName>
-               
-                <CardFooter>
-                    <CardPrice>
-                        {priceProduct} руб
-                    </CardPrice>
-                    <CardBtn>
-                    <img src={plas} alt=""/>
-                    </CardBtn>
-                </CardFooter>
-
-            </CardDescription>
-
-        </CardLink>
-    </CardWrapper>
-)
+export default connect(null,mapDispatchToProps) (Card);

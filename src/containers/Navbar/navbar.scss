@@ -31,10 +31,12 @@
     padding-bottom: 10px;
 }
 .nav-list__link{
-    transition:  opacity 0.2s ease-in;
+    opacity: 1;
+    transition:  opacity 0.2s ease-in;  
+    
 }
 .nav-list__link:hover{
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .nav__icon{

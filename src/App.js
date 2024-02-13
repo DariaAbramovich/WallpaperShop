@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import {ThemeProvider} from "styled-components";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import 'swiper/css';
@@ -6,13 +7,14 @@ import './css/reset.css';
 import './css/base.css';
 import './css/vars.css';
 
-import { HomeContainer } from './containers/Home/home.container';
 import { CatalogeContainer } from "./containers/cataloge/cataloge.container";
 import { ShopData } from "./core/api";
 import { AddProductContainer } from "./containers/adminPart/addProduct/addProduct.container";
 import { LoginContainer } from "./containers/LogIn/login.container";
 import { RegistredContainer } from "./containers/LogIn/Registred/registred.container";
-
+import HomeContainer from "./containers/Home/home.container";
+import store from './redux/store';
+import { BasketContainer } from './containers/basket/basket.container';
 
 const colors = {
   bgColor: '#0D1B39',
@@ -58,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: "/constructor/",
     element: <AddProductContainer/>
+  },
+  {
+    path: "/basket/",
+    element: <BasketContainer/>
   }
 
 ]);
@@ -65,11 +71,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
+   
     <ThemeProvider theme={theme}>
       <div className="App">
         <RouterProvider router={router} />
       </div>
     </ThemeProvider>
+   
   );
 }
 

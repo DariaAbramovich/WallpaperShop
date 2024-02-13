@@ -15,7 +15,7 @@ import wapllpaper9 from './../../../assets/image/wallpaper/7047764_aspect__6489a
 import plas from './../../../assets/icon/Plus.png';
 import btn_left from './../../../assets/icon/arrov-left.svg'
 import btn_right from './../../../assets/icon/arrov-right.svg'
-import { Card } from '../../../components/card';
+import Card from '../../../components/card';
 
 const ProductsComponent = () => {
     const [inputs, setInputs] = useState({})
@@ -94,15 +94,14 @@ const ProductsComponent = () => {
 
                             <div className="swiper">
                                 <div className="swiper-wrapper">
-                                    
                                     {
                                         productData.map((pData, index)=>{
-                                            console.log('movie', pData)
+                                            console.log('product', pData)
                                             
-                                            const {NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock} = pData;
+                                            const {IdProduct,NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock} = pData;
                                             return (
                                                 <div className="swiper-card-wrapper" data-tab-value={TypeProduct}>
-                                                <Card nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock}/>
+                                                <Card index={IdProduct} nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock}/>
                                                 </div>
 
                                             )

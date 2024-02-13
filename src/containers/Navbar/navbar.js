@@ -3,6 +3,7 @@ import fav1 from './../../assets/icon/faforite1.png';
 import basket from './../../assets/icon/basket1.png'
 import login from './../../assets/icon/login.png'
 import {Link} from "react-router-dom";
+import CardBtn from '../../components/basket-btn';
 
 export const Navbar = () => {
     return (
@@ -23,8 +24,7 @@ export const Navbar = () => {
                     </li>
                     <li className="nav-list__item nav__icon">
                         <Link to={`/basket/`} className="nav-list__link">
-                            <img src={basket} />
-                            <div className="basket__count">0</div>
+                           <CardBtn/>
                         </Link>
                     </li>
                 </ul>

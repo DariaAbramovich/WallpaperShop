@@ -1,10 +1,8 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Card } from "../../components/card.js";
 import { Search, SearchRe } from "../Search/search";
 import './cataloge.scss'
-
-
+import Card from '../../components/card';
 
 const CatalogeComponent = () => {
 //     const [productData, setProductData] = useState([]);
@@ -308,9 +306,9 @@ const CatalogeComponent = () => {
                                 productData.map((pData, index)=>{
                                     console.log('movie', pData)
                                     
-                                    const {NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock} = pData;
+                                    const {IdProduct ,NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock} = pData;
                                     return (
-                                        <Card nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock}/>
+                                        <Card id={IdProduct } nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock}/>
                                         // <Card key={index}>
                                       )
                                 })
