@@ -17,6 +17,7 @@ const CatalogeComponent = () => {
 //         }
 //         getProductData()
 // },[])
+
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
     useEffect(()=>{
@@ -28,7 +29,6 @@ const CatalogeComponent = () => {
             then(function (response) {
                 console.log(response.data);
                 setProductData(response.data);
-              
             })
     }
 
@@ -315,13 +315,7 @@ const CatalogeComponent = () => {
                                       )
                                 })
                             }
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
-                            <Card />
+                           
                         </div>
                     </div>
                 </div>
