@@ -4,29 +4,27 @@ import image from './../assets/image/wallpaper/1084308_arteks_648ad4843db18.jpeg
 import React from "react";
 import styled from "styled-components";
 import starIcon from './../assets/icon/Plus.png';
-import defaultImg from './../assets/image/wallpaper/1084306_arteks_648ad40ba35b6.jpeg'
+import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg'
 import { Link } from "react-router-dom";
-
+import './../containers/cataloge/cataloge.scss'
 const CardWrapper = styled.div`
     border-radius: 15px;
     position: relative;
     flex-direction: column;
     background-color: #FAFAFA;
-    margin: 15px;
+    margin: 10px;
     // width: calc(25% - 30px);
-    width: 268px;
+    width: 280px;
     margin: 40px 0;
 `;
 
 const CardImageWrapper = styled.div`
-    // margin-top: 50px;
-    background-color: #FAFAFA;
-    border-radius: 20px 20px 0 0;
-    text-align: center;
+
+
 `;
 
 const CardImage = styled.div`
-    margin-top: -50px;
+
 `;
 
 
@@ -45,12 +43,14 @@ const CardLink = styled(Link)`
   }
 `;
 const CardPhoto = styled.div`
-    margin-top: 50px;
-    height: 150px;
+    margin-top: -60px;
+    height: 160px;
     background-color: #FAFAFA;
     border-radius: 20px 20px 0 0;
     text-align: center;
-`
+    
+ 
+`;
 
 const CardDescription = styled.div`
     display: flex;
@@ -101,34 +101,40 @@ const CardBtn = styled.div`
         opacity: 0.8;
 `
 const CardName = styled.div`
-    font-size: 21px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 400;
+`
+const CardArticle = styled.div`
+
 `
 
-
-export const Card = ({nameproduct, photoProduct}) => (
+export const Card = ({nameproduct,  type, priceProduct, photoProduct, inStock}) => (
     <CardWrapper>
         <CardLink to={`/product/`}>
 
             <CardImageWrapper>
+            <div className='instock'>{inStock}</div>
                 <CardImage>
-                  <img src={photoProduct} alt=""/>
+                    <CardPhoto>
+                    <img src={defaultImg} alt="" className='img-card'></img>
+                    </CardPhoto>
                 </CardImage>
             </CardImageWrapper>
 
             <CardDescription>
                 <CardCategory>
-                   type
+                   {type}
                 </CardCategory>
                 <CardName >
                {nameproduct}
                 </CardName>
+               
                 <CardFooter>
                     <CardPrice>
-                        priceProduct руб
+                        {priceProduct} руб
                     </CardPrice>
                     <CardBtn>
-                    <img src={plas} alt="" />
+                    <img src={plas} alt=""/>
                     </CardBtn>
                 </CardFooter>
 

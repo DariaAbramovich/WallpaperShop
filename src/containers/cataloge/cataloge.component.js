@@ -305,20 +305,16 @@ const CatalogeComponent = () => {
                         <h3 className="catalog-title">Каталог</h3>
                         <div className="card-wrapper">
                             {
-                               
                                 productData.map((pData, index)=>{
                                     console.log('movie', pData)
                                     
-                                    const {NameProduct, Photo} = pData;
-                                    console.log('photo:',Photo);
+                                    const {NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock} = pData;
                                     return (
-                                        <Card nameproduct={NameProduct} photoProduct={Photo} />
+                                        <Card nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock}/>
                                         // <Card key={index}>
                                       )
                                 })
-                               
                             }
-                    
                             <Card />
                             <Card />
                             <Card />

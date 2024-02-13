@@ -10,48 +10,52 @@
     border-radius: 30px;
 }
 .back{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     margin: 0;
     padding: 0;
 }
-.mainTitle{
+.login-form_title{
     color: var(   --accent);
     font-size: 27px;
     text-align: center;
     padding: 0px 0 30px 0;
     font-weight: 600;   
 }
-.label{
-    // margin: 0 40px 0 0px;    
-    font-size: 20px;
-    margin: 10px 0px 10px 150px;
-    padding: 15px;
+.login-label{
+    font-size: 17px;
+    font-weight: 500;
 }   
-.pole{
+
+.login-error-plase{
+    color: rgb(197, 7, 7);
+    margin-top: 15px;
+    font-style: italic;
+}
+.input-item{
+    padding: 0px 10px;
+    margin: 10px 0;
     height: 60px;
     width: 300px;
-    padding: 0 10px;
-    margin-left: -30px;
     font-size: 17px;
     border-style: solid;
     border-width: 2px;
     border-color:transparent transparent rgb(176, 176, 176) transparent;  
-
     transition: 0.6s; 
 }
-.pole:hover{
+
+.input-item:hover{
     font-size: 18px;
     border-color:transparent transparent  var( --ui-orange) transparent;  
     
 }
 
 .plase-input{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    margin: 10px 210px;
+    width: 400px;
 } 
-.logIn{
-    margin: 30px 0 0 268px;
+.login-btn{
+    margin: 30px 0 0 285px;
     padding: 10px;
     background-color: var( --bg-btn-dark-blue);
     border-radius: 15px;
@@ -60,7 +64,7 @@
     transition: 0.5s; 
 }  
 
-.logIn:hover{
+.login-btn:hover{
 background-color: var( --bg-btn);
 
 }
