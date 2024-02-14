@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
+import { Tooltip } from 'react-tooltip'
 import './registred.scss'
 import question2 from './../../../assets/icon/info.png'
 
@@ -144,6 +145,7 @@ const RegistredComponent = () => {
         }
     }
 
+    
     return (
         <>
             <div className="reg-wrapper">
@@ -151,9 +153,11 @@ const RegistredComponent = () => {
                     <h1 className="reg-form_title">Создание аккаунта</h1>
                     <div className="reg-plase-input">
                        <div>
-                            <img src={question2} className='label_question'></img>
+                       <img id="info-name" src={question2} className='label_question'></img>
+                        <Tooltip anchorSelect="#info-name">
+                          <p>Имя должно состоять из русских или английских букв</p>
+                        </Tooltip >
                             <label className="reg-label">Имя</label>
-                      
                         </div> 
                         {(dirtyName && errorName) && <div className="reg-error-plase">{errorName}</div>}
                         <input
@@ -169,7 +173,11 @@ const RegistredComponent = () => {
 
                     <div className="reg-plase-input">
                         <div>
-                        <img src={question2} className='label_question'></img>
+                            
+                        <img id="info-surname" src={question2} className='label_question'></img>
+                        <Tooltip anchorSelect="#info-surname">
+                          <p>Фамилия должна состоять из русских или английских букв</p>
+                        </Tooltip>
                         <label className="reg-label">Фамилия</label>
                        
                         </div>
@@ -188,9 +196,11 @@ const RegistredComponent = () => {
 
                     <div className="reg-plase-input">
                        <div>
-                       <img src={question2} className='label_question'></img>
+                       <img id="info-phone" src={question2} className='label_question'></img>
+                       <Tooltip anchorSelect="#info-phone">
+                          <p>Номер должен содержать в себе цифры и начинаться со знака  +</p>
+                        </Tooltip>
                        <label className="reg-label">Телефон</label>
-
                        </div>
                         {(dirtyPhone && errorPhone) && <div className="reg-error-plase">{errorPhone}</div>}
 
@@ -207,8 +217,10 @@ const RegistredComponent = () => {
 
                     <div className="reg-plase-input">
                         <div>
-                        <img src={question2} className='label_question'></img>
-
+                        <img id="info-email" src={question2} className='label_question'></img>
+                        <Tooltip anchorSelect="#info-email">
+                          <p>Почта должна содержать в себе @ и домен (.ru/ .tut/ .gmail)</p>
+                        </Tooltip>
                         <label className="reg-label">Почта</label>
 
                         </div>
@@ -228,8 +240,10 @@ const RegistredComponent = () => {
 
                     <div className="reg-plase-input">
                         <div>
-                        <img src={question2} className='label_question'></img>
-
+                        <img id="info-login" src={question2} className='label_question'></img>
+                        <Tooltip anchorSelect="#info-login">
+                          <p>Минимальная длинна логина - 3 символа, можно использовать латинские буквы, цифры и знаки: '_', '-'</p>
+                        </Tooltip>
                         <label className="reg-label">Логин</label>
                         </div>
                         {(dirtyLogin && errorLogin) && <div className="reg-error-plase">{errorLogin}</div>}
@@ -245,8 +259,10 @@ const RegistredComponent = () => {
                     </div>
                     <div className="reg-plase-input">
                         <div>
-                        <img src={question2} className='label_question'></img>
-
+                        <img id="info-pass" src={question2} className='label_question'></img>
+                        <Tooltip anchorSelect="#info-pass">
+                          <p>Минимальная длинна пароля - 8 символов, можно использовать латинский алфавит и цифры</p>
+                        </Tooltip>
                         <label className="reg-label">Пароль</label>
                         </div>
                         {(dirtyPassword && errorPassword) && <div className="reg-error-plase">{errorPassword}</div>}
