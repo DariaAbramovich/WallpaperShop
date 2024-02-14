@@ -88,7 +88,7 @@ const CardBtn = styled.button`
     align-items: center;
     justify-content: center;
     font-size: 0;
-    transition:  opacity 0.2s ease-in;
+    transition:  opacity 0.4s ease-in;
 
     &:hover{
         opacity: 0.8;
@@ -96,12 +96,15 @@ const CardBtn = styled.button`
 const CardName = styled.div`
     font-size: 18px;
     font-weight: 400;
+    transition: 0.4s;
+    &:hover{
+        color: var( --text-accent);
 `
 const Card = ({id,nameproduct,  type, priceProduct, photoProduct, inStock, addItem}) =>{
     const item = {id,nameproduct,  type, priceProduct, photoProduct, inStock, addItem}
     return(
         <CardWrapper>
-            {/* <CardLink to={`/product/`}> */}
+            <CardLink to={`/detailpage/`}>
     
                 <CardImageWrapper>
                 <div className='instock'>{inStock}</div>
@@ -111,15 +114,17 @@ const Card = ({id,nameproduct,  type, priceProduct, photoProduct, inStock, addIt
                         </CardPhoto>
                     </CardImage>
                 </CardImageWrapper>
-    
+             </CardLink>
+                
                 <CardDescription>
+                <CardLink to={`/detailpage/`}>
                     <CardCategory>
                        {type}
                     </CardCategory>
                     <CardName >
                    {nameproduct}
                     </CardName>
-                   
+                </CardLink>
                     <CardFooter>
                         <CardPrice>
                             {priceProduct} руб
@@ -131,7 +136,7 @@ const Card = ({id,nameproduct,  type, priceProduct, photoProduct, inStock, addIt
     
                 </CardDescription>
     
-            {/* </CardLink> */}
+           
         </CardWrapper>
     )
 }

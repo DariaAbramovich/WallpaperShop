@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import './basket.scss';
 import { Search } from '../Search/search';
 import BasketCard from '../../components/basket-card';
+import notProducts from '../../assets/icon/shopping.png'
 
 const BasketComponent = ({items, total }) => {
 
@@ -18,7 +19,15 @@ const BasketComponent = ({items, total }) => {
                     <div className='product-container'>
                         <div className='product-container_item'>
                         {
-                            items.map(item => <BasketCard key={item.id} item={item} />)
+                            items != 0?
+                                items.map(item => <BasketCard key={item.id} item={item} />)
+                            :
+                            <div className='wrapperr-not-product'>
+                                <p className='not-product'>Пока у вас нет выбранных товаров </p>
+                                <img src={notProducts} className='not-product_img'></img>
+                                                       
+                            </div>
+                             
                         }
                         </div>
                         <div className='product-container_info'>

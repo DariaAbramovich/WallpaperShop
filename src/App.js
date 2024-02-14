@@ -15,6 +15,8 @@ import { RegistredContainer } from "./containers/LogIn/Registred/registred.conta
 import HomeContainer from "./containers/Home/home.container";
 import store from './redux/store';
 import { BasketContainer } from './containers/basket/basket.container';
+import { DefaultContainer } from './components/container';
+import DetailListProductContainer from './containers/detailListProduct/detailListProduct.container';
 
 const colors = {
   bgColor: '#0D1B39',
@@ -55,7 +57,6 @@ const router = createBrowserRouter([
   {
     path: "cataloge/",
     element: <CatalogeContainer/>,
-   
   },
   {
     path: "/constructor/",
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
   {
     path: "/basket/",
     element: <BasketContainer/>
+  },
+  {
+    path:'/detailpage/',
+    element: <DetailListProductContainer/>
   }
 
 ]);
