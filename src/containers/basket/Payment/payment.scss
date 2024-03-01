@@ -1,0 +1,22 @@
+.payment_title{
+    color: var(  --text-card-dark-blue);
+    font-size: 24px;
+    font-weight: 500;
+    margin: 24px;
+}
+.btns_tab{
+    display: flex;
+    margin: 20px 0;
+    // justify-content:space-between;
+}
+.toPay{
+    background-color: var( --bg-btn-dark-blue);
+    color: rgb(235, 235, 235);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.6s;
+}
+.toPay:hover{
+    background-color: var( --btn-accent);
+}

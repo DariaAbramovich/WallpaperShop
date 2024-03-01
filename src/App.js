@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import {ThemeProvider} from "styled-components";
+import axios from 'axios'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import 'swiper/css';
 import './css/App.css';
@@ -15,9 +16,10 @@ import { RegistredContainer } from "./containers/LogIn/Registred/registred.conta
 import HomeContainer from "./containers/Home/home.container";
 import store from './redux/store';
 import { BasketContainer } from './containers/basket/basket.container';
-import { DefaultContainer } from './components/container';
 import DetailListProductContainer from './containers/detailListProduct/detailListProduct.container';
-
+import { ProductsContainer } from './containers/Home/Products/products.container'; 
+import AdminHomeContainer from './containers/adminPart/adminHome/adminhome.container';
+import { AdminCatalogeContainer } from './containers/adminPart/adminCataloge/adminCcataloge.container';
 const colors = {
   bgColor: '#0D1B39',
   // bgColorLight: '#212121',
@@ -47,6 +49,10 @@ const router = createBrowserRouter([
     element: <HomeContainer/>
   },
   {
+    path: "/admin/",
+    element: <AdminHomeContainer/>
+  },
+  {
     path:'login/',
     element: <LoginContainer/>
   },
@@ -59,16 +65,20 @@ const router = createBrowserRouter([
     element: <CatalogeContainer/>,
   },
   {
-    path: "/constructor/",
+    path: "admin:cataloge/",
+    element: <AdminCatalogeContainer/>,
+  },
+  {
+    path: "/addedproducts/",
     element: <AddProductContainer/>
   },
   {
     path: "/basket/",
     element: <BasketContainer/>
   },
-  {
+  { 
     path:'/detailpage/',
-    element: <DetailListProductContainer/>
+    element: <DetailListProductContainer/>,
   }
 
 ]);

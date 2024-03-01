@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AddProductComponent from "./addProduct.component";
 import { Navbar } from "../../Navbar/navbar";
 import { Header } from "../../../components/header";
+import { AdminNavbar } from "../adminNavbar/adminavbar";
 
 const Wrapper = styled.div`
 background-color: rgb(239, 239, 239);
@@ -15,7 +16,7 @@ export const AddProductContainer = () => {
         <>
                 <Header>
                     <div className="container">
-                        <Navbar />
+                        <AdminNavbar />
                     </div>
                 </Header>
                 <AddProductComponent />

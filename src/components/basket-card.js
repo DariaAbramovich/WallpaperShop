@@ -26,7 +26,6 @@ const BasketCard = ({item, counter, removeItem }) => {
 
                     <div className="product_price">
                          {priceProduct} руб
-
                     </div>
                     <div className="wrapper_btns">
                         <div className="btns_control_value">
@@ -39,7 +38,6 @@ const BasketCard = ({item, counter, removeItem }) => {
                 </div>
                 <div className="delete">
                     <div>
-                       
                     </div>
                     <button onClick={() => removeItem(item.id)}><img src={delete_btn} className="img_delete"></img></button>
                 </div>

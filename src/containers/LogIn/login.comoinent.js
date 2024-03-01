@@ -48,6 +48,9 @@ const LoginComponent = () => {
     }
     const passnHanglerUser = (e) => {
         setPasswordUser(e.target.value);
+       const  ToLogin = (e)=>{
+        navigate('/admin/')
+       }
         if (e.target.value) {
             setErrorPasswordUser("");
             const name = e.target.name;
@@ -61,7 +64,14 @@ const LoginComponent = () => {
         
                     for (var i in user) {
                          console.log("lodin -", user.Login);
+                       
                         if (login.value != "" && pass.value != "") {
+                            if(login.value == "admin" && pass.value=="admin"){
+                             
+
+                                navigate('/admin/')
+                                break;
+                            }
                             if (login.value == user.Login && pass.value == user.Password) {
                                 navigate('/')
                                 break;

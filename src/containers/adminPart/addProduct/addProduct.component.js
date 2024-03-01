@@ -82,9 +82,9 @@ const AddProductComponent = () => {
         then(function(response){
             console.log(response.data)
             console.log(inputs)
-            alert("hujkl")
+            alert("Добавлено!")
         })
-    }
+    } 
     return (
         <>
             <div className="wrapper-addedProduct">
@@ -115,10 +115,10 @@ const AddProductComponent = () => {
                         <input  name = 'price' type='text' placeholder='Введите цену' className='' onChange={handleCange}/>
                     </div>
 
-                    <div className='addedProduct-form__item'>
+                    {/* <div className='addedProduct-form__item'>
                         <label>Фото</label>
                         <input  name = 'photo' type='file' className='' onChange={handleCange}/>
-                    </div>
+                    </div> */}
 
                     <div className='addedProduct-form__item'>
                         <label>Тип обоев</label>
@@ -162,7 +162,7 @@ const AddProductComponent = () => {
 
                     <div className='addedProduct-form__item'>
                         <label>Ширина</label>
-                        <input name = 'widthWallPaper' type='number' placeholder='Введите длинну' className='' onChange={handleCange}/>
+                        <input name = 'widthWallPaper' type='text' placeholder='Введите длинну' className='' onChange={handleCange}/>
                     </div>
 
                     <div className='addedProduct-form__item'>
@@ -174,15 +174,11 @@ const AddProductComponent = () => {
                         <label>Страна изготовитель</label>
                         <input name = 'country' type='text' placeholder='Введите страну изготовителя' className='' onChange={handleCange}/>
                     </div>
-
                     <div className='addedProduct-form__item'>
-                        <label>Наличие блеска</label>
-                        <input name = 'isShadow' type='text' placeholder='Input name product' className='' onChange={handleCange}/>
+                        <label>Поверхность</label>
+                        <input name = 'surfaceProduct' type='text' placeholder='Введите страну изготовителя' className='' onChange={handleCange}/>
                     </div>
-                    <div className='addedProduct-form__item'>
-                        <label>Тип поверхности</label>
-                        <input name = 'typesurface' type='text' placeholder='Input name product' className='' onChange={handleCange}/>
-                    </div>
+                   
 
                     <div className='addedProduct-form__item'>
                         <label>В наличии</label>

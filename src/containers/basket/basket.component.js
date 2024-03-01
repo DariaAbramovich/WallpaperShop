@@ -7,9 +7,11 @@ import './basket.scss';
 import { Search } from '../Search/search';
 import BasketCard from '../../components/basket-card';
 import notProducts from '../../assets/icon/shopping.png'
+import Payment from './Payment/payment';
+import Modal from '../../components/modal';
 
 const BasketComponent = ({items, total }) => {
-
+    const [paymentActive, setPaymentActive] = useState(false)
     return(
         <div className="container">
 
@@ -25,26 +27,26 @@ const BasketComponent = ({items, total }) => {
                             <div className='wrapperr-not-product'>
                                 <p className='not-product'>Пока у вас нет выбранных товаров </p>
                                 <img src={notProducts} className='not-product_img'></img>
-                                                       
                             </div>
-                             
                         }
                         </div>
                         <div className='product-container_info'>
                             <div className='info_count'>
-                                {/* <p>Товары {} шт</p> */}
                             </div>
                             <div>
                                 <div className='info-price'>
                                     <div >Итого:</div>
-                                    <div >{total}</div>
+                                    <div >{total} руб</div>
                                 </div>
-                                <button className='info_btn'>Заказать</button>
+                             <button className='info_btn' onClick={()=>setPaymentActive(true)}>Заказать</button>
                             </div>
                         </div>
                     </div>
                 </div>
+            <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={total} dataOrder={items}/>
+
             </div>
+
         </div>
     )
 }
@@ -52,5 +54,5 @@ const BasketComponent = ({items, total }) => {
 const mapStateToProps = ({ cart: { cartItems }}) => ({
     items: cartItems,
     total: cartItems.reduce((acc, item) => acc += item.priceProduct * item.quantity, 0)
-  });
+});
 export default connect(mapStateToProps)( BasketComponent);

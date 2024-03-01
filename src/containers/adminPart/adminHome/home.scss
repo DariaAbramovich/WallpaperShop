@@ -1,0 +1,42 @@
+.header{
+    position: relative;
+    padding-top: 40px;
+    background-color: var(--footer-bg);
+    background-image: url('./../../../assets/image/bg3.jpg');
+
+    // background-image: url('./../../assets/image/Rectangle 1441.jpg');
+    aspect-ratio: 1290 / 1004;
+    background-size:cover;
+    opacity: 1;
+    color: #000000;
+}
+a{
+    color: #000000;
+}
+.header__content{
+    text-align: center;
+    padding-top: 20px;
+   
+}
+.header__title {
+    margin-bottom: 30px;
+    font-weight: 400;
+    font-size: 55px;
+    line-height: 130%;
+    /* 104px */
+    letter-spacing: -0.8px;
+    // text-transform: capitalize;
+}
+.header__content p {
+    max-width: 606px;
+    margin: 0 auto;
+    font-size: 24px;
+    line-height: 160%;
+    opacity: 0.8;
+    /* 38.4px */
+}
+
+.header__search{
+    margin: 0px auto;
+    margin-top: 65px;
+}

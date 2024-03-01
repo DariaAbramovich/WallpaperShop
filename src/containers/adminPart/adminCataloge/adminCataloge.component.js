@@ -1,23 +1,12 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Search, SearchRe } from "../Search/search";
-import './cataloge.scss'
-import Card from '../../components/card';
-import Modal from '../../components/modal';
+import './adminCataloge.scss'
+import { Search } from '../../Search/search';
+import Card from '../../../components/card';
+import AdminCard from '../../../components/adminCard';
 
-const CatalogeComponent = () => {
-//     const [productData, setProductData] = useState([]);
-//     useEffect ( ()=>{
-//         const getProductData = async ()=>{
-//             const reqData = await fetch('http://localhost/api/index.php')
-//             const resData = await reqData.json();
-//             console.log(resData);
-//             setProductData(resData);
-//         }
-//         getProductData()
-// },[])
+const AdminCatalogeComponent = () => {
 
-    const [modalActive, setModalActive] = useState(true)
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
     useEffect(()=>{
@@ -305,16 +294,13 @@ const CatalogeComponent = () => {
                         <h3 className="catalog-title">Каталог</h3>
                         <div className="card-wrapper">
                             {
-                                productData.map((pData, id)=>{
-                                    console.log('product',id, pData)
+                                productData.map((pData, index)=>{
+                                    console.log('product', pData)
                                     
-                                    const {IdProduct ,NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock, DescribeProduct,BaseProduct,CollectionProduct,Appointment,ColorProduct,DrawingProduct,ThemeDrawing,DockingProduct,WidthProduct,Manufacturer,Country,SurfaceProduct,StateProduct} = pData;
+                                    const {IdProduct ,NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock} = pData;
                                     return (
-                                        <div>
-                                            
-                                            <Card id={IdProduct} nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock} describeProduct={DescribeProduct} baseProduct={BaseProduct} collectionProduct={CollectionProduct} appointment={Appointment} colorProduct={ColorProduct} drawingProduct={DrawingProduct} themeDrawing={ThemeDrawing} dockingProduct={DockingProduct} widthProduct={WidthProduct} manufacturer={Manufacturer} country={Country} surfaceProduct={SurfaceProduct} stateProduct={StateProduct}/>
-                                            {/* <Modal active={modalActive} setActive={setModalActive}/> */}
-                                        </div>
+                                        <AdminCard id={IdProduct } nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock}/>
+                                       
                                     )
                                 })
                             }
@@ -328,4 +314,4 @@ const CatalogeComponent = () => {
     )
 }
 
-export default CatalogeComponent;
+export default AdminCatalogeComponent;

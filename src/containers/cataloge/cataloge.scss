@@ -91,22 +91,134 @@
     margin-left: 20px;
 }
 
-.img-card{
+.img-cardd_prod{
     width: 100%;
     height: 100%;
 }
-.instock{
+.instocks_label{
     padding: 5px;
     text-align: center;
     width: 100px;
     height: 30px;
-    background-color: rgba(67, 67, 67, 0.25);
+    background-color: rgba(67, 67, 67, 0.35);
     backdrop-filter: blur(2px);
     position: absolute;
     z-index: 1;
     right: -0px;
-    top: -60px;
+    // top: -60px;
     color: #000000;
-    border-radius: 3px 120px / 120px;
-    font-size: 14px;
+    font-size: 16px;
+}
+
+
+// MODAL
+
+.modal{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+    position: fixed;
+    z-index: 4;
+    top:0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+}
+.modal.active{
+    transform: scale(1);
+}
+.modal_content{
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    // height: 200px;
+    width: 800px;
+}
+.moreinfo-btn-prod{
+    margin-left: -100px;
+   font-size: 16px;
+   font-weight: 600;
+   transition: .4s;
+}
+.moreinfo-btn-prod:hover{
+    color: var(--accent);
+    font-weight: 700;
+    // font-size: 17px;
+}
+.img_toMore{
+    padding: 0 15px;
+}
+.product_modal_img{
+    display: grid;
+    grid-template-columns: 5fr 5fr;
+    // gap: 10px 0;
+    margin-left: 10px;
+}
+.modal_img{
+    width: 300px;
+    height: 250px;
+    margin: 10px;
+   
+}
+.modal_article{
+    color: var( --text-muted);
+    font-size: 16px;
+    margin: 10px;
+}
+.modal_name{
+    color: var(  --text-card-dark-blue);
+    font-size: 22px;
+    // font-weight: 400;
+    margin-top: 70px;
+    margin-left: 20px;
+   
+}
+.modal_desctibe{
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 40px;
+    margin-left: 20px;
+    color: #000000;
+}
+.modal_important_info{
+    display: flex;
+    margin: 10px;
+}
+.modal_price{
+    color: var(  --text-card-dark-blue);
+    font-size: 20px;
+    margin: 5px;
+}
+.modal_instok{
+    font-size: 16px;
+    margin: 0 5px;
+    color: var( --text-muted);
+}
+.modal_stateproduct{
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(24, 24, 24);
+
+}
+.modal_info{
+    display: grid;
+    grid-template-columns: 6fr 5fr ;
+    // gap: 10px 0;
+    margin-left: 10px;
+   
+}
+.modal_info_item{
+    font-size: 17px;
+    margin-top: 10px;
+
+}
+.item_text{
+    margin-left: 10px;
+    
+}
+.modal_close{
+    width: 20px;
+    height: 20px;
 }
