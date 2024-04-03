@@ -10,8 +10,20 @@ export const DefaultContainer = styled.div`
 `;
 
 export const Container = styled(DefaultContainer)`
+  @media (min-width: ${props => props.theme.mobileS}) {
+    max-width:320px;
+  }
+
+  @media (min-width: ${props => props.theme.mobileM}) {
+    max-width:355px;
+  }
+
+  @media (min-width: ${props => props.theme.mobileL}) {
+    max-width:405px;
+  }
+
   @media (min-width: ${props => props.theme.mobileXL}) {
-    max-width:540px;
+    max-width:520px;
   }
 
   @media (min-width: ${props => props.theme.tablet}) {
@@ -29,5 +41,4 @@ export const Container = styled(DefaultContainer)`
   @media (min-width: ${props => props.theme.xLarge}) {
     max-width:1350px;
   }
-
 `;

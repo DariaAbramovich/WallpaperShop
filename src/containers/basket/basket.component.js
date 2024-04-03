@@ -38,7 +38,11 @@ const BasketComponent = ({items, total }) => {
                                     <div >Итого:</div>
                                     <div >{total} руб</div>
                                 </div>
-                             <button className='info_btn' onClick={()=>setPaymentActive(true)}>Заказать</button>
+                                <div>
+                                
+                                </div>
+                                
+                             <button className='info_btn' onClick={()=>setPaymentActive(true)}>Офомить заказ</button>
                             </div>
                         </div>
                     </div>

@@ -1,3 +1,4 @@
+
 import { Provider } from 'react-redux';
 import {ThemeProvider} from "styled-components";
 import axios from 'axios'
@@ -6,7 +7,7 @@ import 'swiper/css';
 import './css/App.css';
 import './css/reset.css';
 import './css/base.css';
-import './css/vars.css';
+import './css/vars.scss';
 
 import { CatalogeContainer } from "./containers/cataloge/cataloge.container";
 import { ShopData } from "./core/api";

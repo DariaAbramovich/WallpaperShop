@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 import { useEffect, useState } from 'react'
 import Swiper from 'swiper';
 import 'swiper/css';
@@ -84,8 +85,8 @@ const ProductsComponent = () => {
                         <div className="tab-controls">
                             <button data-tab="all" className="tub-controls__btn">Все</button>
                             <button data-tab="Бумажные обои" className="tub-controls__btn">Бумажные</button>
-                            <button data-tab="Флизелиновые обои" className="tub-controls__btn">Флизелиновые</button>
-                            <button data-tab="Виниловые обои" className="tub-controls__btn">Виниловые</button>
+                            <button data-tab=" Флизелиновые обои" className="tub-controls__btn">Флизелиновые</button>
+                            <button data-tab=" Виниловые обои" className="tub-controls__btn">Виниловые</button>
                         </div>
                     </div>
 

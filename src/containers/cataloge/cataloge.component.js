@@ -1,6 +1,9 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Search, SearchRe } from "../Search/search";
+import Swiper from 'swiper';
+import 'swiper/css';
+
 import './cataloge.scss'
 import Card from '../../components/card';
 import Modal from '../../components/modal';
@@ -31,6 +34,44 @@ const CatalogeComponent = () => {
                 setProductData(response.data);
             })
     }
+    const swiper = new Swiper('.swiper', {
+        // slidesPerView: 4,
+        // spaceBetween: 40,   
+        freeMode: true,
+        navigation: {
+            nextButton: 'swiperNext',
+            prevButton: '.swiperPrew',    
+        },
+    
+    });
+    const tabsBtn = document.querySelectorAll('[data-tab]')
+    const tabProducts = document.querySelectorAll('[data-tab-value]')
+    for(let btn of tabsBtn){
+        btn.addEventListener('click', function(){
+            for(let btn of tabsBtn){
+                btn.classList.remove('active-btn')
+            }   
+            this.classList.add('active-btn')
+    
+            // отображаем нужное и скрываем ненужное
+            for(let product of tabProducts){
+                //делаем проверку на отображение всех товаров
+                if(this.dataset.tab == "all"){
+                    product.classList.remove('none')
+                }
+                else{
+                    if(product.dataset.tabValue === this.dataset.tab){
+                        product.classList.remove('none')
+                    }
+                    else{
+                        product.classList.add('none')
+                    }
+                }
+               
+            }
+            swiper.update()
+        })
+    }
 
     return(
     <>
@@ -45,7 +86,7 @@ const CatalogeComponent = () => {
                     <div className="cataloge-filter">
                         <h3 className="filter-title">Сортировка</h3>
 
-                        <div className="filter-price">
+                        {/* <div className="filter-price">
                             <div className="filter__param">
                                 Цена
                             </div>
@@ -233,32 +274,34 @@ const CatalogeComponent = () => {
                             </form>
 
 
-                        </div>
+                        </div> */}
                         <div className="filter-type">
-                            <div className="filter__param">
+                            {/* <div className="filter__param">
                                 Тип
-                            </div>
+                            </div> */}
                             <form className="brend-form">
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Флизелиновые обои
-                                </label><br></br>
+                                <div lassName="swiper">
+                                    <button data-tab="all">
+                                        Все</button>
 
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Бумажные обои<br></br>
-                                </label>
+                                    <button name='fliz' data-tab=" Флизелиновые обои">
+                                        Флизелиновые обои
+                                    </button><br></br>
 
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Виниловые обои<br></br>
-                                </label>
+                                    <button name='paper'data-tab="Бумажные обои" >
+                                        Бумажные обои<br></br>
+                                    </button>
 
-
+                                    <button name='viniil' data-tab=" Виниловые обои" >
+                                        Виниловые обои<br></br>
+                                    </button>
+                                    <br></br>
+                                    <button>Применить</button>
+                                </div>
                             </form>
 
                         </div>
-                        <div className="filter-collection">
+                        {/* <div className="filter-collection">
                             <div className="filter__param">
                                 Коллекция
                             </div>
@@ -299,7 +342,7 @@ const CatalogeComponent = () => {
                                 </label>
                             </form>
 
-                        </div>
+                        </div> */}
                     </div>
                     <div className="cataloge-cards">
                         <h3 className="catalog-title">Каталог</h3>
@@ -311,8 +354,9 @@ const CatalogeComponent = () => {
                                     const {IdProduct ,NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock, DescribeProduct,BaseProduct,CollectionProduct,Appointment,ColorProduct,DrawingProduct,ThemeDrawing,DockingProduct,WidthProduct,Manufacturer,Country,SurfaceProduct,StateProduct} = pData;
                                     return (
                                         <div>
-                                            
-                                            <Card id={IdProduct} nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock} describeProduct={DescribeProduct} baseProduct={BaseProduct} collectionProduct={CollectionProduct} appointment={Appointment} colorProduct={ColorProduct} drawingProduct={DrawingProduct} themeDrawing={ThemeDrawing} dockingProduct={DockingProduct} widthProduct={WidthProduct} manufacturer={Manufacturer} country={Country} surfaceProduct={SurfaceProduct} stateProduct={StateProduct}/>
+                                            <div data-tab-value={TypeProduct}>
+                                                 <Card id={IdProduct} nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock} describeProduct={DescribeProduct} baseProduct={BaseProduct} collectionProduct={CollectionProduct} appointment={Appointment} colorProduct={ColorProduct} drawingProduct={DrawingProduct} themeDrawing={ThemeDrawing} dockingProduct={DockingProduct} widthProduct={WidthProduct} manufacturer={Manufacturer} country={Country} surfaceProduct={SurfaceProduct} stateProduct={StateProduct}/>
+                                            </div>
                                             {/* <Modal active={modalActive} setActive={setModalActive}/> */}
                                         </div>
                                     )

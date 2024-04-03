@@ -29,9 +29,9 @@ const BasketCard = ({item, counter, removeItem }) => {
                     </div>
                     <div className="wrapper_btns">
                         <div className="btns_control_value">
-                            <button  className="btns_control">+</button>
+                            {/* <button  className="btns_control">+</button>
                             <p className="label_count">{quantity}</p>
-                            <button  className="btns_control">-</button>
+                            <button  className="btns_control">-</button> */}
                         </div>
                     </div>
 

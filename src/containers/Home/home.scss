@@ -5,7 +5,7 @@
     background-image: url('./../../assets/image/bg3.jpg');
 
     // background-image: url('./../../assets/image/Rectangle 1441.jpg');
-    aspect-ratio: 1290 / 1004;
+    // aspect-ratio: 1290 / 1004;
     background-size:cover;
     opacity: 1;
     color: #000000;
@@ -21,7 +21,7 @@ a{
 .header__title {
     margin-bottom: 30px;
     font-weight: 400;
-    font-size: 55px;
+    font-size: clamp(28px, 0.821rem + 4.64vw, 80px);
     line-height: 130%;
     /* 104px */
     letter-spacing: -0.8px;
