@@ -40,3 +40,25 @@ a{
     margin: 0px auto;
     margin-top: 65px;
 }
+.search_filter_place{
+    display: block;
+    margin: 20px;
+    border-radius: 10px;
+    background: #000;
+	opacity: 0.6;
+    width: 60%;
+    margin: 2% 20%;
+    z-index: -1;
+    color: white;
+}
+.pData_list{
+    margin: 5px;
+    width: 100%;
+    padding: 10px;
+
+}
+.pData_link{
+    font-size: 18px;
+    font-weight: 500;
+    z-index: 2;
+}

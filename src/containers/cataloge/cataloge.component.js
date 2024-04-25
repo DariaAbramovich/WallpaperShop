@@ -2,91 +2,119 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Search, SearchRe } from "../Search/search";
 import Swiper from 'swiper';
+import { Link, useSearchParams } from 'react-router-dom'
 import 'swiper/css';
+import search_icon from './../../assets/icon/akar-icons_search.png';
+
 
 import './cataloge.scss'
 import Card from '../../components/card';
 import Modal from '../../components/modal';
+import { SearchResult } from '../Search/searchResult';
 
 const CatalogeComponent = () => {
-//     const [productData, setProductData] = useState([]);
-//     useEffect ( ()=>{
-//         const getProductData = async ()=>{
-//             const reqData = await fetch('http://localhost/api/index.php')
-//             const resData = await reqData.json();
-//             console.log(resData);
-//             setProductData(resData);
-//         }
-//         getProductData()
-// },[])
-
+    //     const [productData, setProductData] = useState([]);
+    //     useEffect ( ()=>{
+    //         const getProductData = async ()=>{
+    //             const reqData = await fetch('http://localhost/api/index.php')
+    //             const resData = await reqData.json();
+    //             console.log(resData);
+    //             setProductData(resData);
+    //         }
+    //         getProductData()
+    // },[])
     const [modalActive, setModalActive] = useState(true)
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
-    useEffect(()=>{
+    const [result, setResult] = useState([]);
+
+    // const [searchParamsOne, setSearchParamsOne] = useSearchParams();
+    // const postQueryOne = searchParamsOne.get('pData') || '';
+
+    // const [toggle, setToggle] = useState(false);
+    // const [result, setResult] = useState([]);
+
+    useEffect(() => {
         getProducts();
-    },[])
-    const  getProducts = (e) => {
-    
+    }, [])
+    const getProducts = (e) => {
         axios.get('http://localhost/api/product.php', inputs).
             then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 setProductData(response.data);
             })
     }
+    // const handleSubmitOne = (e) => {
+    //     e.preventDefault();
+    //     const formOne = e.target;
+    //     const queryOne = formOne.searchOne.value.toLowerCase();
+    //     console.log(queryOne)
+    //     setSearchParamsOne({ pData: queryOne })
+    // }
+
+    // const handleCange = (e) => {   
+    //     const name = e.target.name;
+    //     const value = e.target.value;
+    //     setInputs(values => ({ ...values, [name]: value }))
+
+    // }
     const swiper = new Swiper('.swiper', {
         // slidesPerView: 4,
         // spaceBetween: 40,   
         freeMode: true,
         navigation: {
             nextButton: 'swiperNext',
-            prevButton: '.swiperPrew',    
+            prevButton: '.swiperPrew',
         },
-    
+
     });
     const tabsBtn = document.querySelectorAll('[data-tab]')
     const tabProducts = document.querySelectorAll('[data-tab-value]')
-    for(let btn of tabsBtn){
-        btn.addEventListener('click', function(){
-            for(let btn of tabsBtn){
+    for (let btn of tabsBtn) {
+        btn.addEventListener('click', function () {
+            for (let btn of tabsBtn) {
                 btn.classList.remove('active-btn')
-            }   
+            }
             this.classList.add('active-btn')
-    
+
             // отображаем нужное и скрываем ненужное
-            for(let product of tabProducts){
+            for (let product of tabProducts) {
                 //делаем проверку на отображение всех товаров
-                if(this.dataset.tab == "all"){
+                if (this.dataset.tab == "all") {
                     product.classList.remove('none')
                 }
-                else{
-                    if(product.dataset.tabValue === this.dataset.tab){
+                else {
+                    if (product.dataset.tabValue === this.dataset.tab) {
                         product.classList.remove('none')
                     }
-                    else{
+                    else {
                         product.classList.add('none')
                     }
                 }
-               
+
             }
             swiper.update()
         })
     }
 
-    return(
-    <>
-        <div className="container">
-            <div className="search-position">
-                <div className="search__wrapper">
-                    <Search />
+    return (
+        <>
+            <div className="container">
+                <div className="search-position">
+                    <div >
+                        <Search setResult={setResult}/>
+                        <div className='search_filter_place' >
+                        <SearchResult result={result}/>
+                            
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="cataloge">
-                <div className="cataloge-wrapper">
-                    <div className="cataloge-filter">
-                        <h3 className="filter-title">Сортировка</h3>
+                <div className="cataloge">
+                    <div className="cataloge-wrapper">
+                        <div className="cataloge-filter">
+                            <h3 className="filter-title">Сортировка</h3>
 
-                        {/* <div className="filter-price">
+                            {/* <div className="filter-price">
                             <div className="filter__param">
                                 Цена
                             </div>
@@ -275,33 +303,33 @@ const CatalogeComponent = () => {
 
 
                         </div> */}
-                        <div className="filter-type">
-                            {/* <div className="filter__param">
+                            <div className="filter-type">
+                                {/* <div className="filter__param">
                                 Тип
                             </div> */}
-                            <form className="brend-form">
-                                <div lassName="swiper">
-                                    <button data-tab="all">
-                                        Все</button>
+                                <form className="brend-form">
+                                    <div lassName="swiper">
+                                        <button data-tab="all">
+                                            Все</button>
 
-                                    <button name='fliz' data-tab=" Флизелиновые обои">
-                                        Флизелиновые обои
-                                    </button><br></br>
+                                        <button name='fliz' data-tab=" Флизелиновые обои">
+                                            Флизелиновые обои
+                                        </button><br></br>
 
-                                    <button name='paper'data-tab="Бумажные обои" >
-                                        Бумажные обои<br></br>
-                                    </button>
+                                        <button name='paper' data-tab="Бумажные обои" >
+                                            Бумажные обои<br></br>
+                                        </button>
 
-                                    <button name='viniil' data-tab=" Виниловые обои" >
-                                        Виниловые обои<br></br>
-                                    </button>
-                                    <br></br>
-                                    <button>Применить</button>
-                                </div>
-                            </form>
+                                        <button name='viniil' data-tab=" Виниловые обои" >
+                                            Виниловые обои<br></br>
+                                        </button>
+                                        <br></br>
+                                        <button>Применить</button>
+                                    </div>
+                                </form>
 
-                        </div>
-                        {/* <div className="filter-collection">
+                            </div>
+                            {/* <div className="filter-collection">
                             <div className="filter__param">
                                 Коллекция
                             </div>
@@ -343,32 +371,32 @@ const CatalogeComponent = () => {
                             </form>
 
                         </div> */}
-                    </div>
-                    <div className="cataloge-cards">
-                        <h3 className="catalog-title">Каталог</h3>
-                        <div className="card-wrapper">
-                            {
-                                productData.map((pData, id)=>{
-                                    console.log('product',id, pData)
-                                    
-                                    const {IdProduct ,NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct,InStock, DescribeProduct,BaseProduct,CollectionProduct,Appointment,ColorProduct,DrawingProduct,ThemeDrawing,DockingProduct,WidthProduct,Manufacturer,Country,SurfaceProduct,StateProduct} = pData;
-                                    return (
-                                        <div>
-                                            <div data-tab-value={TypeProduct}>
-                                                 <Card id={IdProduct} nameproduct={NameProduct} article = {Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock} describeProduct={DescribeProduct} baseProduct={BaseProduct} collectionProduct={CollectionProduct} appointment={Appointment} colorProduct={ColorProduct} drawingProduct={DrawingProduct} themeDrawing={ThemeDrawing} dockingProduct={DockingProduct} widthProduct={WidthProduct} manufacturer={Manufacturer} country={Country} surfaceProduct={SurfaceProduct} stateProduct={StateProduct}/>
+                        </div>
+                        <div className="cataloge-cards">
+                            <h3 className="catalog-title">Каталог</h3>
+                            <div className="card-wrapper">
+                                {
+                                    productData.map((pData, id) => {
+                                        console.log('product', id, pData)
+
+                                        const { IdProduct, NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct, InStock, DescribeProduct, BaseProduct, CollectionProduct, Appointment, ColorProduct, DrawingProduct, ThemeDrawing, DockingProduct, WidthProduct, Manufacturer, Country, SurfaceProduct, StateProduct } = pData;
+                                        return (
+                                            <div>
+                                                <div data-tab-value={TypeProduct}>
+                                                    <Card id={IdProduct} nameproduct={NameProduct} article={Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock} describeProduct={DescribeProduct} baseProduct={BaseProduct} collectionProduct={CollectionProduct} appointment={Appointment} colorProduct={ColorProduct} drawingProduct={DrawingProduct} themeDrawing={ThemeDrawing} dockingProduct={DockingProduct} widthProduct={WidthProduct} manufacturer={Manufacturer} country={Country} surfaceProduct={SurfaceProduct} stateProduct={StateProduct} />
+                                                </div>
+                                                {/* <Modal active={modalActive} setActive={setModalActive}/> */}
                                             </div>
-                                            {/* <Modal active={modalActive} setActive={setModalActive}/> */}
-                                        </div>
-                                    )
-                                })
-                            }
-                           
+                                        )
+                                    })
+                                }
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div >
-        </div>
-    </>
+                </div >
+            </div>
+        </>
     )
 }
 
