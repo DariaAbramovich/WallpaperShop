@@ -1,17 +1,26 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
+// 'http://localhost/api/product.php'
+// 'http://localhost/api/user.php'
 
 
-// const [productData, setProductData] = useState([]);
-//         useEffect ( ()=>{
-//             const getProductData = async ()=>{
-//                 const reqData = await fetch('http://localhost/api/index.php')
-//                 const resData = await reqData.json();
-//                 console.log(resData);
-    
-//                 setProductData(resData);
-//             }
-//             getProductData()
-// },[])
-    
+const API = axios.create({
+  baseURL: `http://localhost`,
+});
+
+const endpoints = {
+  getProduct: '/api/product.php',
+  getUsers: '/user.php',
+}
+
+export const ShopService =  {
+    getProduct() {
+    return API.get(endpoints.getProduct);
+  },
+  getUsers() {
+    return API.get(endpoints.getUsers);
+  },
+
+  
+};

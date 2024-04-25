@@ -8,19 +8,21 @@ import './css/App.css';
 import './css/reset.css';
 import './css/base.css';
 import './css/vars.scss';
-
+import React, {useEffect} from "react";
+import { ShopService } from './core/api';
 import { CatalogeContainer } from "./containers/cataloge/cataloge.container";
 import { ShopData } from "./core/api";
 import { AddProductContainer } from "./containers/adminPart/addProduct/addProduct.container";
 import { LoginContainer } from "./containers/LogIn/login.container";
 import { RegistredContainer } from "./containers/LogIn/Registred/registred.container";
-import HomeContainer from "./containers/Home/home.container";
+
 import store from './redux/store';
 import { BasketContainer } from './containers/basket/basket.container';
 import DetailListProductContainer from './containers/detailListProduct/detailListProduct.container';
 import { ProductsContainer } from './containers/Home/Products/products.container'; 
 import AdminHomeContainer from './containers/adminPart/adminHome/adminhome.container';
 import { AdminCatalogeContainer } from './containers/adminPart/adminCataloge/adminCcataloge.container';
+import HomeContainer from './containers/Home/home.container';
 const colors = {
   bgColor: '#0D1B39',
   // bgColorLight: '#212121',
@@ -47,7 +49,8 @@ const theme = {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeContainer/>
+    element: <HomeContainer/>,
+    
   },
   {
     path: "/admin/",
@@ -78,14 +81,19 @@ const router = createBrowserRouter([
     element: <BasketContainer/>
   },
   { 
-    path:'/detailpage/',
+    path:'/product/:idProduct',
     element: <DetailListProductContainer/>,
+    
   }
 
 ]);
 
 
 function App() {
+  useEffect(() => {
+    console.log("use effect");
+  }, []);
+
   return (
    
     <ThemeProvider theme={theme}>

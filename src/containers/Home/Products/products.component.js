@@ -17,6 +17,7 @@ import plas from './../../../assets/icon/Plus.png';
 import btn_left from './../../../assets/icon/arrov-left.svg'
 import btn_right from './../../../assets/icon/arrov-right.svg'
 import Card from '../../../components/card';
+import { ShopService } from '../../../core/api';
 
 const ProductsComponent = () => {
     const [inputs, setInputs] = useState({})
@@ -26,7 +27,7 @@ const ProductsComponent = () => {
     },[])
     const  getProducts = (e) => {
     
-        axios.get('http://localhost/api/product.php', inputs).
+        ShopService.getProduct().
             then(function (response) {
                 console.log(response.data);
                 setProductData(response.data);
