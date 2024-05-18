@@ -16,7 +16,7 @@ const CardBtn = ({onClick,itemsCount }) =>{
 const mapStateToProps = state => ({
     itemsCount: state.cart.cartItems.reduce((acc, item) => acc += item.quantity, 0)
   });
-export default  connect(mapStateToProps) (CardBtn);
+export default connect(mapStateToProps) (CardBtn);
 
 // const mapStateProdToProps = state => ({
 //     itemsCount: state.delate.delatetReducer.reduce((acc, item) => acc += item.quantity, 0)

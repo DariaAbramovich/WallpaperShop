@@ -1,6 +1,6 @@
 import { Header } from "../../components/header"
 import { Navbar } from "../Navbar/navbar"
-import { Constructor } from "./constructor.companent"
+import ConstructorCompanent from "./constructor.companent"
 
 export const ConstructorContainer = () => {
     return (
@@ -11,7 +11,7 @@ export const ConstructorContainer = () => {
                         <Navbar/>
                     </div>   
             </Header>
-            <Constructor/>
+            <ConstructorCompanent/>
             </>
         </>
     )

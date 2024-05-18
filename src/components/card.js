@@ -87,7 +87,7 @@ const ProdCardPrice = styled.div`
     font-size: 21px;
     font-weight: 600;
 `
-const ProdCardBtn = styled.button`
+export const ProdCardBtn = styled.button`
     position: relative; 
     z-index: 3;
     width: 48px;

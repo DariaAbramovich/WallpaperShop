@@ -8,7 +8,7 @@ import './css/App.css';
 import './css/reset.css';
 import './css/base.css';
 import './css/vars.scss';
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { ShopService } from './core/api';
 import { CatalogeContainer } from "./containers/cataloge/cataloge.container";
 import { ShopData } from "./core/api";
@@ -27,6 +27,13 @@ import { ConstructorContainer } from './containers/constructot/constructor.conta
 import { Vinil } from './containers/cataloge/section/vinil/vinil';
 import { Paper } from './containers/cataloge/section/paper/paper';
 import { NonWowen } from './containers/cataloge/section/woven';
+import { C } from './containers/constructot/c';
+
+const [cart, setCart] = useState([]);
+const addToCart = (item) => {
+    setCart((prevCart) => [...prevCart, item]);
+};
+
 const colors = {
   bgColor: '#0D1B39',
   // bgColorLight: '#212121',
@@ -74,6 +81,10 @@ const router = createBrowserRouter([
   {
     path:'/constructor/',
     element:<ConstructorContainer/>
+  },
+  {
+    path:'/c/',
+    element:<C/>
   },
   {
     path:'/nonWoven/',

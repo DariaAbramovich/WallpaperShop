@@ -1,6 +1,5 @@
-import './constructor.scss';
-import { connect } from 'react-redux';  
-import { addItem } from '../../redux/cart/cart.actions';
+
+
 import React, { useState } from 'react';
 import beige from './../../assets/image/constructor/colors/bejevi.jpg';
 import black from './../../assets/image/constructor/colors/black.jpg';
@@ -28,15 +27,16 @@ import spring64 from './../../assets/image/constructor/picture/icons8-весна
 import spring94 from './../../assets/image/constructor/picture/icons8-весна-94.png'
 import None from './../../assets/image/constructor/picture/icons8-нет-64.png'
 
- 
 const PRICES = {
     paper: 20, 
     vinyl: 40,
-    nonwowen:34,
+    nonwowen: 34,
 };
-const BASE_PATTERN_PRICE = 10;
-const COLIBRI_PATTERN_PRICE = 15; 
-const Constructor = () => {
+
+const BASE_PATTERN_PRICE = 10; // Base price increase for any selected pattern
+const COLIBRI_PATTERN_PRICE = 15; // Additional price for colibri pattern
+
+export const C = () => {
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedImage, setSelectedImage] = useState('');
     const [width, setWidth] = useState('');
@@ -47,6 +47,7 @@ const Constructor = () => {
     const handleColorSelection = (color) => {
         setSelectedColor(color);
     };
+
     const handleImageSelection = (image) => {
         if (image === 'none') {
             setSelectedImage('');
@@ -56,16 +57,19 @@ const Constructor = () => {
             calculatePrice(width, wallpaperType, image);
         }
     };
+
     const handleWidthChange = (e) => {
         const newWidth = e.target.value;
         setWidth(newWidth);
         calculatePrice(newWidth, wallpaperType, selectedImage);
     };
+
     const handleWallpaperTypeChange = (e) => {
         const newType = e.target.value;
         setWallpaperType(newType);
         calculatePrice(width, newType, selectedImage);
     };
+
     const calculatePrice = (width, type, image) => {
         const numericWidth = parseFloat(width);
         if (!isNaN(numericWidth)) {
@@ -77,6 +81,7 @@ const Constructor = () => {
             setPrice(0);
         }
     };
+
     const handleOrder = () => {
         const order = {
             color: selectedColor,
@@ -86,28 +91,27 @@ const Constructor = () => {
             price
         };
         setCart([...cart, order]); // Add order to cart
-        console.log('Cart:', cart); // You can see the cart items in the console
     };
+
     const resultStyle = {
         backgroundColor: selectedColor,
         backgroundImage: selectedImage ? `url(${selectedImage})` : 'none',
         backgroundRepeat: 'repeat',
         backgroundSize: '70px'
     };
+
     return (
         <>
             <div className='const_wrapper'>
-                <h1 className='wrapp_title'>Конструктор - создние персональных обоев</h1>
+                <h1 className='wrapp_title'>Конструктор - создание персональных обоев</h1>
                 <div className='constructor_body'>
-
                     <div className='constructor_result'>
-                        <div className='result' style={ resultStyle }>
+                        <div className='result' style={resultStyle}>
                             {selectedColor && <p>Selected Color: {selectedColor}</p>}
-
                         </div>
                     </div>
                     <div className='constructor_param'>
-                        <p className='param_title'>Выберете цвет:</p>
+                        <p className='param_title'>Выберите цвет:</p>
                         <div className='param_color'>
                             <div className='color-item_b' onClick={() => handleColorSelection('black')}>b</div>
                             <div className='color-item_w' onClick={() => handleColorSelection('white')}>w</div>
@@ -122,8 +126,8 @@ const Constructor = () => {
                             <div className='color-item_bl' onClick={() => handleColorSelection('#ccebff')}>bl</div>
                             <div onClick={() => handleColorSelection('beige')}><img src={beige} className='color-item_gr' alt='beige' /></div>
                         </div>
-                        <p className='param_title'>Выберете рисунок:</p>
-                            <div className='param_imge'>
+                        <p className='param_title'>Выберите рисунок:</p>
+                        <div className='param_image'>
                             <div onClick={() => handleImageSelection(colibri)}><img className='img_picture' src={colibri} alt='colibri' /></div>
                             <div onClick={() => handleImageSelection(spa50)}><img className='img_picture' src={spa50} alt='spa50' /></div>
                             <div onClick={() => handleImageSelection(spa80)}><img className='img_picture' src={spa80} alt='spa80' /></div>
@@ -136,13 +140,12 @@ const Constructor = () => {
                             <div onClick={() => handleImageSelection(spring64)}><img className='img_picture' src={spring64} alt='spring64' /></div>
                             <div onClick={() => handleImageSelection(spring94)}><img className='img_picture' src={spring94} alt='spring94' /></div>
                             <div onClick={() => handleImageSelection('none')}><img className='img_picture' src={None} alt='None' /></div>
-
-                            </div>
-                            <p className='param_title'>Выберите тип обоев:</p>
+                        </div>
+                        <p className='param_title'>Выберите тип обоев:</p>
                         <select value={wallpaperType} onChange={handleWallpaperTypeChange}>
                             <option value='paper'>Бумажные</option>
                             <option value='vinyl'>Виниловые</option>
-                            <option value='nonwowen'>Флизилиновые</option>
+                            <option value='nonwowen'>Флизелиновые</option>
                         </select>
                         
                         <p className='param_title'>Введите ширину (в метрах):</p>
@@ -155,16 +158,22 @@ const Constructor = () => {
                         <p>Цена: {price} руб.</p>
                         <button onClick={handleOrder}>Заказать</button>
                     </div>
-                </div>
+                    <div className='cart'>
+                        <h2>Корзина</h2>
+                       
 
+ <ul>
+                            {cart.map((item, index) => (
+                                <li key={index}>
+                                    {item.wallpaperType} обои, {item.width} м, {item.color}, Рисунок: {item.image ? 'Да' : 'Нет'}, Цена: {item.price} руб.
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </>
-    )
-}
-
-const mapDispatchToProps = dispatch => ({
-    addItem: item => dispatch(addItem(item))
-})
+    );
+};
 
 
-export default connect(null,mapDispatchToProps) (Constructor);

@@ -1,89 +1,224 @@
+
 import axios from 'axios'
+import Swiper from 'swiper';
+import 'swiper/css';
 import { useEffect, useState } from 'react'
+
+import './../../cataloge.scss'
+import { Link } from 'react-router-dom';
+import { Search } from '../../../Search/search';
+import { SearchResult } from '../../../Search/searchResult';
 import Card from '../../../../components/card';
 
 export const Paper = () => {
 
     const [inputs, setInputs] = useState({})
-    const [productDataN, setProductDataN] = useState([]);
+    const [productData, setProductData] = useState([]);
     const [result, setResult] = useState([]);
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
+    const [stateProd,setStateProd ] = useState('');
+    const [stateProds,setStateProds ] = useState([]);
+    const [manufacturer, setManufacturer] = useState('');
+    const [manufacturers, setManufacturers] = useState([]);
+    
+
+    const [filterApplied, setFilterApplied] = useState(false); // To track whether filters are applied or not
+
     useEffect(() => {
-        getProductsN();
+        getProducts();
     }, [])
-    const getProductsN = async () => {
+    const getProducts = async () => {
         try {
             const response = await axios.get('http://localhost/api/product_paper.php', { params: inputs });
             if (Array.isArray(response.data)) {
-                setProductDataN(response.data);
-            } else {
-                console.error('Response data is not an array', response.data);
+                setProductData(response.data);
+                const uniqueManufacturers = [...new Set(response.data.map(product => product.Country))];
+                setManufacturers(uniqueManufacturers);
+                const uniqueStateProd = [...new Set(response.data.map(product => product.StateProduct))];
+                setStateProds(uniqueStateProd)
+                console.log(uniqueStateProd)
             }
-        } catch (error) {
-            console.error('Error fetching product data:', error);
+            else {
+                console.error('Данные ответа не являются массивом', response.data);
+            }
+        }
+        catch (error) {
+            console.error('Ошибка получения данных о продукте:', error);
         }
     };
+    const applyFilters = () => {
+        setFilterApplied(true);
+    };
+
+    const resetFilters = () => {
+        setMinPrice('');
+        setMaxPrice('');
+        setManufacturer('');
+        setStateProd('');
+        setFilterApplied(false);
+    };
+
+    const filteredProducts = productData.filter((pData) => {
+        const price = parseFloat(pData.PriceProduct);
+        const min = parseFloat(minPrice);
+        const max = parseFloat(maxPrice);
+        if (filterApplied) {
+            if (!isNaN(min) && price < min) return false;
+            if (!isNaN(max) && price > max) return false;
+            if(stateProd && pData.StateProduct !== stateProd) return false
+            if (manufacturer && pData.Country !== manufacturer) return false;
+            
+        }
+        return true;
+    });
     return (
         <>
-            <h1>non-wowen paper</h1>
-            <>
-            {Array.isArray(productDataN) && productDataN.length > 0 ? (
-                    productDataN.map((pData, id) => {
-                        console.log('product', id, pData);
-                        const {
-                            IdProduct,
-                            NameProduct,
-                            Article,
-                            TypeProduct,
-                            PriceProduct,
-                            PhotoProduct,
-                            InStock,
-                            DescribeProduct,
-                            BaseProduct,
-                            CollectionProduct,
-                            Appointment,
-                            ColorProduct,
-                            DrawingProduct,
-                            ThemeDrawing,
-                            DockingProduct,
-                            WidthProduct,
-                            Manufacturer,
-                            Country,
-                            SurfaceProduct,
-                            StateProduct
-                        } = pData;
-                        return (
-                            <div key={IdProduct}>
-                                <Card
-                                    id={IdProduct}
-                                    nameproduct={NameProduct}
-                                    article={Article}
-                                    type={TypeProduct}
-                                    priceProduct={PriceProduct}
-                                    photoProduct={PhotoProduct}
-                                    inStock={InStock}
-                                    describeProduct={DescribeProduct}
-                                    baseProduct={BaseProduct}
-                                    collectionProduct={CollectionProduct}
-                                    appointment={Appointment}
-                                    colorProduct={ColorProduct}
-                                    drawingProduct={DrawingProduct}
-                                    themeDrawing={ThemeDrawing}
-                                    dockingProduct={DockingProduct}
-                                    widthProduct={WidthProduct}
-                                    manufacturer={Manufacturer}
-                                    country={Country}
-                                    surfaceProduct={SurfaceProduct}
-                                    stateProduct={StateProduct}
-                                />
+            <div className="container">
+                <div className="search-position">
+                    <div >
+                        <Search setResult={setResult} />
+                        <div className='search_filter_place' >
+                            <SearchResult result={result} />
+
+                        </div>
+                    </div>
+                </div>
+                <div className="cataloge">
+                    <div className="cataloge-wrapper">
+                        <div className="cataloge-filter">
+                            <h3 className="filter-title">Сортировка</h3>
+                            <div className="filter-type">
+                                <div >
+                                    <div>
+                                        <label>
+                                            Цена от:
+                                            <input
+                                                type="number"
+                                                value={minPrice}
+                                                onChange={(e) => setMinPrice(e.target.value)}
+                                                placeholder='0'
+                                            />
+                                        </label>
+                                        <label>
+                                            Цена до:
+                                            <input
+                                                type="number"
+                                                value={maxPrice}
+                                                onChange={(e) => setMaxPrice(e.target.value)}
+                                                placeholder='0'
+                                            />
+                                        </label>
+                                        <br></br>
+                                        <label>
+                                            Состояние товара:
+                                            <select
+                                                value={stateProd}
+                                                onChange={(e) => setStateProd(e.target.value)}
+                                            >
+                                             {/* <option value="">Все</option> */}
+                                             {stateProds.map((stedP, index) => (
+                                                    <option key={index} value={stedP}>{stedP}</option>
+                                                ))}
+                                          
+                                            </select>
+                                        </label>
+                                        <br></br>
+                                        <label>
+                                            Страна производитель:
+                                            <select
+                                                value={manufacturer}
+                                                onChange={(e) => setManufacturer(e.target.value)}
+                                            >
+                                                <option value="">Все</option>
+                                                {manufacturers.map((manuf, index) => (
+                                                    <option key={index} value={manuf}>{manuf}</option>
+                                                ))}
+                                            </select>
+                                        </label>
+                                        <div>
+                                        <button onClick={applyFilters}>Применить фильтры</button>
+                                        <button onClick={resetFilters}>Сбросить фильры</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        );
-                    })
-                ) : (
-                    <p>No products available</p>
-                )}
+                        </div>
+                        <div className="cataloge-cards">
+                            <div>
+                                <div className="catalog-title">Каталог
+                                    <div className='catalog_category'>
+                                        <Link to={'/cataloge/'} className='category_btn'> Все</Link>
+                                        <Link to={'/nonWoven/'} className='category_btn'>Флизелиновые</Link>
+                                        <Link to={'/paperwall/'} className='category_btn'>Бумажные</Link>
+                                        <Link to={'/vinil/'} className='category_btn'>Виниловые</Link>
+                                    </div>
+                                </div>
 
-            </>
 
+                            </div>
+
+                            <div className="card-wrapper">
+                                {filteredProducts.length > 0 ? (
+                                    filteredProducts.map((pData) => {
+                                        const {
+                                            IdProduct,
+                                            NameProduct,
+                                            Article,
+                                            TypeProduct,
+                                            PriceProduct,
+                                            PhotoProduct,
+                                            InStock,
+                                            DescribeProduct,
+                                            BaseProduct,
+                                            CollectionProduct,
+                                            Appointment,
+                                            ColorProduct,
+                                            DrawingProduct,
+                                            ThemeDrawing,
+                                            DockingProduct,
+                                            WidthProduct,
+                                            Manufacturer,
+                                            Country,
+                                            SurfaceProduct,
+                                            StateProduct
+                                        } = pData;
+                                        return (
+                                            <div key={IdProduct}>
+                                                <Card
+                                                    id={IdProduct}
+                                                    nameproduct={NameProduct}
+                                                    article={Article}
+                                                    type={TypeProduct}
+                                                    priceProduct={PriceProduct}
+                                                    photoProduct={PhotoProduct}
+                                                    inStock={InStock}
+                                                    describeProduct={DescribeProduct}
+                                                    baseProduct={BaseProduct}
+                                                    collectionProduct={CollectionProduct}
+                                                    appointment={Appointment}
+                                                    colorProduct={ColorProduct}
+                                                    drawingProduct={DrawingProduct}
+                                                    themeDrawing={ThemeDrawing}
+                                                    dockingProduct={DockingProduct}
+                                                    widthProduct={WidthProduct}
+                                                    manufacturer={Manufacturer}
+                                                    country={Country}
+                                                    surfaceProduct={SurfaceProduct}
+                                                    stateProduct={StateProduct}
+                                                />
+                                            </div>
+                                        );
+                                    })
+                                ) : (
+                                    <p>Таких товаров нет</p>
+                                )}
+
+                            </div>
+                        </div>
+                    </div>
+                </div >
+            </div>
         </>
     )
 }
