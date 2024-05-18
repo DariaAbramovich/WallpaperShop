@@ -24,7 +24,7 @@
 
 
 .cataloge{
-    margin-top: 50px;
+    margin-top: 40px;
    
 }
 .cataloge-wrapper{
@@ -39,6 +39,35 @@
     border-width: 2px;
     border-color: transparent rgb(148, 148, 148) transparent transparent;
     margin-right: 30px;
+}
+
+.catalog_category{
+    
+    display: flex;
+    padding: 6px;
+    // background: #f8f8f8;
+    justify-content:first baseline;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.category_btn{
+    height: 45px;
+    padding: 7px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 32px;
+    background-color: rgb(244, 167, 73);
+    color: rgba(31, 31, 31, 0.8);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.85; 
+    margin: 5px;
+    transition: background-color 0.4s ease-in;
+}
+.category_btn:hover{
+    background-color: rgba(81, 81, 81, 0.7);
 }
 .filter-title{
     text-align: center;
@@ -81,7 +110,7 @@
     color: var(  --text-card-dark-blue);
     font-size: 24px;
     font-weight: 500;
-    padding-bottom: 30px;
+    padding-bottom: 40px;
 }
 
 .card-wrapper{

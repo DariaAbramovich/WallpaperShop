@@ -17,26 +17,61 @@ const CatalogeComponent = () => {
     const [result, setResult] = useState([]);
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
+    const [stateProd,setStateProd ] = useState('');
+    const [stateProds,setStateProds ] = useState([]);
+    const [manufacturer, setManufacturer] = useState('');
+    const [manufacturers, setManufacturers] = useState([]);
+    
+
+    const [filterApplied, setFilterApplied] = useState(false); // To track whether filters are applied or not
+
     useEffect(() => {
         getProducts();
     }, [])
-    const getProducts = (e) => {
-        axios.get('http://localhost/api/product.php', inputs).
-            then(function (response) {
-                // console.log(response.data);
+    const getProducts = async () => {
+        try {
+            const response = await axios.get('http://localhost/api/product.php', { params: inputs });
+            if (Array.isArray(response.data)) {
                 setProductData(response.data);
-            })
-    }
+                const uniqueManufacturers = [...new Set(response.data.map(product => product.Country))];
+                setManufacturers(uniqueManufacturers);
+                const uniqueStateProd = [...new Set(response.data.map(product => product.StateProduct))];
+                setStateProds(uniqueStateProd)
+                console.log(uniqueStateProd)
+            }
+            else {
+                console.error('Данные ответа не являются массивом', response.data);
+            }
+        }
+        catch (error) {
+            console.error('Ошибка получения данных о продукте:', error);
+        }
+    };
+    const applyFilters = () => {
+        setFilterApplied(true);
+    };
+
+    const resetFilters = () => {
+        setMinPrice('');
+        setMaxPrice('');
+        setManufacturer('');
+        setStateProd('');
+        setFilterApplied(false);
+    };
 
     const filteredProducts = productData.filter((pData) => {
         const price = parseFloat(pData.PriceProduct);
         const min = parseFloat(minPrice);
         const max = parseFloat(maxPrice);
-        if (!isNaN(min) && price < min) return false;
-        if (!isNaN(max) && price > max) return false;
+        if (filterApplied) {
+            if (!isNaN(min) && price < min) return false;
+            if (!isNaN(max) && price > max) return false;
+            if(stateProd && pData.StateProduct !== stateProd) return false
+            if (manufacturer && pData.Country !== manufacturer) return false;
+            
+        }
         return true;
     });
-
     return (
         <>
             <div className="container">
@@ -53,111 +88,131 @@ const CatalogeComponent = () => {
                     <div className="cataloge-wrapper">
                         <div className="cataloge-filter">
                             <h3 className="filter-title">Сортировка</h3>
-
-
                             <div className="filter-type">
-                                <form className="brend-form">
-                                    <div >
-                                        <button><Link to={'/cataloge/'}> Все обои</Link></button>
+                                <div >
+                                    <div>
+                                        <label>
+                                            Цена от:
+                                            <input
+                                                type="number"
+                                                value={minPrice}
+                                                onChange={(e) => setMinPrice(e.target.value)}
+                                                placeholder='0'
+                                            />
+                                        </label>
+                                        <label>
+                                            Цена до:
+                                            <input
+                                                type="number"
+                                                value={maxPrice}
+                                                onChange={(e) => setMaxPrice(e.target.value)}
+                                                placeholder='0'
+                                            />
+                                        </label>
                                         <br></br>
-                                        <Link to={'/nonWoven/'}>Флизелиновые обои</Link>
-
+                                        <label>
+                                            Состояние товара:
+                                            <select
+                                                value={stateProd}
+                                                onChange={(e) => setStateProd(e.target.value)}
+                                            >
+                                             {/* <option value="">Все</option> */}
+                                             {stateProds.map((stedP, index) => (
+                                                    <option key={index} value={stedP}>{stedP}</option>
+                                                ))}
+                                          
+                                            </select>
+                                        </label>
                                         <br></br>
-
-                                        <button name='paper'>
-                                            <Link to={'/paperwall/'}>Бумажные обои</Link>
-                                        </button>
-
-                                        <button name='vinil' >
-                                            <Link to={'/vinil/'}>Виниловые обои</Link>
-                                        </button>
-                                        <br></br>
-                                        <br></br>
-                                        <div>Фильтровать по цене:</div>
-                                        
-
+                                        <label>
+                                            Страна производитель:
+                                            <select
+                                                value={manufacturer}
+                                                onChange={(e) => setManufacturer(e.target.value)}
+                                            >
+                                                <option value="">Все</option>
+                                                {manufacturers.map((manuf, index) => (
+                                                    <option key={index} value={manuf}>{manuf}</option>
+                                                ))}
+                                            </select>
+                                        </label>
                                         <div>
-                                            <label>
-                                                Min Price:
-                                                <input
-                                                    type="number"
-                                                    value={minPrice}
-                                                    onChange={(e) => setMinPrice(e.target.value)}
-                                                />
-                                            </label>
-                                            <label>
-                                                Max Price:
-                                                <input
-                                                    type="number"
-                                                    value={maxPrice}
-                                                    onChange={(e) => setMaxPrice(e.target.value)}
-                                                />
-                                            </label>
+                                        <button onClick={applyFilters}>Применить фильтры</button>
+                                        <button onClick={resetFilters}>Сбросить фильры</button>
                                         </div>
-
                                     </div>
-                                </form>
-
+                                </div>
                             </div>
-
                         </div>
                         <div className="cataloge-cards">
-                            <h3 className="catalog-title">Каталог</h3>
-                            <div className="card-wrapper">
-                            {filteredProducts.length > 0 ? (
-                    filteredProducts.map((pData) => {
-                        const {
-                            IdProduct,
-                            NameProduct,
-                            Article,
-                            TypeProduct,
-                            PriceProduct,
-                            PhotoProduct,
-                            InStock,
-                            DescribeProduct,
-                            BaseProduct,
-                            CollectionProduct,
-                            Appointment,
-                            ColorProduct,
-                            DrawingProduct,
-                            ThemeDrawing,
-                            DockingProduct,
-                            WidthProduct,
-                            Manufacturer,
-                            Country,
-                            SurfaceProduct,
-                            StateProduct
-                        } = pData;
-                        return (
-                            <div key={IdProduct}>
-                                <Card
-                                    id={IdProduct}
-                                    nameproduct={NameProduct}
-                                    article={Article}
-                                    type={TypeProduct}
-                                    priceProduct={PriceProduct}
-                                    photoProduct={PhotoProduct}
-                                    inStock={InStock}
-                                    describeProduct={DescribeProduct}
-                                    baseProduct={BaseProduct}
-                                    collectionProduct={CollectionProduct}
-                                    appointment={Appointment}
-                                    colorProduct={ColorProduct}
-                                    drawingProduct={DrawingProduct}
-                                    themeDrawing={ThemeDrawing}
-                                    dockingProduct={DockingProduct}
-                                    widthProduct={WidthProduct}
-                                    manufacturer={Manufacturer}
-                                    country={Country}
-                                    surfaceProduct={SurfaceProduct}
-                                    stateProduct={StateProduct}
-                                />
+                            <div>
+                                <div className="catalog-title">Каталог
+                                    <div className='catalog_category'>
+                                        <Link to={'/cataloge/'} className='category_btn'> Все</Link>
+                                        <Link to={'/nonWoven/'} className='category_btn'>Флизелиновые</Link>
+                                        <Link to={'/paperwall/'} className='category_btn'>Бумажные</Link>
+                                        <Link to={'/vinil/'} className='category_btn'>Виниловые</Link>
+                                    </div>
+                                </div>
+
+
                             </div>
-                        );
-                    })
-                ) : (
-                    <p>Таких товаров нет</p>
-                )}
+
+                            <div className="card-wrapper">
+                                {filteredProducts.length > 0 ? (
+                                    filteredProducts.map((pData) => {
+                                        const {
+                                            IdProduct,
+                                            NameProduct,
+                                            Article,
+                                            TypeProduct,
+                                            PriceProduct,
+                                            PhotoProduct,
+                                            InStock,
+                                            DescribeProduct,
+                                            BaseProduct,
+                                            CollectionProduct,
+                                            Appointment,
+                                            ColorProduct,
+                                            DrawingProduct,
+                                            ThemeDrawing,
+                                            DockingProduct,
+                                            WidthProduct,
+                                            Manufacturer,
+                                            Country,
+                                            SurfaceProduct,
+                                            StateProduct
+                                        } = pData;
+                                        return (
+                                            <div key={IdProduct}>
+                                                <Card
+                                                    id={IdProduct}
+                                                    nameproduct={NameProduct}
+                                                    article={Article}
+                                                    type={TypeProduct}
+                                                    priceProduct={PriceProduct}
+                                                    photoProduct={PhotoProduct}
+                                                    inStock={InStock}
+                                                    describeProduct={DescribeProduct}
+                                                    baseProduct={BaseProduct}
+                                                    collectionProduct={CollectionProduct}
+                                                    appointment={Appointment}
+                                                    colorProduct={ColorProduct}
+                                                    drawingProduct={DrawingProduct}
+                                                    themeDrawing={ThemeDrawing}
+                                                    dockingProduct={DockingProduct}
+                                                    widthProduct={WidthProduct}
+                                                    manufacturer={Manufacturer}
+                                                    country={Country}
+                                                    surfaceProduct={SurfaceProduct}
+                                                    stateProduct={StateProduct}
+                                                />
+                                            </div>
+                                        );
+                                    })
+                                ) : (
+                                    <p>Таких товаров нет</p>
+                                )}
 
                             </div>
                         </div>

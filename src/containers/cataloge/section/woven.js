@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import Card from '../../../components/card';
 
 export const NonWowen = () => {
-    const [inputs, setInputs] = useState({});
-    const [productDataN, setProductDataN] = useState([]);
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
 
+    const [inputs, setInputs] = useState({})
+    const [productDataN, setProductDataN] = useState([]);
+    const [result, setResult] = useState([]);
     useEffect(() => {
         getProductsN();
-    }, []);
-
+    }, [])
     const getProductsN = async () => {
         try {
-            const response = await axios.get('http://localhost/api/product_fliz.php', { params: inputs });
+            const response = await axios.get('http://localhost/api/product_vinil.php', { params: inputs });
             if (Array.isArray(response.data)) {
                 setProductDataN(response.data);
             } else {
@@ -24,40 +22,13 @@ export const NonWowen = () => {
             console.error('Error fetching product data:', error);
         }
     };
-
-    const filteredProducts = productDataN.filter((pData) => {
-        const price = parseFloat(pData.PriceProduct);
-        const min = parseFloat(minPrice);
-        const max = parseFloat(maxPrice);
-        if (!isNaN(min) && price < min) return false;
-        if (!isNaN(max) && price > max) return false;
-        return true;
-    });
-
     return (
         <>
-            <h1>Non-Wowen Paper</h1>
-            <div>
-                <label>
-                    Min Price:
-                    <input
-                        type="number"
-                        value={minPrice}
-                        onChange={(e) => setMinPrice(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Max Price:
-                    <input
-                        type="number"
-                        value={maxPrice}
-                        onChange={(e) => setMaxPrice(e.target.value)}
-                    />
-                </label>
-            </div>
+            <h1>non-wowen paper</h1>
             <>
-                {filteredProducts.length > 0 ? (
-                    filteredProducts.map((pData) => {
+            {Array.isArray(productDataN) && productDataN.length > 0 ? (
+                    productDataN.map((pData, id) => {
+                        console.log('product', id, pData);
                         const {
                             IdProduct,
                             NameProduct,
@@ -110,7 +81,9 @@ export const NonWowen = () => {
                 ) : (
                     <p>No products available</p>
                 )}
+
             </>
+
         </>
-    );
-};
+    )
+}

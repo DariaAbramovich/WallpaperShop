@@ -71,6 +71,7 @@ const ProductsComponent = () => {
     return (
         <>
             <section className="products">
+                
                 <div className="container">
                     <div className="products__title">Наши товары</div>
 

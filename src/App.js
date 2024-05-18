@@ -23,10 +23,10 @@ import { ProductsContainer } from './containers/Home/Products/products.container
 import AdminHomeContainer from './containers/adminPart/adminHome/adminhome.container';
 import { AdminCatalogeContainer } from './containers/adminPart/adminCataloge/adminCcataloge.container';
 import HomeContainer from './containers/Home/home.container';
-import { NonWowen, Woven } from './containers/cataloge/section/woven';
 import { ConstructorContainer } from './containers/constructot/constructor.container';
 import { Vinil } from './containers/cataloge/section/vinil/vinil';
 import { Paper } from './containers/cataloge/section/paper/paper';
+import { NonWowen } from './containers/cataloge/section/woven';
 const colors = {
   bgColor: '#0D1B39',
   // bgColorLight: '#212121',
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/nonWoven/',
-    element:<NonWowen/>,
+    element: <NonWowen/>,
   },
   {
     path:'/vinil/',
