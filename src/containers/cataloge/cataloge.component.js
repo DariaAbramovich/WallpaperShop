@@ -1,39 +1,22 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
 import { Search, SearchRe } from "../Search/search";
 import Swiper from 'swiper';
-import { Link, useSearchParams } from 'react-router-dom'
 import 'swiper/css';
-import search_icon from './../../assets/icon/akar-icons_search.png';
-
+import { useEffect, useState } from 'react'
 
 import './cataloge.scss'
 import Card from '../../components/card';
-import Modal from '../../components/modal';
 import { SearchResult } from '../Search/searchResult';
+import { Link } from 'react-router-dom';
+import { NonWowen } from './section/woven';
 
 const CatalogeComponent = () => {
-    //     const [productData, setProductData] = useState([]);
-    //     useEffect ( ()=>{
-    //         const getProductData = async ()=>{
-    //             const reqData = await fetch('http://localhost/api/index.php')
-    //             const resData = await reqData.json();
-    //             console.log(resData);
-    //             setProductData(resData);
-    //         }
-    //         getProductData()
-    // },[])
-    const [modalActive, setModalActive] = useState(true)
+
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
     const [result, setResult] = useState([]);
-
-    // const [searchParamsOne, setSearchParamsOne] = useSearchParams();
-    // const postQueryOne = searchParamsOne.get('pData') || '';
-
-    // const [toggle, setToggle] = useState(false);
-    // const [result, setResult] = useState([]);
-
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
     useEffect(() => {
         getProducts();
     }, [])
@@ -44,68 +27,25 @@ const CatalogeComponent = () => {
                 setProductData(response.data);
             })
     }
-    // const handleSubmitOne = (e) => {
-    //     e.preventDefault();
-    //     const formOne = e.target;
-    //     const queryOne = formOne.searchOne.value.toLowerCase();
-    //     console.log(queryOne)
-    //     setSearchParamsOne({ pData: queryOne })
-    // }
 
-    // const handleCange = (e) => {   
-    //     const name = e.target.name;
-    //     const value = e.target.value;
-    //     setInputs(values => ({ ...values, [name]: value }))
-
-    // }
-    const swiper = new Swiper('.swiper', {
-        // slidesPerView: 4,
-        // spaceBetween: 40,   
-        freeMode: true,
-        navigation: {
-            nextButton: 'swiperNext',
-            prevButton: '.swiperPrew',
-        },
-
+    const filteredProducts = productData.filter((pData) => {
+        const price = parseFloat(pData.PriceProduct);
+        const min = parseFloat(minPrice);
+        const max = parseFloat(maxPrice);
+        if (!isNaN(min) && price < min) return false;
+        if (!isNaN(max) && price > max) return false;
+        return true;
     });
-    const tabsBtn = document.querySelectorAll('[data-tab]')
-    const tabProducts = document.querySelectorAll('[data-tab-value]')
-    for (let btn of tabsBtn) {
-        btn.addEventListener('click', function () {
-            for (let btn of tabsBtn) {
-                btn.classList.remove('active-btn')
-            }
-            this.classList.add('active-btn')
-
-            // отображаем нужное и скрываем ненужное
-            for (let product of tabProducts) {
-                //делаем проверку на отображение всех товаров
-                if (this.dataset.tab == "all") {
-                    product.classList.remove('none')
-                }
-                else {
-                    if (product.dataset.tabValue === this.dataset.tab) {
-                        product.classList.remove('none')
-                    }
-                    else {
-                        product.classList.add('none')
-                    }
-                }
-
-            }
-            swiper.update()
-        })
-    }
 
     return (
         <>
             <div className="container">
                 <div className="search-position">
                     <div >
-                        <Search setResult={setResult}/>
+                        <Search setResult={setResult} />
                         <div className='search_filter_place' >
-                        <SearchResult result={result}/>
-                            
+                            <SearchResult result={result} />
+
                         </div>
                     </div>
                 </div>
@@ -114,282 +54,110 @@ const CatalogeComponent = () => {
                         <div className="cataloge-filter">
                             <h3 className="filter-title">Сортировка</h3>
 
-                            {/* <div className="filter-price">
-                            <div className="filter__param">
-                                Цена
-                            </div>
-                            <div className="input-price">
-                                <input className="price__from" placeholder="От" type="number" min="0" />
-                                <input className="price__to" placeholder="До" type="number" min="0" />
-                            </div>
-                        </div>
-                        <div className="filter-brend">
-                            <div className="filter__param">
-                                Бренд
-                            </div>
-                            <form className="brend-form">
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Palitra
-                                </label><br></br>
 
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Erismann<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    IDECO<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    RASCH<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Артекс<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Малекс<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    МаксДекор<br></br>
-                                </label>
-                            </form>
-
-                        </div>
-                        <div className="filter-country">
-                            <div className="filter__param">
-                                Страна производитель
-                            </div>
-                            <form className="brend-form">
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Россия
-                                </label><br></br>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Бельгия<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Германия<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Украина<br></br>
-                                </label>
-
-
-                            </form>
-                        </div>
-                        <div className="filter-room">
-                            <div className="filter__param">
-                                Помещение
-                            </div>
-                            <form className="brend-form">
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Гостиная
-                                </label><br></br>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Детская<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Кабинет<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Кухня<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Прихожая<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Спальня<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Универсальное<br></br>
-                                </label>
-
-                            </form>
-
-                        </div>
-                        <div className="filter-disane">
-                            <div className="filter__param">
-                                Дизайн
-                            </div>
-                            <form className="brend-form">
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Абстракция
-                                </label><br></br>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Геометрия<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Дамаск<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Дерево<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Камень<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Однотонный<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Плитка<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Полосы  <br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Ткань<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Узор<br></br>
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Флористика<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Штукатурка<br></br>
-                                </label>
-                            </form>
-
-
-                        </div> */}
                             <div className="filter-type">
-                                {/* <div className="filter__param">
-                                Тип
-                            </div> */}
                                 <form className="brend-form">
-                                    <div lassName="swiper">
-                                        <button data-tab="all">
-                                            Все</button>
+                                    <div >
+                                        <button><Link to={'/cataloge/'}> Все обои</Link></button>
+                                        <br></br>
+                                        <Link to={'/nonWoven/'}>Флизелиновые обои</Link>
 
-                                        <button name='fliz' data-tab=" Флизелиновые обои">
-                                            Флизелиновые обои
-                                        </button><br></br>
+                                        <br></br>
 
-                                        <button name='paper' data-tab="Бумажные обои" >
-                                            Бумажные обои<br></br>
+                                        <button name='paper'>
+                                            <Link to={'/paperwall/'}>Бумажные обои</Link>
                                         </button>
 
-                                        <button name='viniil' data-tab=" Виниловые обои" >
-                                            Виниловые обои<br></br>
+                                        <button name='vinil' >
+                                            <Link to={'/vinil/'}>Виниловые обои</Link>
                                         </button>
                                         <br></br>
-                                        <button>Применить</button>
+                                        <br></br>
+                                        <div>Фильтровать по цене:</div>
+                                        
+
+                                        <div>
+                                            <label>
+                                                Min Price:
+                                                <input
+                                                    type="number"
+                                                    value={minPrice}
+                                                    onChange={(e) => setMinPrice(e.target.value)}
+                                                />
+                                            </label>
+                                            <label>
+                                                Max Price:
+                                                <input
+                                                    type="number"
+                                                    value={maxPrice}
+                                                    onChange={(e) => setMaxPrice(e.target.value)}
+                                                />
+                                            </label>
+                                        </div>
+
                                     </div>
                                 </form>
 
                             </div>
-                            {/* <div className="filter-collection">
-                            <div className="filter__param">
-                                Коллекция
-                            </div>
-                            <form className="brend-form">
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Amadeus
-                                </label><br></br>
 
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Stories<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Галактика<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Дисней<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Идальго<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Миллениум<br></br>
-                                </label>
-
-                                <label>
-                                    <input type="checkbox" name="brend" value="HTML" />
-                                    Тоскана<br></br>
-                                </label>
-                            </form>
-
-                        </div> */}
                         </div>
                         <div className="cataloge-cards">
                             <h3 className="catalog-title">Каталог</h3>
                             <div className="card-wrapper">
-                                {
-                                    productData.map((pData, id) => {
-                                        console.log('product', id, pData)
-
-                                        const { IdProduct, NameProduct, Article, TypeProduct, PriceProduct, PhotoProduct, InStock, DescribeProduct, BaseProduct, CollectionProduct, Appointment, ColorProduct, DrawingProduct, ThemeDrawing, DockingProduct, WidthProduct, Manufacturer, Country, SurfaceProduct, StateProduct } = pData;
-                                        return (
-                                            <div>
-                                                <div data-tab-value={TypeProduct}>
-                                                    <Card id={IdProduct} nameproduct={NameProduct} article={Article} type={TypeProduct} priceProduct={PriceProduct} photoProduct={PhotoProduct} inStock={InStock} describeProduct={DescribeProduct} baseProduct={BaseProduct} collectionProduct={CollectionProduct} appointment={Appointment} colorProduct={ColorProduct} drawingProduct={DrawingProduct} themeDrawing={ThemeDrawing} dockingProduct={DockingProduct} widthProduct={WidthProduct} manufacturer={Manufacturer} country={Country} surfaceProduct={SurfaceProduct} stateProduct={StateProduct} />
-                                                </div>
-                                                {/* <Modal active={modalActive} setActive={setModalActive}/> */}
-                                            </div>
-                                        )
-                                    })
-                                }
+                            {filteredProducts.length > 0 ? (
+                    filteredProducts.map((pData) => {
+                        const {
+                            IdProduct,
+                            NameProduct,
+                            Article,
+                            TypeProduct,
+                            PriceProduct,
+                            PhotoProduct,
+                            InStock,
+                            DescribeProduct,
+                            BaseProduct,
+                            CollectionProduct,
+                            Appointment,
+                            ColorProduct,
+                            DrawingProduct,
+                            ThemeDrawing,
+                            DockingProduct,
+                            WidthProduct,
+                            Manufacturer,
+                            Country,
+                            SurfaceProduct,
+                            StateProduct
+                        } = pData;
+                        return (
+                            <div key={IdProduct}>
+                                <Card
+                                    id={IdProduct}
+                                    nameproduct={NameProduct}
+                                    article={Article}
+                                    type={TypeProduct}
+                                    priceProduct={PriceProduct}
+                                    photoProduct={PhotoProduct}
+                                    inStock={InStock}
+                                    describeProduct={DescribeProduct}
+                                    baseProduct={BaseProduct}
+                                    collectionProduct={CollectionProduct}
+                                    appointment={Appointment}
+                                    colorProduct={ColorProduct}
+                                    drawingProduct={DrawingProduct}
+                                    themeDrawing={ThemeDrawing}
+                                    dockingProduct={DockingProduct}
+                                    widthProduct={WidthProduct}
+                                    manufacturer={Manufacturer}
+                                    country={Country}
+                                    surfaceProduct={SurfaceProduct}
+                                    stateProduct={StateProduct}
+                                />
+                            </div>
+                        );
+                    })
+                ) : (
+                    <p>Таких товаров нет</p>
+                )}
 
                             </div>
                         </div>

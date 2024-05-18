@@ -67,8 +67,6 @@ const LoginComponent = () => {
                        
                         if (login.value != "" && pass.value != "") {
                             if(login.value == "admin" && pass.value=="admin"){
-                             
-
                                 navigate('/admin/')
                                 break;
                             }

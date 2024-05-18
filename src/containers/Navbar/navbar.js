@@ -16,7 +16,7 @@ export const Navbar = () => {
                      */}
                     <li className="nav-list__item"><Link to={`/cataloge/`} className="nav-list__link">Каталог</Link></li>
 
-                    <li className="nav-list__item"><Link to={`/constructor/`} className="nav-list__link"></Link></li>
+                    <li className="nav-list__item"><Link to={`/constructor/`} className="nav-list__link">Конструктор</Link></li>
                     {/* <li className="nav-list__item"><Link to={`/constructor/`} className="nav-list__link">Конструктор</Link></li> */}
 
                     <li className="nav-list__item"><Link to={`/about/`} className="nav-list__link">О нас</Link></li>
