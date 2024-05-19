@@ -37,10 +37,15 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
         <div className="basket-card_wrapper">
             {cartItems.length === 0 ? (
                 <div className='wrapperr-not-product'>
-                    <p className='not-product'>Ваша корзина пуста</p>
-                    <img src={notProducts} className='not-product_img'></img>
-                    <button onClick={handleBackToConstructor}>Перейти к конструктору</button>
-                    <button onClick={handleBackToCatalog}>Перейти в каталог</button>
+                    <div>
+                        <p className='not-product'>Ваша корзина пуста</p>
+                        <img src={notProducts} className='not-product_img'></img>
+                    </div>
+                    {/* <div className='btns_cart_none'>
+                        <p className='btns_cart_none_text'>Вы можете:</p>
+                        <button className='cart_none' onClick={handleBackToConstructor}>Перейти к конструктору</button>
+                        <button className='cart_none' onClick={handleBackToCatalog}>Перейти в каталог</button>
+                    </div> */}
                 </div>
 
             ) : (

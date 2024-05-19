@@ -87,32 +87,32 @@ const CatalogeComponent = ({ addToCart}) => {
                 <div className="cataloge">
                     <div className="cataloge-wrapper">
                         <div className="cataloge-filter">
-                            <h3 className="filter-title">Сортировка</h3>
+                            <div className="filter_title">Фильтрация</div>
                             <div className="filter-type">
                                 <div >
                                     <div>
-                                        <label>
-                                            Цена от:
+                                        <div>
+                                            <div className='filter_param'>Цена от:</div>
                                             <input
+                                                className='price__from'
                                                 type="number"
                                                 value={minPrice}
                                                 onChange={(e) => setMinPrice(e.target.value)}
-                                                placeholder='0'
+                                                placeholder='0 руб.'
                                             />
-                                        </label>
-                                        <label>
-                                            Цена до:
+                                            <div className='filter_param'>Цена до:</div>
                                             <input
+                                            className='price__from'
                                                 type="number"
                                                 value={maxPrice}
                                                 onChange={(e) => setMaxPrice(e.target.value)}
-                                                placeholder='0'
+                                                placeholder='0 руб.'
                                             />
-                                        </label>
-                                        <br></br>
-                                        <label>
-                                            Состояние товара:
-                                            <select
+                                        </div>
+                                      
+                                        <div>
+                                           <div  className='filter_param'>Состояние товара:</div> 
+                                            <select className='select_area'
                                                 value={stateProd}
                                                 onChange={(e) => setStateProd(e.target.value)}
                                             >
@@ -122,11 +122,12 @@ const CatalogeComponent = ({ addToCart}) => {
                                                 ))}
                                           
                                             </select>
-                                        </label>
-                                        <br></br>
-                                        <label>
-                                            Страна производитель:
+                                        </div>
+                                        <div>
+
+                                          <div className='filter_param'>Страна производитель:</div>  
                                             <select
+                                            className='select_area'
                                                 value={manufacturer}
                                                 onChange={(e) => setManufacturer(e.target.value)}
                                             >
@@ -135,10 +136,10 @@ const CatalogeComponent = ({ addToCart}) => {
                                                     <option key={index} value={manuf}>{manuf}</option>
                                                 ))}
                                             </select>
-                                        </label>
-                                        <div>
-                                        <button onClick={applyFilters}>Применить фильтры</button>
-                                        <button onClick={resetFilters}>Сбросить фильры</button>
+                                        </div>
+                                        <div className='btn_filter_area'>
+                                        <button className='btn_filter' onClick={applyFilters}>Применить фильтры</button>
+                                        <button className='btn_filter' onClick={resetFilters}>Сбросить фильры</button>
                                         </div>
                                     </div>
                                 </div>

@@ -66,9 +66,19 @@
     background-color: var( --btn-accent);
 }
 // basket card 
-.basket-card_wrapper{
-  
+.wrapperr-not-product{
+    display: flex;
+    justify-content: center;
+}
+.btns_cart_none{
+    margin-top: 10%;
+}
+.btns_cart_none_text{
     
+}
+.cart_none{
+
+
 }
 .cart_item{
     background-color: rgb(255, 255, 255);
