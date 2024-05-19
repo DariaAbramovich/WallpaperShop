@@ -104,7 +104,7 @@ export const Constructor = ({ addToCart }) => {
     return (
         <>
             <div className='const_wrapper'>
-                <h1 className='wrapp_title'>Конструктор - создние персональных обоев</h1>
+                <h1 className='wrapp_title'><span className='wrapp_title_span'>Конструктор</span> - создние персональных обоев</h1>
                 <div className='constructor_body'>
 
                     <div className='constructor_result'>

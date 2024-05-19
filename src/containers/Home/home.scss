@@ -76,3 +76,98 @@ a{
     color: var(--accent);
 
 }
+
+// infoblog 
+.InfoBlog_title{
+    text-align: center;
+    font-size: 36px;
+    margin: 20px;
+    font-weight: 600;
+}
+.InfoBlog_wrapper{
+    margin-top: -70px;
+    // align-items: center;
+    // display:ruby;
+    display: flex;  
+    // justify-content:center;
+    // gap: -20px;
+    // margin: 5%;
+    padding: 8%;
+}
+// .InfoBlog_wrapper_item{
+//     width: 340px;
+//     display: inline-block; 
+//     overflow: hidden; /* Скрываем всё за контуром */
+// }
+// .InfoBlog_wrapper_item img{
+//     transition: 1s; /* Время эффекта */
+//     display: block; 
+// }
+// .item_wallpaper:hover{
+//     transform: scale(1.2); /* Увеличиваем масштаб */
+// }]
+
+
+.hover-effect-btn {
+    position: relative;
+    // display: contents;
+    width: 100%;
+    background-color: transparent;
+  }
+  .pr_img{
+    width: 100%;
+    // display: flex;
+
+  }
+  .pr_img_vinil{
+    width: 45%;
+  }
+  .pr_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Настройка цвета и прозрачности для блока с заголовком */
+    transition: background 0.5s ease;
+  }
+  .hover-effect-btn:hover .pr_overlay {
+    display: block;
+    background: rgba(0, 0, 0, 0.9); /* Настройка цвета и прозрачности для блока с заголовком при наведении */
+  }
+  .pr_title {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 25%; /* Отступ сверху */
+    font-size: 1.700em; /* Размер текста заголовка */
+    text-align: center;
+    text-transform: uppercase; /* Заглавные буквы */
+    color: white; /* Цвет заголовка */
+    z-index: 1;
+    transition: top .5s ease;
+  }
+  .hover-effect-btn:hover .pr_title {
+    top: 10%; /* Отступ сверху при наведении */
+  }
+  .pr_button {
+    position: absolute;
+    width: 100%;
+    left:0;
+    top: 65%; /* Отступ сверху */
+    text-align: center;
+    opacity: 0;
+    transition: opacity .35s ease;
+  }
+  .pr_button a {
+    padding: 15px 40px; /* Отступ */
+    text-align: center;
+    background: #cd7210; /* Цвет кнопки */
+    color: white; /* Цвет текста */
+    border-radius: 5px;
+    z-index: 1; 
+
+  }
+  .hover-effect-btn:hover .pr_button {
+    opacity: 1;
+  }

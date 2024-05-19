@@ -10,6 +10,7 @@ import { ShopService } from '../../core/api'
 import search_icon from './../../assets/icon/akar-icons_search.png';
 import { Link, useSearchParams } from 'react-router-dom'
 import { SearchResult } from '../Search/searchResult'
+import { InfoBlog } from './infoBlog/infoBlog'
 
 
 
@@ -38,7 +39,7 @@ const HomeComponent = ({cartItemCount}) => {
                     </div>
                 </div>
             </header>
-               <ProductsContainer />
+            <InfoBlog/>
 
         </>
     )
