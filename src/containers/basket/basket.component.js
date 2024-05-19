@@ -9,9 +9,13 @@ import BasketCard from '../../components/basket-card';
 import notProducts from '../../assets/icon/shopping.png'
 import Payment from './Payment/payment';
 import Modal from '../../components/modal';
+import Cart from '../../components/cart';
 
-const BasketComponent = ({items, total }) => {
+const BasketComponent = ({cartItems,removeFromCart,updateQuantity}) => {
     const [paymentActive, setPaymentActive] = useState(false)
+    const calculateTotalPrice = () => { 
+        return cartItems.reduce((total, item) => total + item.priceProduct * item.quantity, 0); 
+    }; 
     return(
         <div className="container">
 
@@ -20,34 +24,23 @@ const BasketComponent = ({items, total }) => {
                 <div>
                     <div className='product-container'>
                         <div className='product-container_item'>
-                        {
-                            items != 0?
-                                items.map(item => <BasketCard key={item.id} item={item} />)
-                            :
-                            <div className='wrapperr-not-product'>
-                                <p className='not-product'>Пока у вас нет выбранных товаров </p>
-                                <img src={notProducts} className='not-product_img'></img>
-                            </div>
-                        }
+                        <Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/>
+                        
                         </div>
                         <div className='product-container_info'>
-                            <div className='info_count'>
-                            </div>
                             <div>
-                                <div className='info-price'>
-                                    <div >Итого:</div>
-                                    <div >{total} руб</div>
+                                <div className='info-price'>    
+                                    <div >Сумма заказа:</div>
+                                    <div>{calculateTotalPrice()} руб</div> 
                                 </div>
                                 <div>
-                                
                                 </div>
-                                
                              <button className='info_btn' onClick={()=>setPaymentActive(true)}>Офомить заказ</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={total} dataOrder={items}/>
+            {/* <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={total} dataOrder={items}/> */}
 
             </div>
 
@@ -55,8 +48,5 @@ const BasketComponent = ({items, total }) => {
     )
 }
 
-const mapStateToProps = ({ cart: { cartItems }}) => ({
-    items: cartItems,
-    total: cartItems.reduce((acc, item) => acc += item.priceProduct * item.quantity, 0)
-});
-export default connect(mapStateToProps)( BasketComponent);
+
+export default BasketComponent;

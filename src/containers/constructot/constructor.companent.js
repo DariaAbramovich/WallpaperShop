@@ -1,6 +1,6 @@
 import './constructor.scss';
 import { useNavigate } from 'react-router-dom';
-import { connect } from 'react-redux';  
+import { connect } from 'react-redux';
 import { addItem } from '../../redux/cart/cart.actions';
 import React, { useState } from 'react';
 import beige from './../../assets/image/constructor/colors/bejevi.jpg';
@@ -29,23 +29,23 @@ import spring64 from './../../assets/image/constructor/picture/icons8-весна
 import spring94 from './../../assets/image/constructor/picture/icons8-весна-94.png'
 import None from './../../assets/image/constructor/picture/icons8-нет-64.png'
 
- 
+
 const PRICES = {
-    paper: 20, 
-    vinyl: 40,
-    nonwowen:34,
+    paper: 20,
+    vinil: 40,
+    nonwowen: 34,
 };
 const BASE_PATTERN_PRICE = 10;
-const COLIBRI_PATTERN_PRICE = 15; 
+const COLIBRI_PATTERN_PRICE = 15;
 export const Constructor = ({ addToCart }) => {
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedImage, setSelectedImage] = useState('');
     const [width, setWidth] = useState('');
-    const [wallpaperType, setWallpaperType] = useState('paper'); 
+    const [wallpaperType, setWallpaperType] = useState('paper');
     const [price, setPrice] = useState(0);
     // const [cart, setCart] = useState([]); // Cart state
     const navigate = useNavigate();
-   
+
 
     const handleColorSelection = (color) => {
         setSelectedColor(color);
@@ -58,6 +58,7 @@ export const Constructor = ({ addToCart }) => {
             setSelectedImage(image);
             calculatePrice(width, wallpaperType, image);
         }
+        console.log("image", image)
     };
     const handleWidthChange = (e) => {
         const newWidth = e.target.value;
@@ -84,12 +85,13 @@ export const Constructor = ({ addToCart }) => {
         const order = {
             nameproduct: 'Individuai wallpaper',
             colorProduct: selectedColor,
+            img: resultStyle,
             image: selectedImage,
-            widthProduct:width,
-            type:wallpaperType,
-            priceProduct:price
+            widthProduct: width,
+            type: wallpaperType,
+            priceProduct: price
         };
-        
+        console.log('order.selectedColor', order.selectedColor)
         addToCart(order); // Add order to cart
         navigate('/cart/')
     };
@@ -106,7 +108,7 @@ export const Constructor = ({ addToCart }) => {
                 <div className='constructor_body'>
 
                     <div className='constructor_result'>
-                        <div className='result' style={ resultStyle }>
+                        <div className='result' style={resultStyle}>
                             {selectedColor && <p>Selected Color: {selectedColor}</p>}
 
                         </div>
@@ -128,7 +130,7 @@ export const Constructor = ({ addToCart }) => {
                             <div onClick={() => handleColorSelection('beige')}><img src={beige} className='color-item_gr' alt='beige' /></div>
                         </div>
                         <p className='param_title'>Выберете рисунок:</p>
-                            <div className='param_imge'>
+                        <div className='param_imge'>
                             <div onClick={() => handleImageSelection(colibri)}><img className='img_picture' src={colibri} alt='colibri' /></div>
                             <div onClick={() => handleImageSelection(spa50)}><img className='img_picture' src={spa50} alt='spa50' /></div>
                             <div onClick={() => handleImageSelection(spa80)}><img className='img_picture' src={spa80} alt='spa80' /></div>
@@ -142,23 +144,27 @@ export const Constructor = ({ addToCart }) => {
                             <div onClick={() => handleImageSelection(spring94)}><img className='img_picture' src={spring94} alt='spring94' /></div>
                             <div onClick={() => handleImageSelection('none')}><img className='img_picture' src={None} alt='None' /></div>
 
-                            </div>
+                        </div>
+                        <div className='choose_type'>
                             <p className='param_title'>Выберите тип обоев:</p>
-                        <select value={wallpaperType} onChange={handleWallpaperTypeChange}>
-                            <option value='paper'>Бумажные</option>
-                            <option value='vinyl'>Виниловые</option>
-                            <option value='nonwowen'>Флизилиновые</option>
-                        </select>
-                        
+                            <select className='change_type_prod' value={wallpaperType} onChange={handleWallpaperTypeChange}>
+                                <option value='paper'>Бумажные</option>
+                                <option value='vinil'>Виниловые</option>
+                                <option value='nonwowen'>Флизилиновые</option>
+                            </select>
+                        </div>
                         <p className='param_title'>Введите ширину (в метрах):</p>
                         <input
+                            className='input_width'
                             type='number'
                             value={width}
                             onChange={handleWidthChange}
                             placeholder='Введите ширину'
                         />
-                        <p>Цена: {price} руб.</p>
-                        <button onClick={handleOrder}>Заказать</button>
+                        <div className='bottom_constructor'>
+                            <p className='price_item'>Цена: {price} руб.</p>
+                            <button className='constr_toOrder' onClick={handleOrder}>Заказать</button>
+                        </div>
                     </div>
                 </div>
 

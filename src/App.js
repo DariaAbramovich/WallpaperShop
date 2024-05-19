@@ -33,6 +33,7 @@ import { Navbar } from './containers/Navbar/navbar';
 import { WowenContainer } from './containers/cataloge/section/wowen.container';
 import { PaperContainer } from './containers/cataloge/section/paper/paper.container';
 import { VinilContainer } from './containers/cataloge/section/vinil/vinil.container';
+import { Footer } from './containers/Footer/footer';
 
 
 
@@ -166,6 +167,10 @@ const App = ()=>{
           return updatedCart;
       });
   };
+  const getTotalItems = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+};
+
   useEffect(() => {
     console.log("use effect");
   }, []);
@@ -179,24 +184,25 @@ const App = ()=>{
         <BrowserRouter>
         {/* <Navbar cartItemCount={cart.length}/> */}
         <Routes>
-            <Route path="/" element={<HomeContainer cartItemCount={cart.length}/>} />
-            <Route path="/constructor/" element={<ConstructorContainer addToCart={addToCart} cartItemCount={cart.length}/>} />
-            <Route path="/cart/" element={<Cart cartItems={cart} removeFromCart={removeFromCart} cartItemCount={cart.length}/>} />
+            <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()}/>} />
+            <Route path="/constructor/" element={<ConstructorContainer addToCart={addToCart} cartItemCount={getTotalItems()}/>} />
+            {/* <Route path="/cart/" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/>} /> */}
             <Route path="/admin/" element={<AdminHomeContainer />}  />
             <Route path="login/" element={<LoginContainer/>} />
             <Route path="registred/" element={<RegistredContainer/>} />
-            <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={cart.length}/>} />
-            <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={cart.length}/>} />
-            <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={cart.length}/>} />
-            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={cart.length}/>} />
+            <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()}/>} />
+            <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
+            <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
+            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} />} />
 
             <Route path="admin:cataloge/" element={<AdminCatalogeContainer/>} />
-            <Route path="/addedproducts/" element={<Paper cartItemCount={cart.length}/>} />
-            <Route path="/basket/" element={<BasketContainer/>} />
+            <Route path="/addedproducts/" element={<Paper    />} />
+            <Route path="/cart/" element={<BasketContainer cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()}/>} />
             <Route path="/product/:idProduct" element={<DetailListProductContainer/>} />
 
 
         </Routes>
+        <Footer />
         </BrowserRouter>
         {/* <Router>
           <switch>

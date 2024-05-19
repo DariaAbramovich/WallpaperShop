@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import '../containers/basket/basket.scss';
-import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg';
 import delete_btn from '../assets/icon/delete.png';
 import { connect } from 'react-redux';
 import { removeItemById } from '../redux/cart/cart.actions';

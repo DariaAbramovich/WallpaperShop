@@ -32,7 +32,7 @@
 .product-container_item{
 }
 .product-container_info{
-    width: 300px;
+    width: 280px;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
 }
@@ -43,6 +43,7 @@
     
 }
 .info-price{
+    margin-top: 50px;
     padding: 10px 30px;
     display: flex;
     justify-content: space-between;
@@ -66,11 +67,15 @@
 }
 // basket card 
 .basket-card_wrapper{
-    padding:  0px 10px;
-    margin: 0px 0 20px 0;
-    background-color: rgb(255, 255, 255);
-    border-radius: 20px;
+  
     
+}
+.cart_item{
+    background-color: rgb(255, 255, 255);
+    padding:  0px 10px;
+    border-radius: 20px;
+  
+    margin-bottom: 20px;
 }
 .wrapper_top{
     display: grid;
@@ -79,34 +84,51 @@
 }
 
 .product-container_info{
-    height: 200px;
+    height: 230px;
+    width: 300px;
     border-radius: 20px;
 }
 .img{
+    margin-bottom: 10px;
     margin-top: 15px;
     margin-left: 10px;
     border-radius: 15px;
     height: 130px;
+    color: transparent  ;
 }
 .product_name{
-    margin: 15px 30px;
+    margin: 10px 20px;
     font-size: 17px;
 }
 .product_type{
-    margin: 10px 0;
+    margin: 20px 20px;
     color: var( --text-muted);
     font-size: 16px;
 }
+.product_price_one{
+    padding: 0px;
+    margin: 50px 0px;
+    margin-left: -30px;
+    // color: var(  --text-card-dark-blue);
+    font-size: 17px;
+    font-weight: 500;
+}
 .product_price{
-    margin: 55px 0;
-    margin-left: 40px;
+    margin: -10px 10px;
+    margin-left: 40%;
+    // margin-bottom: 20px;
     // color: var(  --text-card-dark-blue);
     font-size: 18px;
     font-weight: 600;
 }
-.delete{
+.bottom{
     display: flex;
     justify-content: space-between;
+}
+.delete{
+    margin: 15px 0;
+    margin-left: 4%;
+
 }
 .img_delete{
     width: 30px;
@@ -122,8 +144,8 @@
 
 // btns
 .wrapper_btns{
-    margin: 48px 0;
-    margin-left: 0px;
+    margin: 40px 0;
+    margin-left: 70px;
     // background-color: aqua;
 }
 .btns_control_value{
@@ -134,7 +156,7 @@
     padding: 3px;
     font-size: 24px;
     font-weight: 500;
-    width: 40px;
+    width: 30px;
     border-radius: 10px;
     background-color: var(   --bg-btn-dark-blue);
     color: white;

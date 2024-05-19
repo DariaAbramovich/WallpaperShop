@@ -6,7 +6,7 @@ const CartBtn = ({ cartItemCount }) => {
     return (
         <div className="cart-btn">
             <img src={basket} alt="Cart" />
-            {cartItemCount > 0 && <span className="cart-count">{cartItemCount}</span>}
+            {cartItemCount > 0 && <span className="cart_count">{cartItemCount}</span>}
         </div>
     );
 };

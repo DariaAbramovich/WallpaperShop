@@ -12,17 +12,11 @@ export const Navbar = ({ cartItemCount }) => {
     return (
         <>
         
-      
             <div className="nav">
                 <a href="/" className="logo">MagicWall</a>
                 <ul className="nav-list">
-                    {/* <li className="nav-list__item"><a href="cataloge/" className="nav-list__link">Каталог</a></li>
-                     */}
                     <li className="nav-list__item"><Link to={`/cataloge/`} className="nav-list__link">Каталог</Link></li>
-
                     <li className="nav-list__item"><Link to={`/constructor/`} className="nav-list__link">Конструктор</Link></li>
-                    {/* <li className="nav-list__item"><Link to={`/constructor/`} className="nav-list__link">Конструктор</Link></li> */}
-
                     <li className="nav-list__item"><Link to={`/about/`} className="nav-list__link">О нас</Link></li>
                     <li className="nav-list__item nav__icon">
                         <Link to={`/favorite/`}className="nav-list__link">
@@ -32,14 +26,10 @@ export const Navbar = ({ cartItemCount }) => {
                     
                     <li className="nav-list__item nav__icon">
                         <Link to={`/cart/`} className="nav-list__link">
-                        <CartBtn cartItemCount={cartItemCount} />
+                            <CartBtn cartItemCount={cartItemCount} />
                         </Link>
                     </li>
-                    <li className="nav-list__item nav__icon">
-                        <Link to={`/basket/`} className="nav-list__link">
-                           <CardBtn/>
-                        </Link>
-                    </li>
+                   
                 </ul>
 
                 <div className="login">

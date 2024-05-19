@@ -1,3 +1,4 @@
+import Cart from "../../components/cart";
 import { Header } from "../../components/header";
 import { Navbar } from "../Navbar/navbar";
 import BasketComponent from "./basket.component"
@@ -7,16 +8,16 @@ const Wrapper = styled.div`
 background-color: rgb(239, 239, 239);
 aspect-ratio: 1290 / 1004;
 `
-export const BasketContainer = () => {
+export const BasketContainer = ({cartItems,removeFromCart,updateQuantity,cartItemCount}) => {
     return (
         <>
             <Wrapper>
                 <Header>
                     <div className="container">
-                        <Navbar />
+                        <Navbar cartItemCount={cartItemCount} />
                     </div>
                 </Header>
-                <BasketComponent />
+                <BasketComponent cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/>
             </Wrapper>
         </>
     )

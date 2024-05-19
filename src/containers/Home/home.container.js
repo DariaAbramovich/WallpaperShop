@@ -15,7 +15,7 @@ const HomeContainer = ({cartItemCount}) => {
     return (
         <>
             <HomeCompanent cartItemCount ={cartItemCount}/>
-            <Footer />
+           
         </>
     );
 }

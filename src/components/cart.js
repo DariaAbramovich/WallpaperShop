@@ -1,44 +1,94 @@
 
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import notProducts from '../assets/icon/shopping.png'
+import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg';
+import delete_btn from '../assets/icon/delete.png';
 
-const Cart = ({ cartItems, removeFromCart }) => {
+const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
     const navigate = useNavigate();
-    
 
     const handleRemove = (index) => {
         removeFromCart(index);
     };
 
     const handleBackToConstructor = () => {
-        navigate('/constructor/')
+        navigate('/constructor/');
+    };
+    const handleBackToCatalog = () => {
+        navigate('/catalog/');
+    };
+
+    const handleIncrement = (index) => {
+        updateQuantity(index, cartItems[index].quantity + 1);
+    };
+
+    const handleDecrement = (index) => {
+        const newQuantity = cartItems[index].quantity - 1;
+        if (newQuantity > 0) {
+            updateQuantity(index, newQuantity);
+        } else {
+            handleRemove(index);
+        }
     };
 
     return (
-        <div className="cart_wrapper">
-            <h1 className="cart_title">Корзина</h1>
+
+        <div className="basket-card_wrapper">
             {cartItems.length === 0 ? (
-                <p>Ваша корзина пуста</p>
+                <div className='wrapperr-not-product'>
+                    <p className='not-product'>Ваша корзина пуста</p>
+                    <img src={notProducts} className='not-product_img'></img>
+                    <button onClick={handleBackToConstructor}>Перейти к конструктору</button>
+                    <button onClick={handleBackToCatalog}>Перейти в каталог</button>
+                </div>
+
             ) : (
                 <div className="cart_items">
                     {cartItems.map((item, index) => (
                         <div key={index} className="cart_item">
-                            <p>Название: {item.nameproduct}</p>
-                            <p>Тип обоев: {item.type}</p>
-                            <p>Цвет: {item.colorProduct}</p>
-                            <p>Рисунок: {item.image ? 'Да' : 'Нет'}</p>
-                            <p>Ширина: {item.widthProduct} м</p>
-                            <p>Цена: {item.priceProduct} руб.</p>
-                            <button>+</button>
-                            <div>count</div>
-                            <button>-</button>
-                            <button onClick={() => handleRemove(index)}>Удалить</button>
+                            <div className="wrapper_top">
+                                <div className="product_hoto">
+                                    {item.img ? (
+                                        <div style={item.img} className="img">dere</div>
+                                    ) : (
+                                        <img src={defaultImg}  className="img" alt="Default Image" />
+                                    )}
+                                </div>
+
+                                <div >
+                                    <div className="product_type">
+                                        <p>Тип обоев: {item.type}</p>
+                                    </div>
+                                    <p className="product_name">Название: {item.nameproduct}</p>
+                                </div>
+                                <div className="product_price_one">
+                                    <p>Цена за единицу: {item.priceProduct} руб.</p>
+                                </div>
+                                <div className="wrapper_btns">
+                                    <div className="btns_control_value">
+                                        <button className="btns_control"onClick={() => handleDecrement(index)}>-</button>
+                                        <div className="label_count">{item.quantity}</div>
+                                        <button className="btns_control" onClick={() => handleIncrement(index)}>+</button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div className='bottom'>
+                                <div className="product_price">
+                                        <p>Общая цена: {item.priceProduct * item.quantity} руб.</p>
+                                    </div>
+                                <div className="delete">
+                                    <button onClick={() => handleRemove(index)}><img src={delete_btn} className="img_delete"></img></button>
+                                </div>
+                            </div>
+                           
                         </div>
                     ))}
                 </div>
             )}
-            <button onClick={handleBackToConstructor}>Назад к конструктору</button>
+
+
         </div>
     );
 };

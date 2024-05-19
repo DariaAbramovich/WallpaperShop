@@ -9,7 +9,7 @@ const CardBtn = ({onClick,itemsCount }) =>{
     return(
         <div onClick={onClick}>
             <img src={basket} className="basket-icon"/>
-            <div className="basket__count">{itemsCount}</div>
+            <div className="basket_count">{itemsCount}</div>
         </div>
     )
 }
