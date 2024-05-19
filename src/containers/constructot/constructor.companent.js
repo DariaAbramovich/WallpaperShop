@@ -1,4 +1,5 @@
 import './constructor.scss';
+import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';  
 import { addItem } from '../../redux/cart/cart.actions';
 import React, { useState } from 'react';
@@ -36,13 +37,15 @@ const PRICES = {
 };
 const BASE_PATTERN_PRICE = 10;
 const COLIBRI_PATTERN_PRICE = 15; 
-const Constructor = () => {
+export const Constructor = ({ addToCart }) => {
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedImage, setSelectedImage] = useState('');
     const [width, setWidth] = useState('');
     const [wallpaperType, setWallpaperType] = useState('paper'); 
     const [price, setPrice] = useState(0);
-    const [cart, setCart] = useState([]); // Cart state
+    // const [cart, setCart] = useState([]); // Cart state
+    const navigate = useNavigate();
+   
 
     const handleColorSelection = (color) => {
         setSelectedColor(color);
@@ -79,14 +82,16 @@ const Constructor = () => {
     };
     const handleOrder = () => {
         const order = {
-            color: selectedColor,
+            nameproduct: 'Individuai wallpaper',
+            colorProduct: selectedColor,
             image: selectedImage,
-            width,
-            wallpaperType,
-            price
+            widthProduct:width,
+            type:wallpaperType,
+            priceProduct:price
         };
-        setCart([...cart, order]); // Add order to cart
-        console.log('Cart:', cart); // You can see the cart items in the console
+        
+        addToCart(order); // Add order to cart
+        navigate('/cart/')
     };
     const resultStyle = {
         backgroundColor: selectedColor,
@@ -161,10 +166,3 @@ const Constructor = () => {
         </>
     )
 }
-
-const mapDispatchToProps = dispatch => ({
-    addItem: item => dispatch(addItem(item))
-})
-
-
-export default connect(null,mapDispatchToProps) (Constructor);

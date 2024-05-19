@@ -10,7 +10,7 @@ import { Search } from '../../../Search/search';
 import { SearchResult } from '../../../Search/searchResult';
 import Card from '../../../../components/card';
 
-export const Vinil = () => {
+export const Vinil = ({addToCart}) => {
 
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
@@ -206,6 +206,7 @@ export const Vinil = () => {
                                                     country={Country}
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
+                                                    addToCart={addToCart}
                                                 />
                                             </div>
                                         );

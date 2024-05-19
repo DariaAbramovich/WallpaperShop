@@ -10,7 +10,7 @@ import { SearchResult } from '../Search/searchResult';
 import { Link } from 'react-router-dom';
 import { NonWowen } from './section/woven';
 
-const CatalogeComponent = () => {
+const CatalogeComponent = ({ addToCart}) => {
 
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
@@ -206,6 +206,7 @@ const CatalogeComponent = () => {
                                                     country={Country}
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
+                                                    addToCart={ addToCart}
                                                 />
                                             </div>
                                         );

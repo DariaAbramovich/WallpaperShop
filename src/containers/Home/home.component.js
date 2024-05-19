@@ -13,7 +13,7 @@ import { SearchResult } from '../Search/searchResult'
 
 
 
-const HomeComponent = () => {
+const HomeComponent = ({cartItemCount}) => {
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -23,9 +23,9 @@ const HomeComponent = () => {
    
     return (
         <>
-            <header className="header">
+            <header className="header"> 
                 <div className="container">
-                    <Navbar />
+                    <Navbar cartItemCount={cartItemCount}/>
                     <div className="header__content">
                         <h1 className="header__title">Безупречная жизнь начинается дома.</h1>
                         <p>Воплощайте вместе с нами свои самые яркие мечты!</p>

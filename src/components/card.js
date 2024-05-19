@@ -110,10 +110,19 @@ const ProdCardName = styled.div`
     &:hover{
         color: var( --text-accent);
 `
-const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct,  themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem }) =>{
+const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct,  themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem, addToCart }) =>{
     const [modalActive, setModalActive] = useState(false)
-    const item = {id,nameproduct,article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct,  themeDrawing,dockingProduct,widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem }
-    return(
+    const handleOrder = ()=>{
+        const order= {
+            id:id,
+            nameproduct:nameproduct,
+            article:article, type:type, priceProduct:priceProduct, photoProduct:photoProduct,
+            inStock:inStock,describeProduct:describeProduct, baseProduct:baseProduct,collectionProduct:collectionProduct,appointment:appointment,colorProduct:colorProduct,drawingProduct:drawingProduct, themeDrawing:themeDrawing,dockingProduct:dockingProduct,widthProduct,manufacture:manufacture,country:country,surfaceProduct:surfaceProduct,stateProduct:stateProduct, addItem:addItem 
+        };
+        addToCart(order); 
+    }
+    
+        return(
         <div>
         <ProdCardWrapper >
             <ProdCardLink to={`/detailpage/`} >
@@ -140,7 +149,7 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
                         <ProdCardPrice>
                             {priceProduct} руб
                         </ProdCardPrice>
-                        <ProdCardBtn onClick={() => addItem(item)}>
+                        <ProdCardBtn onClick={ handleOrder}>
                         <img src={plas} alt=""/>
                         </ProdCardBtn>
                     </ProdCardFooter>

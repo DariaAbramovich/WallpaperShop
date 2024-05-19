@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { Header } from "../../components/header"
-import { Navbar } from "../Navbar/navbar"
-import CatalogeComponent from "./cataloge.component"
+import { Header } from "../../../components/header";
+import { Navbar } from "../../Navbar/navbar";
+import { NonWowen } from "./woven";
 
 const Wrapper = styled.div`
 background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const CatalogeContainer = ({ addToCart,cartItemCount}) => {
+export const WowenContainer = ({addToCart,cartItemCount}) => {
     return (
         <>
         <Wrapper>
@@ -17,7 +17,7 @@ export const CatalogeContainer = ({ addToCart,cartItemCount}) => {
                         <Navbar cartItemCount={cartItemCount}/>
                     </div>   
             </Header>
-            <CatalogeComponent  addToCart={ addToCart} />
+            <NonWowen addToCart={addToCart}/>
             </Wrapper>
         </>
     )

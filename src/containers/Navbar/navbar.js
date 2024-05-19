@@ -5,10 +5,14 @@ import basket from './../../assets/icon/basket1.png'
 import login from './../../assets/icon/login.png'
 import {Link} from "react-router-dom";
 import CardBtn from '../../components/basket-btn';
+import CartBtn from '../../components/cartBtn';
 
-export const Navbar = () => {
+
+export const Navbar = ({ cartItemCount }) => {
     return (
         <>
+        
+      
             <div className="nav">
                 <a href="/" className="logo">MagicWall</a>
                 <ul className="nav-list">
@@ -25,11 +29,12 @@ export const Navbar = () => {
                             {/* <img src={fav1} /> */}
                         </Link>
                     </li>
-                    {/* <li className="nav-list__item nav__icon">
-                        <Link to={`/favorite/`}className="nav-list__link">
-                            <img src={fav1} />
+                    
+                    <li className="nav-list__item nav__icon">
+                        <Link to={`/cart/`} className="nav-list__link">
+                        <CartBtn cartItemCount={cartItemCount} />
                         </Link>
-                    </li> */}
+                    </li>
                     <li className="nav-list__item nav__icon">
                         <Link to={`/basket/`} className="nav-list__link">
                            <CardBtn/>
@@ -45,6 +50,7 @@ export const Navbar = () => {
 
 
             </div>
+            
         </>
     )
 }

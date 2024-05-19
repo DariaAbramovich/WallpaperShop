@@ -1,31 +1,27 @@
-
-
+// Constructor.js
 import React, { useState } from 'react';
-import beige from './../../assets/image/constructor/colors/bejevi.jpg';
-import black from './../../assets/image/constructor/colors/black.jpg';
-import blue from './../../assets/image/constructor/colors/blue.jpg';
-import blue1 from './../../assets/image/constructor/colors/blue1.jpg';
-import darkBlue from './../../assets/image/constructor/colors/dark-blue.jpg';
-import darkYellow from './../../assets/image/constructor/colors/dark-yelow.jpg';
-import darkgreen from './../../assets/image/constructor/colors/dark-green.jpg';
-import green from './../../assets/image/constructor/colors/green.jpg';
-import perple from './../../assets/image/constructor/colors/perple.jpg';
-import persic from './../../assets/image/constructor/colors/persic.jpg';
-import white from './../../assets/image/constructor/colors/white.jpg';
-import grey from './../../assets/image/constructor/colors/grey.jpg';
-import colibri from './../../assets/image/constructor/picture/icons8-колибри-64.png'
-import sacura from './../../assets/image/constructor/picture/icons8-сакура-94.png'
-import spa80 from './../../assets/image/constructor/picture/icons8-спа-цветок-80.png'
-import spa50 from './../../assets/image/constructor/picture/icons8-цветок-50.png'
-
-import star from './../../assets/image/constructor/picture/icons8-constellation-58.png'
-import horse from './../../assets/image/constructor/picture/icons8-knight-50.png'
-import willow50 from './../../assets/image/constructor/picture/icons8-willow-50.png'
-import spring100 from './../../assets/image/constructor/picture/icons8-весна-100.png'
-import spring48 from './../../assets/image/constructor/picture/icons8-весна-48.png'
-import spring64 from './../../assets/image/constructor/picture/icons8-весна-64.png'
-import spring94 from './../../assets/image/constructor/picture/icons8-весна-94.png'
-import None from './../../assets/image/constructor/picture/icons8-нет-64.png'
+import { useHistory } from 'react-router-dom';
+import grey from './path/to/grey.png'; // Adjust the paths accordingly
+import persic from './path/to/persic.png';
+import perple from './path/to/perple.png';
+import green from './path/to/green.png';
+import darkgreen from './path/to/darkgreen.png';
+import darkYellow from './path/to/darkYellow.png';
+import darkBlue from './path/to/darkBlue.png';
+import blue1 from './path/to/blue1.png';
+import beige from './path/to/beige.png';
+import colibri from './path/to/colibri.png';
+import spa50 from './path/to/spa50.png';
+import spa80 from './path/to/spa80.png';
+import sacura from './path/to/sacura.png';
+import star from './path/to/star.png';
+import horse from './path/to/horse.png';
+import willow50 from './path/to/willow50.png';
+import spring100 from './path/to/spring100.png';
+import spring48 from './path/to/spring48.png';
+import spring64 from './path/to/spring64.png';
+import spring94 from './path/to/spring94.png';
+import None from './path/to/none.png'; // Assuming you have an image for None, otherwise just handle it as a string
 
 const PRICES = {
     paper: 20, 
@@ -36,13 +32,13 @@ const PRICES = {
 const BASE_PATTERN_PRICE = 10; // Base price increase for any selected pattern
 const COLIBRI_PATTERN_PRICE = 15; // Additional price for colibri pattern
 
-export const C = () => {
+const Constructor = ({ addToCart }) => {
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedImage, setSelectedImage] = useState('');
     const [width, setWidth] = useState('');
     const [wallpaperType, setWallpaperType] = useState('paper'); 
     const [price, setPrice] = useState(0);
-    const [cart, setCart] = useState([]); // Cart state
+    const history = useHistory();
 
     const handleColorSelection = (color) => {
         setSelectedColor(color);
@@ -90,7 +86,8 @@ export const C = () => {
             wallpaperType,
             price
         };
-        setCart([...cart, order]); // Add order to cart
+        addToCart(order); // Add order to cart
+        history.push('/cart'); // Navigate to cart page
     };
 
     const resultStyle = {
@@ -147,7 +144,6 @@ export const C = () => {
                             <option value='vinyl'>Виниловые</option>
                             <option value='nonwowen'>Флизелиновые</option>
                         </select>
-                        
                         <p className='param_title'>Введите ширину (в метрах):</p>
                         <input
                             type='number'
@@ -158,22 +154,10 @@ export const C = () => {
                         <p>Цена: {price} руб.</p>
                         <button onClick={handleOrder}>Заказать</button>
                     </div>
-                    <div className='cart'>
-                        <h2>Корзина</h2>
-                       
-
- <ul>
-                            {cart.map((item, index) => (
-                                <li key={index}>
-                                    {item.wallpaperType} обои, {item.width} м, {item.color}, Рисунок: {item.image ? 'Да' : 'Нет'}, Цена: {item.price} руб.
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
                 </div>
             </div>
         </>
     );
 };
 
-
+export default Constructor;

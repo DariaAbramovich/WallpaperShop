@@ -11,10 +11,10 @@ import { ShopService } from '../../core/api.js';
 import Card from '../../components/card.js';
 
 
-const HomeContainer = () => {
+const HomeContainer = ({cartItemCount}) => {
     return (
         <>
-            <HomeCompanent />
+            <HomeCompanent cartItemCount ={cartItemCount}/>
             <Footer />
         </>
     );

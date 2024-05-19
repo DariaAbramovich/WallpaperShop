@@ -1,17 +1,17 @@
 import { Header } from "../../components/header"
 import { Navbar } from "../Navbar/navbar"
-import ConstructorCompanent from "./constructor.companent"
+import {Constructor} from './constructor.companent.js'
 
-export const ConstructorContainer = () => {
+export const ConstructorContainer = ({ addToCart, cartItemCount }) => {
     return (
         <>
         <>
             <Header>
                     <div className="container">
-                        <Navbar/>
+                        <Navbar cartItemCount={cartItemCount}/>
                     </div>   
             </Header>
-            <ConstructorCompanent/>
+            <Constructor addToCart={addToCart}/>
             </>
         </>
     )
