@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import notProducts from '../assets/icon/shopping.png'
 import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg';
@@ -9,6 +9,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
     const navigate = useNavigate();
 
     const handleRemove = (index) => {
+        
         removeFromCart(index);
     };
 
@@ -41,11 +42,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
                         <p className='not-product'>Ваша корзина пуста</p>
                         <img src={notProducts} className='not-product_img'></img>
                     </div>
-                    {/* <div className='btns_cart_none'>
-                        <p className='btns_cart_none_text'>Вы можете:</p>
-                        <button className='cart_none' onClick={handleBackToConstructor}>Перейти к конструктору</button>
-                        <button className='cart_none' onClick={handleBackToCatalog}>Перейти в каталог</button>
-                    </div> */}
+                    
                 </div>
 
             ) : (

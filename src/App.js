@@ -60,120 +60,65 @@ const theme = {
   ...colors,
   ...breakpoints,
 }
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <HomeContainer/>,
-//   },
-//   {
-//     path: "/admin/",
-//     element: <AdminHomeContainer/>
-//   },
-//   {
-//     path:'login/',
-//     element: <LoginContainer/>
-//   },
-//   {
-//     path:'registred/',
-//     element: <RegistredContainer/>
-//   },
-//   {
-//     path: "cataloge/",
-//     element: <CatalogeContainer/>,
-//   },
-//   {
-//     path:'/constructor/',
-//     element:<ConstructorContainer/>
-//   },
 
-//   {
-//     path:'/c/',
-//     element:<C/>
-//   },
-//   {
-//     path:'/nonWoven/',
-//     element: <NonWowen/>,
-//   },
-//   {
-//     path:'/vinil/',
-//     element:<Vinil/>,
-//   },
-//   {
-//     path:'/paperwall/',
-//     element:<Paper/>,
-//   },
-//   {
-//     path: "admin:cataloge/",
-//     element: <AdminCatalogeContainer/>,
-//   },
-//   {
-//     path: "/addedproducts/",
-//     element: <AddProductContainer/>
-//   },
-//   {
-//     path: "/basket/",
-//     element: <BasketContainer/>
-//   },
-//   { 
-//     path:'/product/:idProduct',
-//     element: <DetailListProductContainer/>,
-    
-//   }
-
-// ]);
 
 
 const App = ()=>{
   const [cart, setCart] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-
-    // const addToCart = (item) => {
-    //     setCart((prevCart) => [...prevCart, item]);
-    // };
-    const addToCart = (item) => {
-      setCartItems((prevCartItems) => {
-          const existingItemIndex = prevCartItems.findIndex(
-              (cartItem) =>
-                  cartItem.nameproduct === item.nameproduct &&
-                  cartItem.type === item.type &&
-                  cartItem.colorProduct === item.colorProduct &&
-                  cartItem.image === item.image &&
-                  cartItem.widthProduct === item.widthProduct
-          );
-
-          if (existingItemIndex > -1) {
-              const updatedCart = [...prevCartItems];
-              updatedCart[existingItemIndex].quantity += 1;
-              return updatedCart;
-          } else {
-              return [...prevCartItems, { ...item, quantity: 1 }];
-          }
-      });
-  };
-  const removeFromCart = (index) => {
-    setCartItems((prevCartItems) => prevCartItems.filter((_, i) => i !== index));
-};
-    // const removeFromCart = (index) => {
-    //     setCart((prevCart) => prevCart.filter((_, i) => i !== index));
-    // };
-    const updateQuantity = (index, quantity) => {
-      setCartItems((prevCartItems) => {
-          const updatedCart = [...prevCartItems];
-          if (quantity > 0) {
-              updatedCart[index].quantity = quantity;
-          } else {
-              updatedCart.splice(index, 1);
-          }
-          return updatedCart;
-      });
-  };
-  const getTotalItems = () => {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
-};
-
   useEffect(() => {
-    console.log("use effect");
-  }, []);
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+        setCartItems(JSON.parse(storedCartItems));
+    }
+}, []);
+
+useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}, [cartItems]);
+
+const addToCart = (item) => {
+  setCartItems((prevCartItems) => {
+      const existingItemIndex = prevCartItems.findIndex(
+          (cartItem) =>
+              cartItem.nameproduct === item.nameproduct &&
+              cartItem.type === item.type &&
+              cartItem.colorProduct === item.colorProduct &&
+              cartItem.image === item.image &&
+              cartItem.widthProduct === item.widthProduct
+      );
+
+      if (existingItemIndex > -1) {
+          const updatedCart = [...prevCartItems];
+          updatedCart[existingItemIndex].quantity += 1;
+          return updatedCart;
+      } else {
+          return [...prevCartItems, { ...item, quantity: 1 }];
+      }
+  });
+};
+
+const removeFromCart = (index) => {
+  setCartItems((prevCartItems) => prevCartItems.filter((_, i) => i !== index));
+};
+
+const updateQuantity = (index, quantity) => {
+  setCartItems((prevCartItems) => {
+      const updatedCart = [...prevCartItems];
+      if (quantity > 0) {
+          updatedCart[index].quantity = quantity;
+      } else {
+          updatedCart.splice(index, 1);
+      }
+      return updatedCart;
+  });
+};
+
+const getTotalItems = () => {
+  return cartItems.reduce((total, item) => total + item.quantity, 0);
+};
+
+
   
   return (
    
@@ -193,30 +138,18 @@ const App = ()=>{
             <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()}/>} />
             <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
             <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
-            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} />} />
+            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
 
             <Route path="admin:cataloge/" element={<AdminCatalogeContainer/>} />
             <Route path="/addedproducts/" element={<Paper    />} />
-            <Route path="/cart/" element={<BasketContainer cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()}/>} />
+            <Route path="/cart/" element={<BasketContainer cartItems={cartItems}   removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()}/>} />
             <Route path="/product/:idProduct" element={<DetailListProductContainer/>} />
 
 
         </Routes>
         <Footer />
         </BrowserRouter>
-        {/* <Router>
-          <switch>
-            <Route path="/">
-              <HomeContainer/>
-            </Route>
-            <Route path="/constructor/">
-               <ConstructorContainer addToCart={addToCart}/>
-            </Route>
-            <Route path="/cart">
-                    <Cart cartItems={cart} removeFromCart={removeFromCart} />
-            </Route>
-          </switch>
-        </Router> */}
+       
       </div>
     </ThemeProvider>
    
