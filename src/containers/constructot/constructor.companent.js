@@ -38,11 +38,12 @@ const PRICES = {
 const BASE_PATTERN_PRICE = 10;
 const COLIBRI_PATTERN_PRICE = 15;
 export const Constructor = ({ addToCart }) => {
-    const [selectedColor, setSelectedColor] = useState('');
+    const [selectedColor, setSelectedColor] = useState('white');
     const [selectedImage, setSelectedImage] = useState('');
     const [width, setWidth] = useState('');
     const [wallpaperType, setWallpaperType] = useState('paper');
     const [price, setPrice] = useState(0);
+    const [isWidthValid, setIsWidthValid] = useState(false);
     // const [cart, setCart] = useState([]); // Cart state
     const navigate = useNavigate();
 
@@ -64,6 +65,8 @@ export const Constructor = ({ addToCart }) => {
         const newWidth = e.target.value;
         setWidth(newWidth);
         calculatePrice(newWidth, wallpaperType, selectedImage);
+        setIsWidthValid(!isNaN(newWidth) && newWidth !== '');
+       
     };
     const handleWallpaperTypeChange = (e) => {
         const newType = e.target.value;
@@ -91,9 +94,13 @@ export const Constructor = ({ addToCart }) => {
             type: wallpaperType,
             priceProduct: price
         };
-        console.log('order.selectedColor', order.selectedColor)
-        addToCart(order); // Add order to cart
-        navigate('/cart/')
+        if (isWidthValid) {
+            addToCart(order); // Add order to cart
+            navigate('/cart/')
+        } else {
+            alert('Пожалуйста, введите ширину перед оформлением заказа.');
+        }
+       
     };
     const resultStyle = {
         backgroundColor: selectedColor,
@@ -163,6 +170,7 @@ export const Constructor = ({ addToCart }) => {
                         />
                         <div className='bottom_constructor'>
                             <p className='price_item'>Цена: {price} руб.</p>
+                            
                             <button className='constr_toOrder' onClick={handleOrder}>Заказать</button>
                         </div>
                     </div>

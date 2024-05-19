@@ -62,7 +62,21 @@
     background-color: var(   --bg-btn-dark-blue);
     transition: 0.5s;
 }
+
 .info_btn:hover{
+    background-color: var( --btn-accent);
+}
+.btn_clear_cart{
+    width: 300px;
+    padding: 15px;
+    margin: 0px 50px;
+    margin-top: 50px;
+    color: white;
+    border-radius: 15px;
+    background-color:rgb(160, 141, 107);
+    transition: 0.5s;
+}
+.btn_clear_cart:hover{
     background-color: var( --btn-accent);
 }
 // basket card 
@@ -180,4 +194,14 @@
     font-size: 22px;
     font-weight: 500;
     margin: 5px 13px;
+}
+
+.clear_cart{
+    display: flex;
+}
+.img_clear_cart{
+    width: 30px;
+    padding: 2px;
+    margin: 2px;
+   
 }

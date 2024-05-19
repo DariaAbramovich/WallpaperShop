@@ -97,7 +97,9 @@ const addToCart = (item) => {
       }
   });
 };
-
+const removeAllItems = () => {
+  setCartItems([]);
+};
 const removeFromCart = (index) => {
   setCartItems((prevCartItems) => prevCartItems.filter((_, i) => i !== index));
 };
@@ -142,7 +144,7 @@ const getTotalItems = () => {
 
             <Route path="admin:cataloge/" element={<AdminCatalogeContainer/>} />
             <Route path="/addedproducts/" element={<Paper    />} />
-            <Route path="/cart/" element={<BasketContainer cartItems={cartItems}   removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()}/>} />
+            <Route path="/cart/" element={<BasketContainer cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems}/>} />
             <Route path="/product/:idProduct" element={<DetailListProductContainer/>} />
 
 

@@ -10,12 +10,16 @@ import notProducts from '../../assets/icon/shopping.png'
 import Payment from './Payment/payment';
 import Modal from '../../components/modal';
 import Cart from '../../components/cart';
+import delete_btn from '../../assets/icon/delete.png';
 
-const BasketComponent = ({cartItems,removeFromCart,updateQuantity}) => {
+const BasketComponent = ({cartItems,removeFromCart,updateQuantity,removeAllItems}) => {
     const [paymentActive, setPaymentActive] = useState(false)
     const calculateTotalPrice = () => { 
         return cartItems.reduce((total, item) => total + item.priceProduct * item.quantity, 0); 
     }; 
+    const handleRemoveAll = () => {
+        removeAllItems();
+    };
     return(
         <div className="container">
 
@@ -37,9 +41,15 @@ const BasketComponent = ({cartItems,removeFromCart,updateQuantity}) => {
                                 </div>
                              <button className='info_btn' onClick={()=>setPaymentActive(true)}>Офомить заказ</button>
                             </div>
+                            <div className='clear_cart'>
+                            <button className='btn_clear_cart' onClick={handleRemoveAll}><div>Очистить корзину</div></button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
+               
+                
             {/* <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={total} dataOrder={items}/> */}
 
             </div>
