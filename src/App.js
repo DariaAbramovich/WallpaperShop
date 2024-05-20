@@ -25,7 +25,7 @@ import { CatalogeContainer } from './containers/cataloge/cataloge.container';
 import { AboutContainer } from './containers/About/about.container';
 import { ConstructorContainer } from './containers/constructot/constructor.container';
 
-
+import top from './assets/icon/top.png'
 
 const colors = {
   bgColor: '#0D1B39',
@@ -56,7 +56,8 @@ const theme = {
 const App = ()=>{
   const [cart, setCart] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [isChatBotVisible, setIsChatBotVisible] = useState(false);
+  const [showScrollToTop, setShowScrollToTop] = useState(false); // State to manage scroll to top button visibility
+
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
@@ -68,6 +69,24 @@ const App = ()=>{
 useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }, [cartItems]);
+
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 300) {
+      setShowScrollToTop(true);
+    } else {
+      setShowScrollToTop(false);
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 
 const addToCart = (item) => {
   setCartItems((prevCartItems) => {
@@ -133,6 +152,11 @@ const getTotalItems = () => {
             <Route path="admin:cataloge/" element={<AdminCatalogeContainer/>} />
             <Route path="/addedproducts/" element={<Paper/>} />
         </Routes>
+        {showScrollToTop && (
+            <button className="scroll-to-top-button" onClick={scrollToTop}>
+              <img className='scroll-to-top-img' src={top}></img>
+            </button>
+          )}
         <Footer />
         </BrowserRouter>
       </div>

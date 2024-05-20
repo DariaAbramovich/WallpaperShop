@@ -1,0 +1,109 @@
+// import React, { useState, useEffect } from 'react';
+// import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+// import { ThemeProvider } from 'styled-components';
+// import theme from './theme';
+// import ChatBot from './ChatBot'; // Assuming ChatBot component is in a separate file
+// import HomeContainer from './HomeContainer'; // Import your home container component
+// import AboutContainer from './AboutContainer'; // Import your about container component
+// import ConstructorContainer from './ConstructorContainer'; // Import your constructor container component
+// import CatalogContainer from './CatalogContainer'; // Import your catalog container component
+// import CartContainer from './CartContainer'; // Import your cart container component
+// import ProductDetailContainer from './ProductDetailContainer'; // Import your product detail container component
+// import LoginContainer from './LoginContainer'; // Import your login container component
+// import RegistredContainer from './RegistredContainer'; // Import your registred container component
+// import Footer from './Footer';
+// import chatIcon from './chatIcon.png'; // Assuming you have an icon for the chat button
+// import './App.css';
+
+// const App = () => {
+//   const [cartItems, setCartItems] = useState([]);
+//   const [isChatBotVisible, setIsChatBotVisible] = useState(true); // Initialize chatbot as visible by default
+//   const [showScrollToTop, setShowScrollToTop] = useState(false); // State to manage scroll to top button visibility
+
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     const storedCartItems = localStorage.getItem('cartItems');
+//     if (storedCartItems) {
+//       setCartItems(JSON.parse(storedCartItems));
+//     }
+//   }, []);
+
+//   useEffect(() => {
+//     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+//   }, [cartItems]);
+
+//   useEffect(() => {
+//     if (location.pathname === '/login' || location.pathname === '/registred') {
+//       setIsChatBotVisible(false);
+//     } else {
+//       setIsChatBotVisible(true);
+//     }
+//   }, [location]);
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       if (window.scrollY > 300) {
+//         setShowScrollToTop(true);
+//       } else {
+//         setShowScrollToTop(false);
+//       }
+//     };
+
+//     window.addEventListener('scroll', handleScroll);
+//     return () => {
+//       window.removeEventListener('scroll', handleScroll);
+//     };
+//   }, []);
+
+//   const getTotalItems = () => {
+//     return cartItems.reduce((total, item) => total + item.quantity, 0);
+//   };
+
+//   const toggleChatBot = () => {
+//     setIsChatBotVisible(!isChatBotVisible);
+//   };
+
+//   const scrollToTop = () => {
+//     window.scrollTo({ top: 0, behavior: 'smooth' });
+//   };
+
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <BrowserRouter> {/* Wrap your entire component with BrowserRouter */}
+//         <div className="App">
+//           <Routes>
+//             {/* Routes for different pages */}
+//             <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()} />} />
+//             <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()} />} />
+//             <Route path="/constructor/" element={<ConstructorContainer cartItemCount={getTotalItems()} />} />
+//             <Route path="/catalog/" element={<CatalogContainer cartItemCount={getTotalItems()} />} />
+//             <Route path="/cart/" element={<CartContainer cartItems={cartItems} />} />
+//             <Route path="/product/:id" element={<ProductDetailContainer />} />
+//             <Route path="/login" element={<LoginContainer />} />
+//             <Route path="/registred" element={<RegistredContainer />} />
+//           </Routes>
+
+//           {/* Conditionally render ChatBot based on visibility state */}
+//           {isChatBotVisible && <ChatBot />}
+
+//           {/* Chat toggle button */}
+//           <button className="chat-toggle-button" onClick={toggleChatBot}>
+//             <img src={chatIcon} alt="Chat" />
+//           </button>
+
+//           {/* Scroll to top button */}
+//           {showScrollToTop && (
+//             <button className="scroll-to-top-button" onClick={scrollToTop}>
+//               ↑ Top
+//             </button>
+//           )}
+
+//           <Footer />
+//         </div>
+//       </BrowserRouter>
+//     </ThemeProvider>
+//   );
+// };
+
+// export default App;
