@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
 import { Tooltip } from 'react-tooltip'
@@ -114,7 +114,7 @@ const RegistredComponent = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost/api/user.php', inputs).
+        axios.post('http://localhost/api/user.php',inputs ).
             then(function (response) {
                 console.log(response.data);
                 console.log(inputs);

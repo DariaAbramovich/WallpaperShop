@@ -1,16 +1,13 @@
 
 import axios from 'axios'
-import Swiper from 'swiper';
 import 'swiper/css';
 import { useEffect, useState } from 'react'
 
-import './../../cataloge.scss'
+import './../../adminCataloge.scss'
 import { Link } from 'react-router-dom';
-import { Search } from '../../../Search/search';
-import { SearchResult } from '../../../Search/searchResult';
-import Card from '../../../../components/card';
+import AdminCard from '../../../../../components/adminCard';
 
-export const Vinil = ({addToCart, user}) => {
+export const AdminVinil = () => {
 
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
@@ -77,11 +74,11 @@ export const Vinil = ({addToCart, user}) => {
             <div className="container">
                 <div className="search-position">
                     <div >
-                        <Search setResult={setResult} />
+                        {/* <Search setResult={setResult} />
                         <div className='search_filter_place' >
                             <SearchResult result={result} />
 
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="cataloge">
@@ -147,15 +144,14 @@ export const Vinil = ({addToCart, user}) => {
                         </div>
                         <div className="cataloge-cards">
                             <div>
-                                <div className="catalog-title">Каталог
+                            <div className="catalog-title">Каталог
                                     <div className='catalog_category'>
-                                        <Link to={'/cataloge/'} className='category_btn'> Все</Link>
-                                        <Link to={'/nonWoven/'} className='category_btn'>Флизелиновые</Link>
-                                        <Link to={'/paperwall/'} className='category_btn'>Бумажные</Link>
-                                        <Link to={'/vinil/'} className='category_btn'>Виниловые</Link>
+                                        <Link to={'/admin:cataloge/'} className='category_btn'> Все</Link>
+                                        <Link to={'/admin:nonWoven/'} className='category_btn'>Флизелиновые</Link>
+                                        <Link to={'/admin:paperwall/'} className='category_btn'>Бумажные</Link>
+                                        <Link to={'/admin:vinil/'} className='category_btn'>Виниловые</Link>
                                     </div>
                                 </div>
-
 
                             </div>
 
@@ -186,7 +182,7 @@ export const Vinil = ({addToCart, user}) => {
                                         } = pData;
                                         return (
                                             <div key={IdProduct}>
-                                                <Card
+                                                <AdminCard
                                                     id={IdProduct}
                                                     nameproduct={NameProduct}
                                                     article={Article}
@@ -207,8 +203,7 @@ export const Vinil = ({addToCart, user}) => {
                                                     country={Country}
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
-                                                    addToCart={addToCart}
-                                                    user={user}
+                                                   
                                                 />
 
                                             </div>

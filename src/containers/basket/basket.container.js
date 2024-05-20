@@ -1,6 +1,7 @@
 import Cart from "../../components/cart";
 import { ChatBotContainer } from "../../components/chatBot/chat.container";
 import { Header } from "../../components/header";
+import { Footer } from "../Footer/footer";
 import { Navbar } from "../Navbar/navbar";
 import BasketComponent from "./basket.component"
 import styled from "styled-components";
@@ -20,6 +21,7 @@ export const BasketContainer = ({cartItems,removeFromCart,updateQuantity,cartIte
                 </Header>
                 <BasketComponent cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} removeAllItems={removeAllItems}/>
             <ChatBotContainer/>
+            <Footer/>
             </Wrapper>
         </>
     )

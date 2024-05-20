@@ -3,6 +3,7 @@ import { Header } from "../../components/header"
 import { Navbar } from "../Navbar/navbar"
 import { About } from "./about.component";
 import { ChatBotContainer } from "../../components/chatBot/chat.container";
+import { Footer } from "../Footer/footer";
 
 const Wrapper = styled.div`
 background-color: rgb(239, 239, 239);
@@ -20,6 +21,7 @@ export const AboutContainer = ({cartItemCount}) => {
             </Header>
             <About/>
             <ChatBotContainer/>
+            <Footer/>
         </Wrapper>
         </>
     )

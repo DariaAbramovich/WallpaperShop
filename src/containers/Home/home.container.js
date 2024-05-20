@@ -12,11 +12,20 @@ import Card from '../../components/card.js';
 import { ChatBotContainer } from '../../components/chatBot/chat.container.js';
 
 
-const HomeContainer = ({cartItemCount}) => {
+const HomeContainer = ({cartItemCount, user, setUser}) => {
     return (
         <>
-            <HomeCompanent cartItemCount ={cartItemCount}/>
+        {/* {user ? (
+        <div>
+          <h2>Hello, {user.NamePerson}</h2>
+          <p>Email: {user.Email }</p>
+        </div>
+      ) : (
+        <p>Please log in to see your details.</p>
+      )} */}
+            <HomeCompanent cartItemCount ={cartItemCount}  user={ user} setUser={setUser} />
            <ChatBotContainer/>
+           <Footer/>
         </>
     );
 }

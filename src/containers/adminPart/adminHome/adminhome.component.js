@@ -4,8 +4,9 @@ import { ProductsContainer } from './Products/products.container'
 import './home.scss'
 import { AdminNavbar } from '../adminNavbar/adminavbar'
 import { Search } from '../../Search/search'
+import { InfoBlogAdmin } from './infoBlog/infoBlog'
 
-const AdminHomeComponent = () => {
+const AdminHomeComponent = ({user, setUser}) => {
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
     useEffect(()=>{
@@ -31,18 +32,15 @@ const AdminHomeComponent = () => {
         <>
             <header className="header">
                 <div className="container">
-                    <AdminNavbar />
+                    <AdminNavbar user ={user } setUser={setUser}/>
                     <div className="header__content">
-                        <h2>ADMIN</h2>
                         <h1 className="header__title">Безупречная жизнь начинается дома.</h1>
                         <p>Воплощайте вместе с нами свои самые яркие мечты!</p>
-                        <div className="header__search search-form">
                             <Search />
-                        </div>
                     </div>
                 </div>
             </header>
-            <ProductsContainer />
+            <InfoBlogAdmin/>
 
         </>
     )

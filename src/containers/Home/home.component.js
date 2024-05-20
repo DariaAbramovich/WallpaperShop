@@ -14,7 +14,7 @@ import { InfoBlog } from './infoBlog/infoBlog'
 
 
 
-const HomeComponent = ({cartItemCount}) => {
+const HomeComponent = ({cartItemCount, user,setUser}) => {
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -26,7 +26,7 @@ const HomeComponent = ({cartItemCount}) => {
         <>
             <header className="header"> 
                 <div className="container">
-                    <Navbar cartItemCount={cartItemCount}/>
+                    <Navbar cartItemCount={cartItemCount}  user={ user} setUser={setUser}/>
                     <div className="header__content">
                         <h1 className="header__title">Безупречная жизнь начинается дома.</h1>
                         <p>Воплощайте вместе с нами свои самые яркие мечты!</p>

@@ -1,28 +1,143 @@
-.wrapper-addedProduct{
-    margin: 10px 100px;
+// .wrapper-addedProduct{
+//     margin: 0px 6%;
+// }
+// .addedProduct-title{
+//     font-size: 24px;
+//     margin-top: -80px;
+//     margin-bottom: 20px;
+// }
+// .addedProduct-form{
+//     // background-color: aqua;
+//     // margin-left: 300px;
+//     padding: 20px;
+// }
+// .container_item{
+   
+   
+// //   display: flex;
+// }
+// .addedProduct-form__item{
+//     display: flex;
+//     width: 100%;
+//     margin: 10px;
+//     display: grid;
+//     grid-template-columns: 1fr 3fr;
+// }
+// .addedProduct-form__item input{
+//     // border: 1px solid black;
+//     background-color: rgb(244, 234, 221);
+//     border-radius: 20px;
+//     height: 30px;
+//    padding-left: 15px;
+// }
+// .btn-form{
+//     padding: 10px;
+//     margin: 5px 10px;
+//     border: 1px solid black;
+//     border-radius: 15px;
+// }
+// /* AddProductComponent.css */
+// .error {
+//     border: 1px solid red;
+// }
+
+// .error-text {
+//     color: red;
+//     font-size: 12px;
+// }
+
+
+
+// /* AddProductComponent.css */
+// .error {
+//     border: 1px solid red;
+// }
+
+// .error-text {
+//     color: red;
+//     font-size: 12px;
+// }
+
+// .addedProduct-form__item {
+//     position: relative;
+//     margin-bottom: 15px;
+// }
+
+// .addedProduct-form__item label {
+//     display: flex;
+//     align-items: center;
+//     margin-bottom: 5px;
+// }
+
+// .addedProduct-form__item .info-icon {
+//     margin-left: 8px;
+//     cursor: pointer;
+//     color: #888;
+// }
+
+// .btn-form {
+//     margin-right: 10px;
+// }
+// .info-icon{
+//     width: 20px;
+//     margin: 0 10px;
+// }
+
+.wrapper-addedProduct {
+    margin: 0px 6%;
 }
-.addedProduct-title{
-    font-size: 21px;
+
+.addedProduct-title {
+    font-size: 24px;
+    margin-top: -80px;
+    margin-bottom: 20px;
 }
-.addedProduct-form{
-    // background-color: aqua;
-    // margin-left: 300px;
+
+.addedProduct-form {
     padding: 20px;
-    width: 800px;
 }
-.addedProduct-form__item{
-    margin: 10px;
+
+.form-columns {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
-.addedProduct-form__item input{
-    // border: 1px solid black;
+
+.addedProduct-form__item {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.addedProduct-form__item label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.addedProduct-form__item .info-icon {
+    margin-left: 8px;
+    cursor: pointer;
+    color: #888;
+}
+
+.addedProduct-form__item input {
     background-color: rgb(244, 234, 221);
     border-radius: 20px;
     height: 30px;
-   padding-left: 15px;
+    padding-left: 15px;
+    width: 100%;
 }
-.btn-form{
+
+.error {
+    border: 1px solid red;
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+}
+
+.btn-form {
     padding: 10px;
     margin: 5px 10px;
     border: 1px solid black;

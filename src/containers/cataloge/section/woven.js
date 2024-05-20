@@ -10,7 +10,7 @@ import { SearchResult } from '../../Search/searchResult';
 import Card from '../../../components/card';
 import { Link } from 'react-router-dom';
 
-export const NonWowen = ({addToCart}) => {
+export const NonWowen = ({addToCart,user}) => {
 
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
@@ -208,6 +208,7 @@ export const NonWowen = ({addToCart}) => {
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
                                                     addToCart={addToCart}
+                                                    user={user}
                                                 />
                                             </div>
                                         );

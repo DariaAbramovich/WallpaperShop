@@ -2,7 +2,7 @@
 import { Provider } from 'react-redux';
 import {ThemeProvider} from "styled-components";
 import axios from 'axios'
-import {BrowserRouter, createBrowserRouter, Route, Router, RouterProvider, Routes, useLocation, useNavigate} from "react-router-dom";
+import {BrowserRouter, createBrowserRouter, Navigate, Route, Router, RouterProvider, Routes, useLocation, useNavigate} from "react-router-dom";
 import 'swiper/css';
 import './css/App.css';
 import './css/reset.css';
@@ -26,6 +26,11 @@ import { AboutContainer } from './containers/About/about.container';
 import { ConstructorContainer } from './containers/constructot/constructor.container';
 
 import top from './assets/icon/top.png'
+import { AboutContainerAdmin } from './containers/adminPart/aboutAdmin/About/about.container';
+import { WowenContainerAdmin } from './containers/adminPart/adminCataloge/sectionAdmin/adminwowen.container';
+import { AdminVinilContainer } from './containers/adminPart/adminCataloge/sectionAdmin/vinilAdmin/vinil.container';
+import { AdminPaperContainer } from './containers/adminPart/adminCataloge/sectionAdmin/paperAdmin/paper.container';
+import { AddProductContainer } from './containers/adminPart/addProduct/addProduct.container';
 
 const colors = {
   bgColor: '#0D1B39',
@@ -54,10 +59,14 @@ const theme = {
 
 
 const App = ()=>{
-  const [cart, setCart] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [showScrollToTop, setShowScrollToTop] = useState(false); // State to manage scroll to top button visibility
-
+  // const [user, setUser] = useState(null); // State to store logged-in user data
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))); // State to store logged-in user data
+ 
+  const [isChatBotVisible, setIsChatBotVisible] = useState(true); // Initialize chatbot as visible by default
+  // const location = useLocation();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
@@ -78,6 +87,16 @@ useEffect(() => {
       setShowScrollToTop(false);
     }
   };
+  // useEffect(() => {
+  //   const userParam =()=>{
+  //   if (location.pathname === '/login' || location.pathname === '/registred') {
+  //     setIsChatBotVisible(false);
+  //   } else {
+  //     setIsChatBotVisible(true);
+  //   }
+  //   }
+  // }, [location]);
+
 
   window.addEventListener('scroll', handleScroll);
   return () => {
@@ -131,33 +150,44 @@ const getTotalItems = () => {
   return cartItems.reduce((total, item) => total + item.quantity, 0);
 };
 
+const handleSetUser = (userData) => {
+  setUser(userData);
+  localStorage.setItem('user', JSON.stringify(userData));
+};
   return (
    
     <ThemeProvider theme={theme}>
       <div className="App">
         <BrowserRouter>
         <Routes>
-            <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()}/>} />
-            <Route path="/login/" element={<LoginContainer/>} />
+            <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
+            <Route path="/login/" element={<LoginContainer setUser={handleSetUser}/>} />
             <Route path="/registred/" element={<RegistredContainer/>} />
-            <Route path="/constructor/" element={<ConstructorContainer addToCart={addToCart} cartItemCount={getTotalItems()}/>} />
-            <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()}/>} />
-            <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
-            <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
-            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
+            <Route path="/constructor/" element={user ? <ConstructorContainer addToCart={addToCart} cartItemCount={getTotalItems()} /> : <Navigate to="/login" />} />
+            <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()} user={user} />} />
+            <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()} user={user}/>} />
+            <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user}/>} />
+            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user}/>} />
             <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()}/>} />
-            <Route path="/cart/" element={<BasketContainer cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems}/>} />
+            <Route path="/cart/" element={user ? <BasketContainer cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} />: <Navigate to="/login" />} />
             
-            <Route path="/admin/" element={<AdminHomeContainer />}  />
-            <Route path="admin:cataloge/" element={<AdminCatalogeContainer/>} />
-            <Route path="/addedproducts/" element={<Paper/>} />
+            <Route path="/admin/" element={<AdminHomeContainer user={user} setUser={handleSetUser} />}  />
+            <Route path="/admin:cataloge/" element={<AdminCatalogeContainer/>} />
+            <Route path="/admin:nonWoven/" element={<WowenContainerAdmin  />} />
+            <Route path="/admin:vinil/" element={<AdminVinilContainer />} />
+            <Route path="/admin:paperwall/" element={<AdminPaperContainer />} />
+            <Route path="/addedproducts/" element={<AddProductContainer/>} />
+            <Route path="/aboute/" element={<AboutContainerAdmin/>} />
+
+
+
         </Routes>
         {showScrollToTop && (
             <button className="scroll-to-top-button" onClick={scrollToTop}>
               <img className='scroll-to-top-img' src={top}></img>
             </button>
           )}
-        <Footer />
+        {/* <Footer /> */}
         </BrowserRouter>
       </div>
     </ThemeProvider>

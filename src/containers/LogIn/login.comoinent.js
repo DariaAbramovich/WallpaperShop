@@ -7,8 +7,7 @@ import './login.scss';
 import back from './../../assets/icon/back.png';
 import close from './../../assets/icon/close.png';
 
-
-const LoginComponent = () => {
+const LoginComponent = ({setUser}) => {
 
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({});
@@ -20,6 +19,8 @@ const LoginComponent = () => {
     const [dirtyPasswordUser, setDirtyPasswordUser] = useState(false);
     const [errorLoginUser, setErrorLoginUser] = useState("Поле логин не должно быть пустым");
     const [errorPasswordUser, setErrorPasswordUser] = useState("Поле пароль не должно быть пустым");
+    const [authError, setAuthError] = useState(false); 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         getUsers();
@@ -31,9 +32,8 @@ const LoginComponent = () => {
                 console.log(response.data);
                 setUsers(response.data);
                 // navigate('/');
-            })
+        })
     }
-
     const loginHanglerUser = (e) => {
         setLoginUser(e.target.value);
         if (e.target.value){
@@ -48,7 +48,7 @@ const LoginComponent = () => {
     }
     const passnHanglerUser = (e) => {
         setPasswordUser(e.target.value);
-       const  ToLogin = (e)=>{
+        const  ToLogin = (e)=>{
         navigate('/admin/')
        }
         if (e.target.value) {
@@ -67,19 +67,22 @@ const LoginComponent = () => {
                        
                         if (login.value != "" && pass.value != "") {
                             if(login.value == "admin" && pass.value=="admin"){
+                                setUser(user);
+                                localStorage.setItem('user', JSON.stringify(user));  
                                 navigate('/admin/')
                                 break;
                             }
                             if (login.value == user.Login && pass.value == user.Password) {
-                                navigate('/')
+                                setUser(user);
+                                localStorage.setItem('user', JSON.stringify(user));   
+                                navigate('/');
                                 break;
                             }
                             else {
-                                setErrorPasswordUser("Неверный пароль");
+                                setErrorPasswordUser("Неверный логин или пароль");
                             }
-                        }
+                        }   
                     }
-        
                 })
             }
         }
@@ -131,7 +134,10 @@ const LoginComponent = () => {
                                 onChange={e => loginHanglerUser(e)}
                                 value={loginUser}
                                 onBlur={e => blurHandlerUser(e)}
-                                placeholder="введите логин" className="input-item" />
+                                placeholder="введите логин" 
+                                className={`input-item ${authError ? 'input-error' : ''}`
+                                }/>
+                                
                         </div>
                         <div>
                             <div>
@@ -146,30 +152,12 @@ const LoginComponent = () => {
                                 value={passwordUser}
                                 onBlur={e => blurHandlerUser(e)}
                                 placeholder="введите пароль"
-                                className="input-item"/>
+                                className={`input-item ${authError ? 'input-error' : ''}`}
+                                />
+                                
                         </div>
                     </div>
-                    {/* {Array.isArray(users)
-                        ? users.map((user, key) => {
-                            let pass = document.getElementById('pass')
-                            let login = document.getElementById('login')
-
-                            for (var i in user) {
-                                 console.log("lodin -", user.Login);
-                                if (login.value != "" && pass.value != "") {
-                                    if (login.value == user.Login && pass.value == user.Password) {
-                                        navigate('/')
-                                        break;
-                                    }
-                                    else {
-                                        
-                                    }
-                                }
-                            }
-
-                        }
-                        )
-                        : null} */}
+                  
                     <div>
                         <button className="login-btn">Log in</button>
                         <div className='link-place'>

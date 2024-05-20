@@ -10,7 +10,7 @@ import { Search } from '../../../Search/search';
 import { SearchResult } from '../../../Search/searchResult';
 import Card from '../../../../components/card';
 
-export const Paper = ({addToCart}) => {
+export const Paper = ({addToCart,user}) => {
 
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
@@ -208,6 +208,7 @@ export const Paper = ({addToCart}) => {
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
                                                     addToCart={addToCart}
+                                                    user={user}
                                                 />
                                             </div>
                                         );

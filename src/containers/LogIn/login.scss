@@ -81,3 +81,26 @@ background-color: var( --bg-btn);
 .link:hover{
     color: var(   --accent);
 }
+// .input-item {
+//     border: 1px solid #ccc;
+//     padding: 10px;
+//     font-size: 16px;
+//     margin-bottom: 10px;
+//   }
+  
+  .input-error {
+    border: 1px solid red;
+  }
+  
+  .auth-error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .login-error-place {
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+  }
+  

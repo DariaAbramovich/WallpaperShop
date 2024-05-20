@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { connect } from 'react-redux';  
 import { addItem } from '../redux/cart/cart.actions';
 
@@ -110,9 +110,10 @@ const ProdCardName = styled.div`
     &:hover{
         color: var( --text-accent);
 `
-const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct,  themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem, addToCart }) =>{
+const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct,  themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem, addToCart, user }) =>{
     const [modalActive, setModalActive] = useState(false)
     const handleOrder = ()=>{
+    
         const order= {
             id:id,
             nameproduct:nameproduct,
@@ -120,6 +121,16 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
             inStock:inStock,describeProduct:describeProduct, baseProduct:baseProduct,collectionProduct:collectionProduct,appointment:appointment,colorProduct:colorProduct,drawingProduct:drawingProduct, themeDrawing:themeDrawing,dockingProduct:dockingProduct,widthProduct,manufacture:manufacture,country:country,surfaceProduct:surfaceProduct,stateProduct:stateProduct, addItem:addItem 
         };
         addToCart(order); 
+    
+    }
+    const navigate = useNavigate()
+    const toLogin = ()=>{
+        // <Navigate to="/login" />
+        const confirmed = window.confirm('Вы не вошли в систему. Хотите продолжить?');
+        if (confirmed) {
+            navigate('/login/');
+        }
+
     }
     
         return(
@@ -149,9 +160,17 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
                         <ProdCardPrice>
                             {priceProduct} руб
                         </ProdCardPrice>
-                        <ProdCardBtn onClick={ handleOrder}>
+
+                       {
+                        user ? <ProdCardBtn onClick={ handleOrder}>
                         <img src={plas} alt=""/>
                         </ProdCardBtn>
+                        : <ProdCardBtn > 
+                        <img src={plas} onClick={toLogin} alt=""/>
+                        </ProdCardBtn>
+                        // <Navigate to="/login" />
+                       }
+                        
                     </ProdCardFooter>
                     <button className="moreinfo-btn-prod" onClick={()=>setModalActive(true)}>More info
                     <img src={toMore} className="img_toMore"/>
