@@ -11,8 +11,8 @@ export const Footer = () => {
                                 Наши контакты
                             </h3>
                             <div className="footer__block-content">
-                            +375447935583<br></br>
-                            +375295632482<br></br>
+                            +37544ХХХХХХХ<br></br>
+                            +37529ХХХХХХХ<br></br>
                             magickWall@gmail.com<br></br>
                             </div>
                           
@@ -22,9 +22,9 @@ export const Footer = () => {
                                 Наши адреса
                             </h3>
                             <div className="footer__block-content">
-                            г.Минск ул. Фрунзе 23.<br></br>
-                            г.Минск ул. Сурганова 78.<br></br>
-                            г.Минск ул. Виленская 3.<br></br>
+                            г.Минск ул.Перавая<br></br>
+                            г.Минск ул.Вторая<br></br>
+                            г.Минск ул.Третья<br></br>
                             </div>
                            
                         </div>

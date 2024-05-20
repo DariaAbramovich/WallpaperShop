@@ -9,13 +9,14 @@ import HomeCompanent from './home.component.js'
 import { Container } from '../../components/container.js';
 import { ShopService } from '../../core/api.js';
 import Card from '../../components/card.js';
+import { ChatBotContainer } from '../../components/chatBot/chat.container.js';
 
 
 const HomeContainer = ({cartItemCount}) => {
     return (
         <>
             <HomeCompanent cartItemCount ={cartItemCount}/>
-           
+           <ChatBotContainer/>
         </>
     );
 }

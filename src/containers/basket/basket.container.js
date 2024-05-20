@@ -1,4 +1,5 @@
 import Cart from "../../components/cart";
+import { ChatBotContainer } from "../../components/chatBot/chat.container";
 import { Header } from "../../components/header";
 import { Navbar } from "../Navbar/navbar";
 import BasketComponent from "./basket.component"
@@ -18,6 +19,7 @@ export const BasketContainer = ({cartItems,removeFromCart,updateQuantity,cartIte
                     </div>
                 </Header>
                 <BasketComponent cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} removeAllItems={removeAllItems}/>
+            <ChatBotContainer/>
             </Wrapper>
         </>
     )

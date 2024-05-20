@@ -171,3 +171,16 @@ a{
   .hover-effect-btn:hover .pr_button {
     opacity: 1;
   }
+  
+  .infoBlog_btn_toCatagol{
+    margin: 0 auto;
+    margin-top: -60px;
+    margin-left: 42%;
+    width: 250px;
+    padding: 14px;
+    // margin: 30px 50px;
+    color: white;
+    border-radius: 15px;
+    background-color: #d97b17;
+    transition: 0.6s;
+  }

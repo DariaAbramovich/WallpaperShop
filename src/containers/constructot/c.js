@@ -1,93 +1,68 @@
-// import React from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import notProducts from '../assets/icon/shopping.png';
-// import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg';
-// import delete_btn from '../assets/icon/delete.png';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme';
+import ChatBot from './ChatBot'; // Assuming ChatBot component is in a separate file
+import LoginContainer from './LoginContainer'; // Import your login container component
+import RegistredContainer from './RegistredContainer'; // Import your registred container component
+import Footer from './Footer';
+import chatIcon from './chatIcon.png'; // Assuming you have an icon for the chat button
+import './App.css';
 
-// const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
-//     const navigate = useNavigate();
+const App = () => {
+  const [cartItems, setCartItems] = useState([]);
+  const [isChatBotVisible, setIsChatBotVisible] = useState(false); // State to manage chat bot visibility
 
-//     const handleRemove = (index) => {
-//         removeFromCart(index);
-//     };
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
 
-//     const handleBackToConstructor = () => {
-//         navigate('/constructor/');
-//     };
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
-//     const handleBackToCatalog = () => {
-//         navigate('/catalog/');
-//     };
+  const getTotalItems = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
 
-//     const handleIncrement = (index) => {
-//         updateQuantity(index, cartItems[index].quantity + 1);
-//     };
+  const toggleChatBot = () => {
+    setIsChatBotVisible(!isChatBotVisible);
+  };
 
-//     const handleDecrement = (index) => {
-//         const newQuantity = cartItems[index].quantity - 1;
-//         if (newQuantity > 0) {
-//             updateQuantity(index, newQuantity);
-//         } else {
-//             handleRemove(index);
-//         }
-//     };
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            {/* Routes for different pages */}
+            <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()} />} />
+            <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()} />} />
+            <Route path="/constructor/" element={<ConstructorContainer cartItemCount={getTotalItems()} />} />
+            <Route path="/catalog/" element={<CatalogContainer cartItemCount={getTotalItems()} />} />
+            <Route path="/cart/" element={<CartContainer cartItems={cartItems} />} />
+            <Route path="/product/:id" element={<ProductDetailContainer />} />
+            <Route path="/login" element={<LoginContainer />} />
+            <Route path="/registred" element={<RegistredContainer />} />
+          </Routes>
 
-//     return (
-//         <div className="basket-card_wrapper">
-//             {cartItems.length === 0 ? (
-//                 <div className='wrapperr-not-product'>
-//                     <div>
-//                         <p className='not-product'>Ваша корзина пуста</p>
-//                         <img src={notProducts} className='not-product_img' alt="No Products" />
-//                     </div>
-//                 </div>
-//             ) : (
-//                 <div className="cart_items">
-//                     {cartItems.map((item, index) => (
-//                         <div key={index} className="cart_item">
-//                             <div className="wrapper_top">
-//                                 <div className="product_photo">
-//                                     {item.image ? (
-//                                         <img src={item.image} className="img" alt="Product" />
-//                                     ) : (
-//                                         <img src={defaultImg} className="img" alt="Default" />
-//                                     )}
-//                                 </div>
-//                                 <div>
-//                                     <div className="product_type">
-//                                         <p>Тип обоев: {item.type}</p>
-//                                     </div>
-//                                     <p className="product_name">Название: {item.nameproduct}</p>
-//                                 </div>
-//                                 <div className="product_price_one">
-//                                     <p>Цена за единицу: {item.priceProduct} руб.</p>
-//                                 </div>
-//                                 <div className="wrapper_btns">
-//                                     <div className="btns_control_value">
-//                                         <button className="btns_control" onClick={() => handleDecrement(index)}>-</button>
-//                                         <div className="label_count">{item.quantity}</div>
-//                                         <button className="btns_control" onClick={() => handleIncrement(index)}>+</button>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                             <div className='bottom'>
-//                                 <div className="product_price">
-//                                     <p>Общая цена: {item.priceProduct * item.quantity} руб.</p>
-//                                 </div>
-//                                 <div className="delete">
-//                                     <button onClick={() => handleRemove(index)}>
-//                                         <img src={delete_btn} className="img_delete" alt="Delete" />
-//                                     </button>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     ))}
-//                 </div>
-//             )}
-//             <button onClick={handleBackToConstructor}>Перейти к конструктору</button>
-//             <button onClick={handleBackToCatalog}>Перейти в каталог</button>
-//         </div>
-//     );
-// };
+          {/* Conditionally render ChatBot based on current route */}
+          {window.location.pathname !== '/login' && window.location.pathname !== '/registred' && isChatBotVisible && <ChatBot />}
 
-// export default Cart;
+          {/* Chat toggle button */}
+          {window.location.pathname !== '/login' && window.location.pathname !== '/registred' && (
+            <button className="chat-toggle-button" onClick={toggleChatBot}>
+              <img src={chatIcon} alt="Chat" />
+            </button>
+          )}
+
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </ThemeProvider>
+  );
+};
+
+export default App;

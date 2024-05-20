@@ -17,6 +17,8 @@ const BasketComponent = ({cartItems,removeFromCart,updateQuantity,removeAllItems
     const calculateTotalPrice = () => { 
         return cartItems.reduce((total, item) => total + item.priceProduct * item.quantity, 0); 
     }; 
+    const totalePrice = calculateTotalPrice();
+
     const handleRemoveAll = () => {
         removeAllItems();
     };
@@ -42,7 +44,16 @@ const BasketComponent = ({cartItems,removeFromCart,updateQuantity,removeAllItems
                              <button className='info_btn' onClick={()=>setPaymentActive(true)}>Офомить заказ</button>
                             </div>
                             <div className='clear_cart'>
-                            <button className='btn_clear_cart' onClick={handleRemoveAll}><div>Очистить корзину</div></button>
+                            {
+                                totalePrice == 0 ? (
+                                    <>
+                                    </> 
+                                )
+                                :(
+                                    <button className='btn_clear_cart' onClick={handleRemoveAll}><div>Очистить корзину</div></button>
+                                )
+
+                            }
 
                             </div>
                         </div>

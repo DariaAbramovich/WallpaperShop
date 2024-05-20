@@ -2,7 +2,7 @@
 import { Provider } from 'react-redux';
 import {ThemeProvider} from "styled-components";
 import axios from 'axios'
-import {BrowserRouter, createBrowserRouter, Route, Router, RouterProvider, Routes} from "react-router-dom";
+import {BrowserRouter, createBrowserRouter, Route, Router, RouterProvider, Routes, useLocation, useNavigate} from "react-router-dom";
 import 'swiper/css';
 import './css/App.css';
 import './css/reset.css';
@@ -34,7 +34,10 @@ import { WowenContainer } from './containers/cataloge/section/wowen.container';
 import { PaperContainer } from './containers/cataloge/section/paper/paper.container';
 import { VinilContainer } from './containers/cataloge/section/vinil/vinil.container';
 import { Footer } from './containers/Footer/footer';
+import { AboutContanret } from './containers/About/about.container';
+import ChatBot from './components/chatBot/chatBot';
 
+import { ChatBotContainer } from './components/chatBot/chat.container';
 
 
 const colors = {
@@ -66,6 +69,8 @@ const theme = {
 const App = ()=>{
   const [cart, setCart] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [isChatBotVisible, setIsChatBotVisible] = useState(false);
+
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
     if (storedCartItems) {
@@ -120,38 +125,29 @@ const getTotalItems = () => {
   return cartItems.reduce((total, item) => total + item.quantity, 0);
 };
 
-
-  
   return (
    
     <ThemeProvider theme={theme}>
       <div className="App">
-        {/* <RouterProvider router={router} /> */}
-
         <BrowserRouter>
-        {/* <Navbar cartItemCount={cart.length}/> */}
         <Routes>
             <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()}/>} />
+            <Route path="/login/" element={<LoginContainer/>} />
+            <Route path="/registred/" element={<RegistredContainer/>} />
             <Route path="/constructor/" element={<ConstructorContainer addToCart={addToCart} cartItemCount={getTotalItems()}/>} />
-            {/* <Route path="/cart/" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/>} /> */}
-            <Route path="/admin/" element={<AdminHomeContainer />}  />
-            <Route path="login/" element={<LoginContainer/>} />
-            <Route path="registred/" element={<RegistredContainer/>} />
             <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()}/>} />
             <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
             <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
             <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
-
+            <Route path="/about/" element={<AboutContanret cartItemCount={getTotalItems()}/>} />
+            <Route path="/cart/" element={<BasketContainer cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems}/>} />
+            
+            <Route path="/admin/" element={<AdminHomeContainer />}  />
             <Route path="admin:cataloge/" element={<AdminCatalogeContainer/>} />
             <Route path="/addedproducts/" element={<Paper    />} />
-            <Route path="/cart/" element={<BasketContainer cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems}/>} />
-            <Route path="/product/:idProduct" element={<DetailListProductContainer/>} />
-
-
         </Routes>
         <Footer />
         </BrowserRouter>
-       
       </div>
     </ThemeProvider>
    

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Header } from "../../components/header"
 import { Navbar } from "../Navbar/navbar"
-import CatalogeComponent from "./cataloge.component"
+import { About } from "./about.component";
 import { ChatBotContainer } from "../../components/chatBot/chat.container";
 
 const Wrapper = styled.div`
@@ -9,7 +9,7 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const CatalogeContainer = ({ addToCart,cartItemCount}) => {
+export const AboutContanret = ({cartItemCount}) => {
     return (
         <>
         <Wrapper>
@@ -18,9 +18,9 @@ export const CatalogeContainer = ({ addToCart,cartItemCount}) => {
                         <Navbar cartItemCount={cartItemCount}/>
                     </div>   
             </Header>
-            <CatalogeComponent  addToCart={ addToCart} />
+            <About/>
             <ChatBotContainer/>
-            </Wrapper>
+        </Wrapper>
         </>
     )
 }

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Header } from "../../../../components/header";
 import { Navbar } from "../../../Navbar/navbar";
 import { Paper } from "./paper";
+import { ChatBotContainer } from "../../../../components/chatBot/chat.container";
 
 const Wrapper = styled.div`
 background-color: rgb(239, 239, 239);
@@ -18,6 +19,7 @@ export const PaperContainer = ({addToCart,cartItemCount}) => {
                     </div>   
             </Header>
             <Paper addToCart={addToCart}/>
+            <ChatBotContainer/>
             </Wrapper>
         </>
     )
