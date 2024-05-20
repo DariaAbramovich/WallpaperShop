@@ -9,7 +9,7 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const AboutContanret = ({cartItemCount}) => {
+export const AboutContainer = ({cartItemCount}) => {
     return (
         <>
         <Wrapper>

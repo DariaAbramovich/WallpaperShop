@@ -9,35 +9,22 @@ import './css/reset.css';
 import './css/base.css';
 import './css/vars.scss';
 import React, {useEffect, useState} from "react";
-import { ShopService } from './core/api';
-import { CatalogeContainer } from "./containers/cataloge/cataloge.container";
-import { ShopData } from "./core/api";
-import { AddProductContainer } from "./containers/adminPart/addProduct/addProduct.container";
 import { LoginContainer } from "./containers/LogIn/login.container";
 import { RegistredContainer } from "./containers/LogIn/Registred/registred.container";
 
-import store from './redux/store';
 import { BasketContainer } from './containers/basket/basket.container';
-import DetailListProductContainer from './containers/detailListProduct/detailListProduct.container';
-import { ProductsContainer } from './containers/Home/Products/products.container'; 
 import AdminHomeContainer from './containers/adminPart/adminHome/adminhome.container';
 import { AdminCatalogeContainer } from './containers/adminPart/adminCataloge/adminCcataloge.container';
-import HomeContainer from './containers/Home/home.container';
-import { ConstructorContainer } from './containers/constructot/constructor.container';
-import { Vinil } from './containers/cataloge/section/vinil/vinil';
 import { Paper } from './containers/cataloge/section/paper/paper';
-import { NonWowen } from './containers/cataloge/section/woven';
-import { C } from './containers/constructot/c';
-import Cart from './components/cart';
-import { Navbar } from './containers/Navbar/navbar';
 import { WowenContainer } from './containers/cataloge/section/wowen.container';
 import { PaperContainer } from './containers/cataloge/section/paper/paper.container';
 import { VinilContainer } from './containers/cataloge/section/vinil/vinil.container';
 import { Footer } from './containers/Footer/footer';
-import { AboutContanret } from './containers/About/about.container';
-import ChatBot from './components/chatBot/chatBot';
+import HomeContainer from './containers/Home/home.container';
+import { CatalogeContainer } from './containers/cataloge/cataloge.container';
+import { AboutContainer } from './containers/About/about.container';
+import { ConstructorContainer } from './containers/constructot/constructor.container';
 
-import { ChatBotContainer } from './components/chatBot/chat.container';
 
 
 const colors = {
@@ -139,12 +126,12 @@ const getTotalItems = () => {
             <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
             <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
             <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()}/>} />
-            <Route path="/about/" element={<AboutContanret cartItemCount={getTotalItems()}/>} />
+            <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()}/>} />
             <Route path="/cart/" element={<BasketContainer cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems}/>} />
             
             <Route path="/admin/" element={<AdminHomeContainer />}  />
             <Route path="admin:cataloge/" element={<AdminCatalogeContainer/>} />
-            <Route path="/addedproducts/" element={<Paper    />} />
+            <Route path="/addedproducts/" element={<Paper/>} />
         </Routes>
         <Footer />
         </BrowserRouter>
