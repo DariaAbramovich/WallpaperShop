@@ -182,7 +182,8 @@ export const Paper = ({addToCart,user}) => {
                                             Manufacturer,
                                             Country,
                                             SurfaceProduct,
-                                            StateProduct
+                                            StateProduct,
+                                            Photo
                                         } = pData;
                                         return (
                                             <div key={IdProduct}>
@@ -192,7 +193,6 @@ export const Paper = ({addToCart,user}) => {
                                                     article={Article}
                                                     type={TypeProduct}
                                                     priceProduct={PriceProduct}
-                                                    photoProduct={PhotoProduct}
                                                     inStock={InStock}
                                                     describeProduct={DescribeProduct}
                                                     baseProduct={BaseProduct}
@@ -207,6 +207,7 @@ export const Paper = ({addToCart,user}) => {
                                                     country={Country}
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
+                                                    photoProduct={Photo}
                                                     addToCart={addToCart}
                                                     user={user}
                                                 />

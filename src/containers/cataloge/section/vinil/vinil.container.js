@@ -16,10 +16,10 @@ export const VinilContainer = ({addToCart,cartItemCount,user}) => {
         <Wrapper>
             <Header>
                     <div className="container">
-                        <Navbar cartItemCount={cartItemCount}/>
+                        <Navbar cartItemCount={cartItemCount} user={user}/>
                     </div>   
             </Header>
-            <Vinil addToCart={addToCart} user={user}/>
+            <Vinil addToCart={addToCart} />
             <ChatBotContainer/>
             <Footer/>
             </Wrapper>

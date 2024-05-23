@@ -9,13 +9,13 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const AdminVinilContainer= () => {
+export const AdminVinilContainer= ({user}) => {
     return (
         <>
         <Wrapper>
             <Header>
                     <div className="container">
-                        <AdminNavbar />
+                        <AdminNavbar user={ user}/>
                     </div>   
             </Header>
             <AdminVinil/>

@@ -4,7 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 
 import logout from './../../../assets/icon/logout.png'
 
-export const AdminNavbar = ({user,setUser}) => {
+export const AdminNavbar = ({user,setUser}) => {    
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -24,7 +24,7 @@ export const AdminNavbar = ({user,setUser}) => {
                     <li className="nav-list__item"><Link to={`/admin:cataloge/`} className="nav-list__link">Каталог</Link></li>
 
                     <li className="nav-list__item"><Link to={`/addedproducts/`} className="nav-list__link">Добавление товара</Link></li>
-                    <li className="nav-list__item"><Link to={`/aboute/`} className="nav-list__link">О нас</Link></li>
+                    <li className="nav-list__item"><Link to={`/admin:aboute/`} className="nav-list__link">О нас</Link></li>
                     
                 </ul>
 

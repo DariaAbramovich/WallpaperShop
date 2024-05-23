@@ -8,13 +8,13 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const AdminCatalogeContainer = () => {
+export const AdminCatalogeContainer = ({user}) => {
     return (
         <>
         <Wrapper>
             <Header>
-                    <div className="container">
-                        <AdminNavbar/>
+                    <div className="container" >
+                        <AdminNavbar user={ user}/>
                     </div>   
             </Header>
             <AdminCatalogeComponent />

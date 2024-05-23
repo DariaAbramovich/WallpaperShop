@@ -11,12 +11,12 @@ background-color: rgb(239, 239, 239);
 
 `
 
-export const AddProductContainer = () => {
+export const AddProductContainer = ({user}) => {
     return (
         <>
                 <Header>
-                    <div className="container">
-                        <AdminNavbar />
+                    <div className="container" >
+                        <AdminNavbar user={ user}/>
                     </div>
                 </Header>
                 <AddProductComponent />

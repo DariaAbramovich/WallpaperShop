@@ -10,13 +10,13 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const AboutContainerAdmin = ({cartItemCount}) => {
+export const AboutContainerAdmin = ({cartItemCount, user}) => {
     return (
         <>
         <Wrapper>
             <Header>
                     <div className="container">
-                        <AdminNavbar cartItemCount={cartItemCount}/>
+                        <AdminNavbar cartItemCount={cartItemCount} user={ user}/>
                     </div>   
             </Header>
             <AboutAdmin/>

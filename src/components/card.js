@@ -110,7 +110,7 @@ const ProdCardName = styled.div`
     &:hover{
         color: var( --text-accent);
 `
-const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct,  themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem, addToCart, user }) =>{
+const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct, themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem, addToCart, user }) =>{
     const [modalActive, setModalActive] = useState(false)
     const handleOrder = ()=>{
     
@@ -141,7 +141,7 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
                 <div className='instocks_label'>{stateProduct}</div>
                     <ProdCardImage>
                         <ProdCardPhoto>
-                        <img src={defaultImg} alt="" className='img-card'></img>
+                        <img className='img-card' src={`http://localhost/api/uploads/${photoProduct}`} alt={photoProduct} />
                         </ProdCardPhoto>
                     </ProdCardImage>
                 </ProdCardImageWrapper>

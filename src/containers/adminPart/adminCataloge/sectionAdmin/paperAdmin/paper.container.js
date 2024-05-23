@@ -9,13 +9,13 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const AdminPaperContainer = () => {
+export const AdminPaperContainer = ({user}) => {
     return (
         <>
         <Wrapper>
             <Header>
                     <div className="container">
-                        <AdminNavbar/>
+                        <AdminNavbar user={ user}/>
                     </div>   
             </Header>
             <AdminPaper/>

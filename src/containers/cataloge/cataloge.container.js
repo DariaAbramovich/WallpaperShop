@@ -16,10 +16,10 @@ export const CatalogeContainer = ({ addToCart,cartItemCount, user}) => {
         <Wrapper>
             <Header>
                     <div className="container">
-                        <Navbar cartItemCount={cartItemCount}/>
+                        <Navbar cartItemCount={cartItemCount} user={user}/>
                     </div>   
             </Header>
-            <CatalogeComponent  addToCart={ addToCart}  user={user}/>
+            <CatalogeComponent  addToCart={ addToCart} />
             <ChatBotContainer/>
             <Footer/>
             </Wrapper>

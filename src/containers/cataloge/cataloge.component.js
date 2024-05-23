@@ -168,7 +168,6 @@ const CatalogeComponent = ({ addToCart, user}) => {
                                             Article,
                                             TypeProduct,
                                             PriceProduct,
-                                            PhotoProduct,
                                             InStock,
                                             DescribeProduct,
                                             BaseProduct,
@@ -182,7 +181,8 @@ const CatalogeComponent = ({ addToCart, user}) => {
                                             Manufacturer,
                                             Country,
                                             SurfaceProduct,
-                                            StateProduct
+                                            StateProduct,
+                                            Photo
                                         } = pData;
                                         return (
                                             <div key={IdProduct}>
@@ -192,7 +192,6 @@ const CatalogeComponent = ({ addToCart, user}) => {
                                                     article={Article}
                                                     type={TypeProduct}
                                                     priceProduct={PriceProduct}
-                                                    photoProduct={PhotoProduct}
                                                     inStock={InStock}
                                                     describeProduct={DescribeProduct}
                                                     baseProduct={BaseProduct}
@@ -207,8 +206,10 @@ const CatalogeComponent = ({ addToCart, user}) => {
                                                     country={Country}
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
+                                                    photoProduct={Photo}
                                                     addToCart={ addToCart}
                                                     user={user}
+                                                    
                                                 />
                                             </div>
                                         );

@@ -3,7 +3,8 @@ import './../containers/cataloge/cataloge.scss'
 import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg'
 import close from './../assets/icon/close.png'
 // {/* <Modal active={modalActive} setActive={setModalActive} nameprod={nameproduct} type={type} id={id} article={article} priceProduct={priceProduct} photoProduct={photoProduct} inStock={inStock} describeProduct={describeProduct} baseProduct={baseProduct} collectionProduct={collectionProduct} appointment={appointment} colorProduct={colorProduct} drawingProduct={drawingProduct} themeDrawing={themeDrawing} dockingProduct={dockingProduct} widthProduct={widthProduct} manufacturer={manufacture} country={country} surfaceProduct={surfaceProduct} stateProduct={stateProduct} /> */}
-const Modal = ({ active, setActive, nameprod, type, article, priceProduct, photoProduct, inStock, describeProduct, baseProduct, collectionProduct, appointment, colorProduct, drawingProduct, themeDrawing, dockingProduct, widthProduct, manufacturer, country, surfaceProduct, stateProduct }) => {
+const Modal = ({ active, setActive, nameprod, type, article, priceProduct, inStock, describeProduct, baseProduct, collectionProduct, appointment, colorProduct, drawingProduct, themeDrawing, dockingProduct, widthProduct, manufacturer, country, surfaceProduct, photoProduct, stateProduct }) => {
+    const img = 'http://localhost/api/uploads/'+photoProduct
 
     return (
 
@@ -13,7 +14,7 @@ const Modal = ({ active, setActive, nameprod, type, article, priceProduct, photo
                 <div>
                     <img src={close} className="modal_close" onClick={() => setActive(false)}/>
                     <div className="product_modal_img">
-                        <img src={defaultImg} alt="" className="modal_img"></img>
+                    <img className="modal_img" src={`http://localhost/api/uploads/${photoProduct}`} alt={photoProduct} />
                         <div className="modal_name">Название:{nameprod}
                         <div className="modal_article">Артикул:{article}</div>
                         </div>
@@ -23,7 +24,7 @@ const Modal = ({ active, setActive, nameprod, type, article, priceProduct, photo
 
                         <div className="modal_important_info">
                             <div className="modal_price">Цена: {priceProduct} руб.</div>
-                            <div className="modal_instok">{inStock}</div>
+                            {/* <div className="modal_instok">{inStock}</div> */}
                             <div className="modal_stateproduct">{stateProduct}</div>
                         </div>
                         <div className="modal_info_item">

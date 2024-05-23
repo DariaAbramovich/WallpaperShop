@@ -9,13 +9,13 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const WowenContainerAdmin = () => {
+export const WowenContainerAdmin = ({user}) => {
     return (
         <>
         <Wrapper>
             <Header>
                     <div className="container">
-                        <AdminNavbar/>
+                        <AdminNavbar user={ user}/>
                     </div>   
             </Header>
             <AdminWowen/>

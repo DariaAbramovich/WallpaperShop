@@ -23,7 +23,7 @@ const HomeContainer = ({cartItemCount, user, setUser}) => {
       ) : (
         <p>Please log in to see your details.</p>
       )} */}
-            <HomeCompanent cartItemCount ={cartItemCount}  user={ user} setUser={setUser} />
+          <HomeCompanent cartItemCount ={cartItemCount} user={ user} setUser={setUser} />
            <ChatBotContainer/>
            <Footer/>
         </>

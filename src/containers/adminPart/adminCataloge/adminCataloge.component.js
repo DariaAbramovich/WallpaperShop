@@ -5,25 +5,21 @@ import { Search } from '../../Search/search';
 import Card from '../../../components/card';
 import AdminCard from '../../../components/adminCard';
 import { Link } from 'react-router-dom';
+import EditProductForm from '../editProduct/editProd.component';
 const AdminCatalogeComponent = () => {
-
-    
     const [inputs, setInputs] = useState({})
     const [productData, setProductData] = useState([]);
     const [result, setResult] = useState([]);
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    const [stateProd,setStateProd ] = useState('');
-    const [stateProds,setStateProds ] = useState([]);
+    const [stateProd, setStateProd] = useState('');
+    const [stateProds, setStateProds] = useState([]);
     const [manufacturer, setManufacturer] = useState('');
     const [manufacturers, setManufacturers] = useState([]);
-    
-
     const [filterApplied, setFilterApplied] = useState(false); // To track whether filters are applied or not
+    const [editProductId, setEditProductId] = useState(null); // Хранит ID редактируемого товара
+    const [showEditModal, setShowEditModal] = useState(false);
 
-    useEffect(() => {
-        getProducts();
-    }, [])
     const getProducts = async () => {
         try {
             const response = await axios.get('http://localhost/api/product.php', { params: inputs });
@@ -62,22 +58,54 @@ const AdminCatalogeComponent = () => {
         if (filterApplied) {
             if (!isNaN(min) && price < min) return false;
             if (!isNaN(max) && price > max) return false;
-            if(stateProd && pData.StateProduct !== stateProd) return false
+            if (stateProd && pData.StateProduct !== stateProd) return false
             if (manufacturer && pData.Country !== manufacturer) return false;
-            
+
         }
         return true;
     });
+    useEffect(() => {
+        getProducts();
+    }, [])
 
-    return(
-    <>
-        <div className="container">
-            <div className="search-position">
+    const deleteProduct = async (productId) => {
+        try {
+            const response = await axios.delete(`http://localhost/api/product.php?id=${productId}`);
+            console.log(response.data);
+            // Обновляем список товаров после удаления
+            getProducts();
+        } catch (error) {
+            console.error('Ошибка удаления товара:', error);
+        }
+    };
+    const handleDeleteProduct = (productId) => {
+        const confirmed = window.confirm('Вы уверены, что хотите удалить этот товар из каталога?');
+        if (confirmed) {
+            deleteProduct(productId);
+            // Также можно обновить состояние продуктов, чтобы удаленный товар больше не отображался
+        }
+    };
+    const handleOpenEditForm = (productId, Photo) => {
+        setEditProductId(productId, Photo);
+        setShowEditModal(true);
+    };
+
+    const handleCloseEditForm = () => {
+        setEditProductId(null);
+        setShowEditModal(false);
+        // После закрытия формы обновляем список товаров
+        getProducts();
+    };
+
+    return (
+        <>
+            <div className="container">
+                <div className="search-position">
                     <Search />
-            </div>
-            <div className="cataloge">
-                <div className="cataloge-wrapper">
-                <div className="cataloge-filter">
+                </div>
+                <div className="cataloge">
+                    <div className="cataloge-wrapper">
+                        <div className="cataloge-filter">
                             <div className="filter_title">Фильтрация</div>
                             <div className="filter-type">
                                 <div >
@@ -93,32 +121,32 @@ const AdminCatalogeComponent = () => {
                                             />
                                             <div className='filter_param'>Цена до:</div>
                                             <input
-                                            className='price__from'
+                                                className='price__from'
                                                 type="number"
                                                 value={maxPrice}
                                                 onChange={(e) => setMaxPrice(e.target.value)}
                                                 placeholder='0 руб.'
                                             />
                                         </div>
-                                      
+
                                         <div>
-                                           <div  className='filter_param'>Состояние товара:</div> 
+                                            <div className='filter_param'>Состояние товара:</div>
                                             <select className='select_area'
                                                 value={stateProd}
                                                 onChange={(e) => setStateProd(e.target.value)}
                                             >
-                                             {/* <option value="">Все</option> */}
-                                             {stateProds.map((stedP, index) => (
+                                                {/* <option value="">Все</option> */}
+                                                {stateProds.map((stedP, index) => (
                                                     <option key={index} value={stedP}>{stedP}</option>
                                                 ))}
-                                          
+
                                             </select>
                                         </div>
                                         <div>
 
-                                          <div className='filter_param'>Страна производитель:</div>  
+                                            <div className='filter_param'>Страна производитель:</div>
                                             <select
-                                            className='select_area'
+                                                className='select_area'
                                                 value={manufacturer}
                                                 onChange={(e) => setManufacturer(e.target.value)}
                                             >
@@ -129,15 +157,15 @@ const AdminCatalogeComponent = () => {
                                             </select>
                                         </div>
                                         <div className='btn_filter_area'>
-                                        <button className='btn_filter' onClick={applyFilters}>Применить фильтры</button>
-                                        <button className='btn_filter' onClick={resetFilters}>Сбросить фильры</button>
+                                            <button className='btn_filter' onClick={applyFilters}>Применить фильтры</button>
+                                            <button className='btn_filter' onClick={resetFilters}>Сбросить фильры</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <div className="cataloge-cards">
-                    <div>
+                        <div className="cataloge-cards">
+                            <div>
                                 <div className="catalog-title">Каталог
                                     <div className='catalog_category'>
                                         <Link to={'/admin:cataloge/'} className='category_btn'> Все</Link>
@@ -147,7 +175,7 @@ const AdminCatalogeComponent = () => {
                                     </div>
                                 </div>
                             </div>
-                        <div className="card-wrapper">
+                            <div className="card-wrapper">
                                 {filteredProducts.length > 0 ? (
                                     filteredProducts.map((pData) => {
                                         const {
@@ -156,7 +184,6 @@ const AdminCatalogeComponent = () => {
                                             Article,
                                             TypeProduct,
                                             PriceProduct,
-                                            PhotoProduct,
                                             InStock,
                                             DescribeProduct,
                                             BaseProduct,
@@ -170,7 +197,8 @@ const AdminCatalogeComponent = () => {
                                             Manufacturer,
                                             Country,
                                             SurfaceProduct,
-                                            StateProduct
+                                            StateProduct,
+                                            Photo,
                                         } = pData;
                                         return (
                                             <div key={IdProduct}>
@@ -180,7 +208,6 @@ const AdminCatalogeComponent = () => {
                                                     article={Article}
                                                     type={TypeProduct}
                                                     priceProduct={PriceProduct}
-                                                    photoProduct={PhotoProduct}
                                                     inStock={InStock}
                                                     describeProduct={DescribeProduct}
                                                     baseProduct={BaseProduct}
@@ -195,21 +222,29 @@ const AdminCatalogeComponent = () => {
                                                     country={Country}
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
-                                                    
+                                                    onDelete={() => handleDeleteProduct(IdProduct)}
+                                                    photoProduct={Photo}
+                                                    onEdit={() => handleOpenEditForm(IdProduct, Photo)}
                                                 />
+
                                             </div>
                                         );
                                     })
                                 ) : (
                                     <p>Таких товаров нет</p>
                                 )}
-
+                                {editProductId && (
+                                    <EditProductForm
+                                        productId={editProductId} // Передаем ID редактируемого товара в форму редактирования
+                                        onClose={handleCloseEditForm} // Передаем функцию для закрытия формы редактирования
+                                    />
+                                )}
                             </div>
+                        </div>
                     </div>
-                </div>
-            </div >
-        </div>
-    </>
+                </div >
+            </div>
+        </>
     )
 }
 

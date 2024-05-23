@@ -19,13 +19,10 @@ export const AdminPaper = () => {
     const [stateProds,setStateProds ] = useState([]);
     const [manufacturer, setManufacturer] = useState('');
     const [manufacturers, setManufacturers] = useState([]);
-    
-
     const [filterApplied, setFilterApplied] = useState(false); // To track whether filters are applied or not
-
-    useEffect(() => {
-        getProducts();
-    }, [])
+    const [editProductId, setEditProductId] = useState(null); // Хранит ID редактируемого товара
+    const [showEditModal, setShowEditModal] = useState(false);
+       
     const getProducts = async () => {
         try {
             const response = await axios.get('http://localhost/api/product_paper.php', { params: inputs });
@@ -64,12 +61,44 @@ export const AdminPaper = () => {
         if (filterApplied) {
             if (!isNaN(min) && price < min) return false;
             if (!isNaN(max) && price > max) return false;
-            if(stateProd && pData.StateProduct !== stateProd) return false
+            if (stateProd && pData.StateProduct !== stateProd) return false
             if (manufacturer && pData.Country !== manufacturer) return false;
-            
+
         }
         return true;
     });
+    useEffect(() => {
+        getProducts();
+    }, [])
+
+    const deleteProduct = async (productId) => {
+        try {
+            const response = await axios.delete(`http://localhost/api/product.php?id=${productId}`);
+            console.log(response.data);
+            // Обновляем список товаров после удаления
+            getProducts();
+        } catch (error) {
+            console.error('Ошибка удаления товара:', error);
+        }
+    };
+    const handleDeleteProduct = (productId) => {
+        const confirmed = window.confirm('Вы уверены, что хотите удалить этот товар из каталога?');
+        if (confirmed) {
+            deleteProduct(productId);
+            // Также можно обновить состояние продуктов, чтобы удаленный товар больше не отображался
+        }
+    };
+    const handleOpenEditForm = (productId) => {
+        setEditProductId(productId);
+        setShowEditModal(true);
+    };
+
+    const handleCloseEditForm = () => {
+        setEditProductId(null);
+        setShowEditModal(false);
+        // После закрытия формы обновляем список товаров
+        getProducts();
+    };
     return (
         <>
             <div className="container">
@@ -166,7 +195,6 @@ export const AdminPaper = () => {
                                             Article,
                                             TypeProduct,
                                             PriceProduct,
-                                            PhotoProduct,
                                             InStock,
                                             DescribeProduct,
                                             BaseProduct,
@@ -180,7 +208,8 @@ export const AdminPaper = () => {
                                             Manufacturer,
                                             Country,
                                             SurfaceProduct,
-                                            StateProduct
+                                            StateProduct,
+                                            Photo
                                         } = pData;
                                         return (
                                             <div key={IdProduct}>
@@ -190,7 +219,6 @@ export const AdminPaper = () => {
                                                     article={Article}
                                                     type={TypeProduct}
                                                     priceProduct={PriceProduct}
-                                                    photoProduct={PhotoProduct}
                                                     inStock={InStock}
                                                     describeProduct={DescribeProduct}
                                                     baseProduct={BaseProduct}
@@ -205,6 +233,9 @@ export const AdminPaper = () => {
                                                     country={Country}
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
+                                                    onDelete={() => handleDeleteProduct(IdProduct)}
+                                                    photoProduct={Photo}
+                                                    onEdit={() => handleOpenEditForm(IdProduct)}
                                                    
                                                 />
                                             </div>

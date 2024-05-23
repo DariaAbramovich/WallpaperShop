@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import toMore from './../assets/icon/arrov-right.svg'
-
+import editImg from './../assets/icon/edit.png'
 import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg'
 
 import './../containers/cataloge/cataloge.scss'
@@ -67,7 +67,7 @@ const ProdCardDescription = styled.div`
 `
 const ProdCardCategory = styled(Link)`
     position: relative;
-    z-index: 3;
+    z-index: 0;
     color: #8D8D8D;
     font-size: 17px;
 `
@@ -109,38 +109,41 @@ const ProdCardName = styled.div`
     &:hover{
         color: var( --text-accent);
 `
-const AdminCard = ({ id, nameproduct, article, type, priceProduct, photoProduct, inStock, describeProduct, baseProduct, collectionProduct, appointment, colorProduct, drawingProduct, themeDrawing, dockingProduct, widthProduct, manufacture, country, surfaceProduct, stateProduct }) => {
+const AdminCard = ({ id, nameproduct, article, type, priceProduct, inStock, describeProduct, baseProduct, collectionProduct, appointment, colorProduct, drawingProduct, themeDrawing, dockingProduct, widthProduct, manufacture, country, surfaceProduct, stateProduct,  photoProduct,onDelete, onEdit}) => {
     const [modalActive, setModalActive] = useState(false)
-
+   
     const item = { id, nameproduct, type, priceProduct, photoProduct, inStock }
+    const img = 'http://localhost/api/uploads/'+photoProduct
+    console.log(' img ',img  )
     return (
         <div>
             <ProdCardWrapper >
-                <ProdCardLink to={`/detailpage/`} >
                     <ProdCardImageWrapper>
                         <div className='instocks_label'>{stateProduct}</div>
                         <ProdCardImage>
                             <ProdCardPhoto>
-                                <img src={defaultImg} alt="" className='img-card'></img>
+                            <img className='img-card' src={`http://localhost/api/uploads/${photoProduct}`} alt={photoProduct} />
+
                             </ProdCardPhoto>
                         </ProdCardImage>
                     </ProdCardImageWrapper>
-                </ProdCardLink>
 
                 <ProdCardDescription>
-                    <ProdCardLink to={`/detailpage/`}>
                         <ProdCardCategory>
                             {type}
                         </ProdCardCategory>
                         <ProdCardName >
                             {nameproduct}
                         </ProdCardName>
-                    </ProdCardLink>
                     <ProdCardFooter>
                         <ProdCardPrice>
                             {priceProduct} руб
                         </ProdCardPrice>
+                        
+                        
 
+                        <button onClick={onDelete}>Удалить</button>
+                        <button onClick={onEdit}> <img src={editImg} className="editImg" /></button>
                     </ProdCardFooter>
                     <button className="moreinfo-btn-prod" onClick={() => setModalActive(true)}>More info
                         <img src={toMore} className="img_toMore" />

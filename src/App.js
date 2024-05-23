@@ -163,21 +163,21 @@ const handleSetUser = (userData) => {
             <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
             <Route path="/login/" element={<LoginContainer setUser={handleSetUser}/>} />
             <Route path="/registred/" element={<RegistredContainer/>} />
-            <Route path="/constructor/" element={user ? <ConstructorContainer addToCart={addToCart} cartItemCount={getTotalItems()} /> : <Navigate to="/login" />} />
+            <Route path="/constructor/" element={user ? <ConstructorContainer user={user} addToCart={addToCart} cartItemCount={getTotalItems()} /> : <Navigate to="/login" />} />
             <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()} user={user} />} />
             <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()} user={user}/>} />
             <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user}/>} />
             <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user}/>} />
-            <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()}/>} />
-            <Route path="/cart/" element={user ? <BasketContainer cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} />: <Navigate to="/login" />} />
+            <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()} user={user}/>} />
+            <Route path="/cart/" element={user ? <BasketContainer user={user} cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} />: <Navigate to="/login" />} />
             
             <Route path="/admin/" element={<AdminHomeContainer user={user} setUser={handleSetUser} />}  />
-            <Route path="/admin:cataloge/" element={<AdminCatalogeContainer/>} />
-            <Route path="/admin:nonWoven/" element={<WowenContainerAdmin  />} />
-            <Route path="/admin:vinil/" element={<AdminVinilContainer />} />
-            <Route path="/admin:paperwall/" element={<AdminPaperContainer />} />
-            <Route path="/addedproducts/" element={<AddProductContainer/>} />
-            <Route path="/aboute/" element={<AboutContainerAdmin/>} />
+            <Route path="/admin:cataloge/" element={<AdminCatalogeContainer  user={user}/>} />
+            <Route path="/admin:nonWoven/" element={<WowenContainerAdmin  user={user} />} />
+            <Route path="/admin:vinil/" element={<AdminVinilContainer  user={user}/>} />
+            <Route path="/admin:paperwall/" element={<AdminPaperContainer  user={user} />} />
+            <Route path="/addedproducts/" element={<AddProductContainer  user={user}/>} />
+            <Route path="/admin:aboute/" element={<AboutContainerAdmin  user={user}/>} />
 
 
 

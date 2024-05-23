@@ -168,7 +168,6 @@ export const NonWowen = ({addToCart,user}) => {
                                             Article,
                                             TypeProduct,
                                             PriceProduct,
-                                            PhotoProduct,
                                             InStock,
                                             DescribeProduct,
                                             BaseProduct,
@@ -182,7 +181,8 @@ export const NonWowen = ({addToCart,user}) => {
                                             Manufacturer,
                                             Country,
                                             SurfaceProduct,
-                                            StateProduct
+                                            StateProduct,
+                                            Photo
                                         } = pData;
                                         return (
                                             <div key={IdProduct}>
@@ -192,7 +192,6 @@ export const NonWowen = ({addToCart,user}) => {
                                                     article={Article}
                                                     type={TypeProduct}
                                                     priceProduct={PriceProduct}
-                                                    photoProduct={PhotoProduct}
                                                     inStock={InStock}
                                                     describeProduct={DescribeProduct}
                                                     baseProduct={BaseProduct}
@@ -207,6 +206,7 @@ export const NonWowen = ({addToCart,user}) => {
                                                     country={Country}
                                                     surfaceProduct={SurfaceProduct}
                                                     stateProduct={StateProduct}
+                                                    photoProduct={Photo}
                                                     addToCart={addToCart}
                                                     user={user}
                                                 />
