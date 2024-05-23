@@ -10,13 +10,13 @@ const Wrapper = styled.div`
 background-color: rgb(239, 239, 239);
 aspect-ratio: 1290 / 1004;
 `
-export const BasketContainer = ({user, cartItems,removeFromCart,updateQuantity,cartItemCount,removeAllItems}) => {
+export const BasketContainer = ({user, setUser, cartItems,removeFromCart,updateQuantity,cartItemCount,removeAllItems}) => {
     return (
         <>
             <Wrapper>
                 <Header>
                     <div className="container">
-                        <Navbar cartItemCount={cartItemCount} user={user} />
+                        <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser}/>
                     </div>
                 </Header>
                 <BasketComponent cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} removeAllItems={removeAllItems}/>

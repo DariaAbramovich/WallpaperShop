@@ -10,13 +10,13 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const WowenContainer = ({addToCart,cartItemCount,user}) => {
+export const WowenContainer = ({addToCart,cartItemCount,user,setUser}) => {
     return (
         <>
         <Wrapper>
             <Header>
                     <div className="container">
-                        <Navbar cartItemCount={cartItemCount} user={user}/>
+                        <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser}/>
                     </div>   
             </Header>
             <NonWowen addToCart={addToCart}/>
