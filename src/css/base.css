@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&family=Raleway:ital,wght@0,500;1,400;1,500;1,600&display=swap');
+
+
+html, body{
+    font-family: var(--font-main);
+    color: var(--textColor);
+
+}
+body{
+    /* padding-bottom: 50vh; */
+}
+
+.container{
+    max-width: 1310px;
+    padding: 0 0px;
+    margin: 0 auto;
+}
+.container-small{
+    max-width: 1094px;
+}
+.none{
+    display: none !important;
+}
+.scroll-to-top-butto {
+    position: fixed;
+    bottom: 20px;
+    left: 50px;
+   
+    /* background-color: #cac2b5; */
+    /* color: white; */
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 17px;
+    cursor: pointer;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
+    z-index: 1000;
+}
+.scroll-to-top-img{
+    position: fixed;
+    bottom: 20px;
+    left: 50px;
+   
+    /* background-color: #cac2b5; */
+    /* color: white; */
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 17px;
+    cursor: pointer;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); */
+    z-index: 1000;
+    opacity: 0.6;
+    transition: 0.4s;
+  }
+  .scroll-to-top-img:hover{
+    opacity: 1;
+  }
+  .scroll-to-top-butto:hover {
+    background-color: #ffc47b;
+  }
+  

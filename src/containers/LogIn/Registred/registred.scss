@@ -1,0 +1,95 @@
+.tolltip{
+    // margin: 30px 0px;
+    // margin-left: 260px;
+    // padding: 4px;
+}
+
+
+.reg-wrapper{
+    padding: 22px;
+    background-color: var(  --bg-dark-blue);
+}
+.reg-form{
+    margin: 100px 350px;
+    background-color: rgb(233, 232, 232);
+    padding: 40px;
+    border-radius: 30px;
+}
+.plase-error{
+    color: rgb(164, 6, 6);
+
+    font-size: 17px;
+    padding : 10px;
+    text-align: center;
+}
+.reg-form_title{
+    color: var(   --accent);
+    font-size: 27px;
+    text-align: center;
+    padding: 0px 0 30px 0;
+    font-weight: 600;       
+}
+// 
+.reg-plase-input{
+    margin: 0 160px;
+    // display: flex;
+    // grid-template-columns: 1fr 1fr;
+}
+.reg-label{
+    font-size: 15x;
+    // margin-bottom: 40px;
+}
+.label_question{
+    width: 23px;
+    height: 23px;
+    margin: -2px 0;
+    margin-right: 10px;
+
+}
+.reg-error-plase{
+    color: rgb(197, 7, 7);
+    margin-top: 15px;
+    font-style: italic;
+}
+.reg-input{
+    padding: 0px 10px;
+    // margin-left: -30px;
+    margin: 10px 0;
+    height: 60px;
+    width: 390px;
+    font-size: 17px;
+    border-style: solid;
+    border-width: 2px;
+    border-color:transparent transparent rgb(176, 176, 176) transparent;  
+    transition: 0.5s; 
+}
+.reg-input:hover{
+    font-size: 18px;
+    border-color:transparent transparent  var( --ui-orange) transparent; 
+}
+// 
+.reg-btn{
+    margin: 30px 0 0 260px;
+    padding: 18px;
+    background-color: var( --bg-btn-dark-blue);
+    border-radius: 15px;
+    color: white;
+    width: 200px;
+    transition: 0.5s; 
+}
+.reg-btn:hover{
+    background-color: var( --bg-btn);
+}
+.text-link-login{
+    margin: 30px 0 30px 240px;
+    color: var(   --text-muted);
+}
+.login-link{
+    color: var(  --text-card-dark-blue);
+    font-size: 17px;
+    transition: 0.5s; 
+}
+.login-link:hover{
+    color: var(   --accent);
+}
+
