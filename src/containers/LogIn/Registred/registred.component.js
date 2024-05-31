@@ -118,7 +118,7 @@ const RegistredComponent = () => {
             then(function (response) {
                 console.log(response.data);
                 console.log(inputs);
-                navigate('/');
+                navigate('/login/');
         })
     }
 

@@ -235,8 +235,8 @@ const AdminCatalogeComponent = () => {
                                 )}
                                 {editProductId && (
                                     <EditProductForm
-                                        productId={editProductId} // Передаем ID редактируемого товара в форму редактирования
-                                        onClose={handleCloseEditForm} // Передаем функцию для закрытия формы редактирования
+                                        productId={editProductId} 
+                                        onClose={handleCloseEditForm}
                                     />
                                 )}
                             </div>

@@ -5,8 +5,6 @@ import './payment.scss';
 import { connect } from 'react-redux';
 import { removeItemById } from '../../../redux/cart/cart.actions';
 
-
-
 const Payment = ({ pactive, setPactive, sum, dataOrder,removeItem  }) => {
     const sel = document.getElementById('select');
 
@@ -47,7 +45,7 @@ const Payment = ({ pactive, setPactive, sum, dataOrder,removeItem  }) => {
 
                             : <div>Пока у вас нет товаров</div>
                     }
-                    {/* <div>
+                    <div>
                         <h3 className='p-select'>Выберете способ доставки</h3>
                         <p>
                             <select name="select" size="1" id='select'>
@@ -56,10 +54,10 @@ const Payment = ({ pactive, setPactive, sum, dataOrder,removeItem  }) => {
                                 <option value='no_sam'>Доставка курьером</option>
                             </select>
                         </p>
-                    </div>  */}
+                    </div> 
 
                     <div className="btns_tab">
-                      <button className="toPay" onClick={ends}><Link to='/basket/'>Подтведить заказ</Link></button>
+                      <button className="toPay" onClick={ends}><Link to='/basket/'>Оплатить</Link></button>
                         <button className="toPay" onClick={() => setPactive(false)}>Отмена</button>
                     </div>
                 </div>

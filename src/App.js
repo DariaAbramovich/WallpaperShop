@@ -31,6 +31,7 @@ import { WowenContainerAdmin } from './containers/adminPart/adminCataloge/sectio
 import { AdminVinilContainer } from './containers/adminPart/adminCataloge/sectionAdmin/vinilAdmin/vinil.container';
 import { AdminPaperContainer } from './containers/adminPart/adminCataloge/sectionAdmin/paperAdmin/paper.container';
 import { AddProductContainer } from './containers/adminPart/addProduct/addProduct.container';
+import CheckoutForm from './containers/basket/checkOutForm.component';
 
 const colors = {
   bgColor: '#0D1B39',
@@ -169,7 +170,9 @@ const handleSetUser = (userData) => {
             <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/> } />
             <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
             <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
-            <Route path="/cart/" element={user ? <BasketContainer user={user} setUser={handleSetUser} cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} />: <Navigate to="/login" />} />
+            <Route path="/cart/" element={user ? 
+                                    <BasketContainer user={user} setUser={handleSetUser} cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} />
+                                    : <Navigate to="/login" />} />
             
             <Route path="/admin/" element={<AdminHomeContainer user={user} setUser={handleSetUser} />}  />
             <Route path="/admin:cataloge/" element={<AdminCatalogeContainer  user={user} />} />
@@ -178,7 +181,7 @@ const handleSetUser = (userData) => {
             <Route path="/admin:paperwall/" element={<AdminPaperContainer  user={user}/>} />
             <Route path="/addedproducts/" element={<AddProductContainer  user={user}/>} />
             <Route path="/admin:aboute/" element={<AboutContainerAdmin  user={user}/>} />
-
+            <Route path="/payment/" element={<CheckoutForm/>}/>
 
 
         </Routes>

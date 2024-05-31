@@ -113,7 +113,6 @@ const ProdCardName = styled.div`
 const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct, themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem, addToCart, user }) =>{
     const [modalActive, setModalActive] = useState(false)
     const handleOrder = ()=>{
-    
         const order= {
             id:id,
             nameproduct:nameproduct,
@@ -160,16 +159,21 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
                         <ProdCardPrice>
                             {priceProduct} руб
                         </ProdCardPrice>
+                        <ProdCardBtn>
+                          <img src={plas} onClick={handleOrder} alt=""/>
 
-                       {
-                        user ? <ProdCardBtn onClick={ handleOrder}>
-                        <img src={plas} alt=""/>
                         </ProdCardBtn>
+
+                       {/* {
+                        user ? 
+                            <ProdCardBtn onClick={ handleOrder}>
+                                <img src={plas} alt=""/>
+                            </ProdCardBtn>
                         : <ProdCardBtn > 
-                        <img src={plas} onClick={toLogin} alt=""/>
+                             <img src={plas} onClick={toLogin} alt=""/>
                         </ProdCardBtn>
                         // <Navigate to="/login" />
-                       }
+                       } */}
                         
                     </ProdCardFooter>
                     <button className="moreinfo-btn-prod" onClick={()=>setModalActive(true)}>More info

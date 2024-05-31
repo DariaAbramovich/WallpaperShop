@@ -208,7 +208,7 @@ const CatalogeComponent = ({ addToCart, user}) => {
                                                     stateProduct={StateProduct}
                                                     photoProduct={Photo}
                                                     addToCart={ addToCart}
-                                                    user={user}
+                                                    user= {user}
                                                     
                                                 />
                                             </div>
