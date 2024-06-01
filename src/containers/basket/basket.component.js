@@ -96,6 +96,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from './checkOutForm.component';
 import Cart from '../../components/cart';
 import './basket.scss';
+import Payment from './Payment/payment';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7dc');
 
@@ -108,7 +109,7 @@ const BasketComponent = ({ cartItems, removeFromCart, updateQuantity, removeAllI
     return (
         <div className="container">
             <div className='basket-wrapper'>
-                <h1 className='basket-header-title'>Basket</h1>
+                <div className='basket_title'>Basket</div>
                 <div className='product-container'>
                     <div className='product-container_item'>
                         <Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />
@@ -124,10 +125,13 @@ const BasketComponent = ({ cartItems, removeFromCart, updateQuantity, removeAllI
                         )}
                     </div>
                 </div>
-                {paymentActive && (
+                {/* {paymentActive && (
                     <Elements stripe={stripePromise}>
                         <CheckoutForm totalPrice={calculateTotalPrice()} setPactive={setPaymentActive} />
                     </Elements>
+                )} */}
+                 {paymentActive && (
+                        <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={calculateTotalPrice()}/>
                 )}
             </div>
         </div>

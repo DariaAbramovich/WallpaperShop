@@ -20,9 +20,46 @@
 .toPay:hover{
     background-color: var( --btn-accent);
 }
-.p-select{
-    color: black;
-    font-size: 20px;
-    font-weight: 400;
-    margin: 20px 0px;
+.payment_title{
+    color: var(  --text-card-dark-blue);
+    font-size: 24px;
+    font-weight: 500;
+    margin: 24px;
+}
+
+.required {
+    color: red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+input.error,
+select.error {
+    border-color: red;
+}
+
+input.error + .error-message,
+select.error + .error-message {
+    display: block;
+}
+
+.toPay {
+    display: inline-block;
+    // padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btns_tab {
+    text-align: center;
+    margin-top: 20px;
 }

@@ -1,86 +1,76 @@
+// // const express = require('express');
+// // const bodyParser = require('body-parser');
+// // const stripe = require('stripe')('sk_test_Gx4mWEgHtCMr4DYMUIqfIrsz');
 
-// const express = require('express');
-// const axios = require('axios');
-// const cors = require('cors');
-// const Stripe = require('stripe');
-// // const stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7dc'); // Replace with your Stripe secret key
-// const stripe = Stripe('sk_test_Gx4mWEgHtCMr4DYMUIqfIrsz');
-// const app = express();
-// app.use(cors());
-// app.use(express.json());
+// // const app = express();
+// // const port = 3001;
 
-// app.post('https://api.stripe.com/v1/payment_intents', async (req, res) => {
-//     try {
-//         const response = await axios.post('https://api.stripe.com/v1/payment_intents', new URLSearchParams({
-//             amount: req.body.amount,
-//             currency: 'rub',
-//             payment_method_types: ['card']
-//         }), {
-//             headers: {
-//                 'Authorization': `Bearer ${process.env.stripe}`,
-//                 'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         });
-//         res.json(response.data);
-//     } catch (error) {
-//         console.error('Error creating payment intent:', error);
-//         res.status(500).send('Internal Server Error');
-//     }
-// });
+// // app.use(bodyParser.json());
 
-const express = require('express');
-const cors = require('cors');
-const Stripe = require('stripe');
-const stripe = Stripe('sk_test_Gx4mWEgHtCMr4DYMUIqfIrsz'); // Secret key
+// // // Endpoint for creating payment intents
+// // app.post('/payment_intents', async (req, res) => {
+// //     try {
+// //         const { amount } = req.body;
+// //         const paymentIntent = await stripe.paymentIntents.create({
+// //             amount,
+// //             currency: 'usd',
+// //             // Other payment intent options if needed
+// //         });
+// //         res.status(200).json({ client_secret: paymentIntent.client_secret });
+// //     } catch (error) {
+// //         res.status(500).json({ error: error.message });
+// //     }
+// // });
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+// // // Start the server
+// // app.listen(port, () => {
+// //     console.log(`Server is listening on port ${port}`);
+// // });
+// // const express = require('express');
+// // const bodyParser = require('body-parser');
+// // const stripe = require('stripe')('sk_test_Gx4mWEgHtCMr4DYMUIqfIrsz');
 
-app.post('/api/payment-intents', async (req, res) => { // Fixing the endpoint URL
-    try {
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: req.body.amount,
-            currency: 'rub',
-            payment_method_types: ['card']
-        });
-        res.json({ client_secret: paymentIntent.client_secret });
-    } catch (error) {
-        console.error('Error creating payment intent:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
+// // const app = express();
+// // const port = 3001;
 
-app.listen(5000, () => console.log('Server running on port 5000'));
+// // app.use(bodyParser.json());
 
+// // app.post('/payment_intents', async (req, res) => {
+// //     try {
+// //         const { amount } = req.body;
+// //         const paymentIntent = await stripe.paymentIntents.create({
+// //             amount,
+// //             currency: 'usd',
+// //         });
+// //         res.status(200).json({ client_secret: paymentIntent.client_secret });
+// //     } catch (error) {
+// //         res.status(500).json({ error: error.message });
+// //     }
+// // });
 
+// // app.listen(port, () => {
+// //     console.log(`Server is listening on port ${port}`);
+// // });
 
 // const express = require('express');
 // const bodyParser = require('body-parser');
-// const Stripe = require('stripe');
-// const cors = require('cors');
-
+// const axios = require('axios');
 
 // const app = express();
-// const stripe = Stripe('sk_test_YourSecretKey'); // Replace with your Stripe secret key
+// const port = 3001;
 
-// app.use(cors());
-// app.use(express.json());
+// app.use(bodyParser.json());
 
-// app.post('/api/proxy/payment-intents', async (req, res) => {
+// // Проксирующий маршрут для запросов к Stripe API
+// app.post('/stripe-api', async (req, res) => {
 //     try {
-//         const { amount } = req.body;
-//         const paymentIntent = await stripe.paymentIntents.create({
-//             amount,
-//             currency: 'usd',
-//         });
-//         res.status(200).send({ client_secret: paymentIntent.client_secret });
+//         const response = await axios.post('https://merchant-ui-api.stripe.com/elements/wallet-config', req.body);
+//         res.status(200).json(response.data);
 //     } catch (error) {
-//         res.status(500).send({ error: error.message });
+//         res.status(500).json({ error: error.message });
 //     }
 // });
 
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
+// app.listen(port, () => {
+//     console.log(`Server is listening on port ${port}`);
 // });
