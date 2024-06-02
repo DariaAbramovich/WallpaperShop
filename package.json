@@ -26,6 +26,9 @@
     "stripe": "^15.8.0",
     "styled-components": "^6.1.8",
     "swiper": "^11.0.5",
+    "translate": "^3.0.0",
+    "translate-google": "^1.5.0",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

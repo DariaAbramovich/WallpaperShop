@@ -66,8 +66,7 @@ const App = ()=>{
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))); // State to store logged-in user data
  
   const [isChatBotVisible, setIsChatBotVisible] = useState(true); // Initialize chatbot as visible by default
-  // const location = useLocation();
-  // const navigate = useNavigate();
+  const [language, setLanguage] = useState('ru'); // default language
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
@@ -161,28 +160,27 @@ const handleSetUser = (userData) => {
       <div className="App">
         <BrowserRouter>
         <Routes>
-            <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
+            <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
             <Route path="/login/" element={<LoginContainer setUser={handleSetUser}/>} />
             <Route path="/registred/" element={<RegistredContainer/>} />
-            <Route path="/constructor/" element={user ? <ConstructorContainer user={user} setUser={handleSetUser} addToCart={addToCart} cartItemCount={getTotalItems()} /> : <Navigate to="/login" />} />
-            <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
-            <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
-            <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/> } />
-            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
-            <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser}/>} />
+            <Route path="/constructor/" element={user ? <ConstructorContainer user={user} setUser={handleSetUser} addToCart={addToCart} cartItemCount={getTotalItems()} language={language} setLanguage={setLanguage} /> : <Navigate to="/login" />} />
+            <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
+            <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
+            <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/> } />
+            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
+            <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
             <Route path="/cart/" element={user ? 
-                                    <BasketContainer user={user} setUser={handleSetUser} cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} />
+                                    <BasketContainer user={user} setUser={handleSetUser} cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} language={language} setLanguage={setLanguage} />
                                     : <Navigate to="/login" />} />
             
-            <Route path="/admin/" element={<AdminHomeContainer user={user} setUser={handleSetUser} />}  />
-            <Route path="/admin:cataloge/" element={<AdminCatalogeContainer  user={user} />} />
-            <Route path="/admin:nonWoven/" element={<WowenContainerAdmin  user={user}/>} />
-            <Route path="/admin:vinil/" element={<AdminVinilContainer  user={user}/>} />
-            <Route path="/admin:paperwall/" element={<AdminPaperContainer  user={user}/>} />
-            <Route path="/addedproducts/" element={<AddProductContainer  user={user}/>} />
-            <Route path="/admin:aboute/" element={<AboutContainerAdmin  user={user}/>} />
-            <Route path="/payment/" element={<CheckoutForm/>}/>
-
+            <Route path="/admin/" element={<AdminHomeContainer user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>}  />
+            <Route path="/admin:cataloge/" element={<AdminCatalogeContainer user={user} language={language} setLanguage={setLanguage}/>} />
+            <Route path="/admin:nonWoven/" element={<WowenContainerAdmin user={user} language={language} setLanguage={setLanguage}/>} />
+            <Route path="/admin:vinil/" element={<AdminVinilContainer  user={user} language={language} setLanguage={setLanguage}/>} />
+            <Route path="/admin:paperwall/" element={<AdminPaperContainer user={user} language={language} setLanguage={setLanguage}/>} />
+            <Route path="/addedproducts/" element={<AddProductContainer user={user} language={language} setLanguage={setLanguage}/>} />
+            <Route path="/admin:aboute/" element={<AboutContainerAdmin user={user} language={language} setLanguage={setLanguage}/>} />
+           
 
         </Routes>
         {showScrollToTop && (

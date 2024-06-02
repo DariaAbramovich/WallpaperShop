@@ -14,7 +14,7 @@ import { InfoBlog } from './infoBlog/infoBlog';
 import './home.scss';
 import { SearchHome } from './searchHome';
 
-const HomeComponent = ({ cartItemCount, user, setUser }) => {
+const HomeComponent = ({ cartItemCount, user, setUser, language, setLanguage}) => {
     const [inputs, setInputs] = useState({});
     const [productData, setProductData] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -32,26 +32,16 @@ const HomeComponent = ({ cartItemCount, user, setUser }) => {
         <>
             <header className={`header ${isSearchFocused ? 'header--dimmed' : ''}`}>
                 <div className="container">
-                    <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser} />
-                    {/* <div className="search-position">
-                        <div>
-                            <Search setSearchResults={setSearchResults} />
-                
-                        </div>
-                        <div className="search-results-container">
-                            {searchResults.map(product => (
-                                <Card key={product.IdProduct} {...product} />
-                            ))}
-                        </div>
-                    </div> */}
+                    <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser} language={language} setLanguage={setLanguage} />
+               
                     <div className="header__content">
-                        <h1 className="header__title">Безупречная жизнь начинается дома.</h1>
-                        <p>Воплощайте вместе с нами свои самые яркие мечты!</p>
+                        <h1 className="header__title">{language === 'en' ? 'Impeccable life begins at home.' : 'Безупречная жизнь начинается дома.'}</h1>
+                        <p>{language === 'en' ? 'Bring your brightest dreams to life with us!' : 'Воплощайте вместе с нами свои самые яркие мечты!'}</p>
                     </div>
                 </div>
             </header>
             
-            <InfoBlog />
+            <InfoBlog language={language} />
         </>
     );
 };

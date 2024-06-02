@@ -1,6 +1,6 @@
-import "./footer.scss"
+import "./footer.scss";
 
-export const Footer = () => {
+export const Footer = ({ language }) => {
     return (
         <>
             <div className="footer__wrapper">
@@ -8,40 +8,36 @@ export const Footer = () => {
                     <div className="footer__grid">
                         <div className="contacts">
                             <h3 className="title">
-                                Наши контакты
+                                {language === 'en' ? 'Our Contacts' : 'Наши контакты'}
                             </h3>
                             <div className="footer__block-content">
-                            +37544ХХХХХХХ<br></br>
-                            +37529ХХХХХХХ<br></br>
-                            magickWall@gmail.com<br></br>
+                                +37544XXXXXXXXX<br />
+                                +37529XXXXXXXXX<br />
+                                magickWall@gmail.com<br />
                             </div>
-                          
                         </div>
                         <div className="address">
                             <h3 className="title">
-                                Наши адреса
+                                {language === 'en' ? 'Our Addresses' : 'Наши адреса'}
                             </h3>
                             <div className="footer__block-content">
-                            г.Минск ул.Перавая<br></br>
-                            г.Минск ул.Вторая<br></br>
-                            г.Минск ул.Третья<br></br>
+                                Minsk, ul. Peravaya<br />
+                                Minsk, ul. Vtoraya<br />
+                                Minsk, ul. Tretya<br />
                             </div>
-                           
                         </div>
                         <div className="schedule">
                             <h3 className="title">
-                                График работы
+                                {language === 'en' ? 'Working Hours' : 'График работы'}
                             </h3>
                             <div className="footer__block-content">
-                            пн — пт : с 10:00 до 20:00<br></br>
-                            сб — вс : с 10:00 до 18:00<br></br>
+                                Mon — Fri: 10:00 AM — 8:00 PM<br />
+                                Sat — Sun: 10:00 AM — 6:00 PM<br />
                             </div>
-                           
                         </div>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </>
-    )
-}
-
+    );
+};

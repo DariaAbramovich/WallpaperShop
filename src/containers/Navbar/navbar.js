@@ -1,37 +1,39 @@
-import './../../css/vars.scss'
-import './navbar.scss';
-import fav1 from './../../assets/icon/faforite1.png';
-import basket from './../../assets/icon/basket1.png'
-import login from './../../assets/icon/login.png'
-import { Link, useNavigate } from "react-router-dom";
-import CardBtn from '../../components/basket-btn';
-import CartBtn from '../../components/cartBtn';
-import logout from './../../assets/icon/logout.png'
+    import './../../css/vars.scss';
+    import './navbar.scss';
+    import fav1 from './../../assets/icon/faforite1.png';
+    import basket from './../../assets/icon/basket1.png';
+    import login from './../../assets/icon/login.png';
+    import logout from './../../assets/icon/logout.png';
+    import { Link, useNavigate } from "react-router-dom";
+    import CartBtn from '../../components/cartBtn';
+    import { useState } from 'react';
 
-export const Navbar = ({ cartItemCount, user, setUser }) => {
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        const confirmed = window.confirm('Вы хотите выйти из системы?');
-        if (confirmed) {
-          localStorage.removeItem('user'); // Remove user data from localStorage
-          setUser(null); // Clear user state in App component
-          navigate('/');
-        }
-      };
+    export const Navbar = ({ cartItemCount, user, setUser, language, setLanguage }) => {
+        const navigate = useNavigate();
+        
+        const handleLogout = () => {
+            const confirmed = window.confirm(language === 'en' ? 'Do you want to log out?' : 'Вы хотите выйти из системы?');
+            if (confirmed) {
+            localStorage.removeItem('user');
+            setUser(null);
+            navigate('/');
+            }
+        };
 
-    return (
-        <>
+        const toggleLanguage = () => {
+            setLanguage(prevLang => (prevLang === 'en' ? 'ru' : 'en'));
+        };
 
+        return (
             <div className="nav">
                 <a href="/" className="logo">MagicWall</a>
                 <ul className="nav-list">
-                    <li className="nav-list__item"><Link to={`/cataloge/`} className="nav-list__link">Каталог</Link></li>
-                    <li className="nav-list__item"><Link to={`/constructor/`} className="nav-list__link">Конструктор</Link></li>
-                    <li className="nav-list__item"><Link to={`/about/`} className="nav-list__link">О нас</Link></li>
-
-                  <li className="nav-list__item nav__icon">
+                    <li className="nav-list__item"><Link to={`/cataloge/`} className="nav-list__link">{language === 'en' ? 'Catalog' : 'Каталог'}</Link></li>
+                    <li className="nav-list__item"><Link to={`/constructor/`} className="nav-list__link">{language === 'en' ? 'Constructor' : 'Конструктор'}</Link></li>
+                    <li className="nav-list__item"><Link to={`/about/`} className="nav-list__link">{language === 'en' ? 'About Us' : 'О нас'}</Link></li>
+                    <li className="nav-list__item nav__icon">
                         <Link to={`/favorite/`} className="nav-list__link">
-                            {/* <img src={fav1} /> */}
+                            <img src={fav1} alt="Favorite"/>
                         </Link>
                     </li>
                     <li className="nav-list__item nav__icon">
@@ -40,20 +42,16 @@ export const Navbar = ({ cartItemCount, user, setUser }) => {
                         </Link>
                     </li>
                 </ul>
-
                 <div className="login">
                     {user ? (
-                        // <a href="https://www.flaticon.com/free-icons/logout" title="logout icons" onClick={handleLogout} ></a>
                         <img src={logout} onClick={handleLogout} alt="Logout" />
                     ) : (
                         <Link to={`/login/`} className="nav-list__link">
-                            <img src={login} />
+                            <img src={login} alt="Login"/>
                         </Link>
                     )}
-
-
                 </div>
+             
             </div>
-        </>
-    )
-}
+        );
+    };

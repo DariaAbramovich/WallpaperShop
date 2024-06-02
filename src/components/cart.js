@@ -80,7 +80,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
                             </div>
                             <div className='bottom'>
                                 <div className="product_price">
-                                        <p>Общая цена: {item.priceProduct * item.quantity} руб.</p>
+                                        <p>Общая цена: {(item.priceProduct * item.quantity).toFixed(2)} руб.</p>
                                     </div>
                                 <div className="delete">
                                     <button onClick={() => handleRemove(index)}><img src={delete_btn} className="img_delete"></img></button>
