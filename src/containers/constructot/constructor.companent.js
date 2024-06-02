@@ -163,7 +163,7 @@ export const Constructor = ({ addToCart }) => {
                         </div>
                         <div className='choose_width'>
                             <p className='param_title'>Выберите ширину обоев:</p>
-                            <select value={width} onChange={handleWidthChange}>
+                            <select className='change_type_prod' value={width} onChange={handleWidthChange}>
                                 <option value=''>Не выбрано</option>
                                 <option value='0.53'>0.53</option>
                                 <option value='1.6'>1.6</option>

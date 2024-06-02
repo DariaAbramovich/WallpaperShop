@@ -17,6 +17,8 @@ const BasketComponent = ({ cartItems, removeFromCart, updateQuantity, removeAllI
 
     const handleRemoveAll = () => removeAllItems();
 
+    const totalPrice = calculateTotalPrice();
+
     return (
         <div className="container">
             <div className='basket-wrapper'>
@@ -27,18 +29,24 @@ const BasketComponent = ({ cartItems, removeFromCart, updateQuantity, removeAllI
                     </div>
                     <div className='product-container_info'>
                         <div className='info-price'>
-                            <div>Order Total:</div>
-                            <div>{calculateTotalPrice().toFixed(2)} руб</div>
+                            <div>Сумма заказа:</div>
+                            <div>{totalPrice.toFixed(2)} руб</div>
                         </div>
-                        <button className='info_btn' onClick={() => setPaymentActive(true)}>Checkout</button>
-                        {calculateTotalPrice() > 0 && (
-                            <button className='btn_clear_cart' onClick={handleRemoveAll}>Clear Cart</button>
+                        <button
+                            className={`info_btn ${totalPrice === 0 ? 'disabled' : ''}`}
+                            onClick={() => setPaymentActive(true)}
+                            disabled={totalPrice === 0}
+                        >
+                            Оформить заказ
+                        </button>
+                        {totalPrice > 0 && (
+                            <button className='btn_clear_cart' onClick={handleRemoveAll}>Очистить корзину</button>
                         )}
                     </div>
                 </div>
                 {paymentActive && (
                     <Elements stripe={stripePromise}>
-                        <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={calculateTotalPrice()} />
+                        <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={totalPrice} />
                     </Elements>
                 )}
             </div>

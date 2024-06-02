@@ -54,7 +54,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
                                     {item.img ? (
                                         <div style={item.img} className="img">dere</div>
                                     ) : (
-                                         <img className='img-card' src={`http://localhost/api/uploads/${item.photoProduct}`} alt={item.photoProduct} />
+                                         <img className='img' src={`http://localhost/api/uploads/${item.photoProduct}`} alt={item.photoProduct} />
 
                                         // <img src={defaultImg}  className="img" alt="Default Image" />
                                     )}

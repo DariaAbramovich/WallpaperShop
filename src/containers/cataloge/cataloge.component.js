@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './cataloge.scss';
@@ -16,6 +15,7 @@ const CatalogeComponent = ({ addToCart, user, language }) => {
     const [manufacturer, setManufacturer] = useState('');
     const [manufacturers, setManufacturers] = useState([]);
     const [filterApplied, setFilterApplied] = useState(false);
+    const [showNewProducts, setShowNewProducts] = useState(false);
 
     useEffect(() => {
         getProducts();
@@ -28,21 +28,22 @@ const CatalogeComponent = ({ addToCart, user, language }) => {
                 setProductData(response.data);
                 const uniqueManufacturers = [...new Set(response.data.map(product => product.Country))];
                 setManufacturers(uniqueManufacturers);
-                const uniqueStateProd = [...new Set(response.data.map(product => product.StateProduct))];
-                setStateProds(uniqueStateProd)
-                console.log(uniqueStateProd)
-            }
-            else {
+                let uniqueStateProd = [...new Set(response.data.map(product => product.StateProduct))];
+                // Удаление "Новинка" из списка состояния товара
+                uniqueStateProd = uniqueStateProd.filter(state => state !== 'Новинка');
+                setStateProds(uniqueStateProd);
+                console.log(uniqueStateProd);
+            } else {
                 console.error('Данные ответа не являются массивом', response.data);
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.error('Ошибка получения данных о продукте:', error);
         }
     };
 
     const applyFilters = () => {
         setFilterApplied(true);
+        setShowNewProducts(false);
     };
 
     const resetFilters = () => {
@@ -51,9 +52,16 @@ const CatalogeComponent = ({ addToCart, user, language }) => {
         setManufacturer('');
         setStateProd('');
         setFilterApplied(false);
+        setShowNewProducts(false);
+    };
+
+    const showNewProductsOnly = () => {
+        setShowNewProducts(true);
+        setFilterApplied(false);
     };
 
     const filteredProducts = productData.filter((pData) => {
+        if (showNewProducts && pData.StateProduct !== 'Новинка') return false;
         const price = parseFloat(pData.PriceProduct);
         const min = parseFloat(minPrice);
         const max = parseFloat(maxPrice);
@@ -78,53 +86,56 @@ const CatalogeComponent = ({ addToCart, user, language }) => {
             <div className="cataloge">
                 <div className="cataloge-wrapper">
                     <div className="cataloge-filter">
-                        <div className="filter_title">{language === 'en' ? 'Filters' : 'Фильтрация'}</div>
+                        <div className="filter_title">Фильтрация</div>
                         <div className="filter-type">
                             <div>
                                 <div>
-                                    <div className='filter_param'>{language === 'en' ? 'Price from:' : 'Цена от:'}</div>
+                                    <div className='filter_param'>Цена от:</div>
                                     <input
                                         className='price__from'
                                         type="number"
                                         value={minPrice}
                                         onChange={(e) => setMinPrice(e.target.value)}
-                                        placeholder={language === 'en' ? '0 rub.' : '0 руб.'}
+                                        placeholder={'0 руб.'}
                                     />
-                                    <div className='filter_param'>{language === 'en' ? 'Price to:' : 'Цена до:'}</div>
+                                    <div className='filter_param'>Цена до:</div>
                                     <input
                                         className='price__from'
                                         type="number"
                                         value={maxPrice}
                                         onChange={(e) => setMaxPrice(e.target.value)}
-                                        placeholder={language === 'en' ? '0 rub.' : '0 руб.'}
+                                        placeholder={'0 руб.'}
                                     />
                                 </div>
                                 <div>
-                                    <div className='filter_param'>{language === 'en' ? 'Product State:' : 'Состояние товара:'}</div>
+                                    <div className='filter_param'>Помещение:</div>
                                     <select className='select_area'
                                         value={stateProd}
                                         onChange={(e) => setStateProd(e.target.value)}
                                     >
+                                        <option value="">Не выбрано</option>
                                         {stateProds.map((stedP, index) => (
                                             <option key={index} value={stedP}>{stedP}</option>
                                         ))}
                                     </select>
                                 </div>
                                 <div>
-                                    <div className='filter_param'>{language === 'en' ? 'Country of Manufacture:' : 'Страна производитель:'}</div>
+                                    <div className='filter_param'>Страна производитель:</div>
                                     <select className='select_area'
                                         value={manufacturer}
                                         onChange={(e) => setManufacturer(e.target.value)}
                                     >
-                                        <option value="">{language === 'en' ? 'All' : 'Все'}</option>
+                                        <option value="">Не выбрано</option>
                                         {manufacturers.map((manuf, index) => (
                                             <option key={index} value={manuf}>{manuf}</option>
                                         ))}
                                     </select>
                                 </div>
+                                <button onClick={showNewProductsOnly}>Показать новинки</button>
+
                                 <div className='btn_filter_area'>
                                     <button className='btn_filter' onClick={applyFilters}>{language === 'en' ? 'Apply Filters' : 'Применить фильтры'}</button>
-                                    <button className='btn_filter' onClick={resetFilters}>{language === 'en' ? 'Reset Filters' : 'Сбросить фильры'}</button>
+                                    <button className='btn_filter' onClick={resetFilters}>{language === 'en' ? 'Reset Filters' : 'Сбросить фильтры'}</button>
                                 </div>
                             </div>
                         </div>
