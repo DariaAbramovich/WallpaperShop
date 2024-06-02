@@ -171,7 +171,7 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
                             <img src={plas} onClick={handleOrder} alt=""/>
                         </ProdCardBtn>
                     </ProdCardFooter>
-                    <button className="moreinfo-btn-prod" onClick={() => setModalActive(true)}>More info
+                    <button className="moreinfo-btn-prod" onClick={() => setModalActive(true)}>Подробнее
                         <img src={toMore} className="img_toMore" alt=""/>
                     </button>
                 </ProdCardDescription>

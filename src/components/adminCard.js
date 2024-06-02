@@ -111,6 +111,8 @@ const ProdCardName = styled.div`
 `
 const AdminCard = ({ id, nameproduct, article, type, priceProduct, inStock, describeProduct, baseProduct, collectionProduct, appointment, colorProduct, drawingProduct, themeDrawing, dockingProduct, widthProduct, manufacture, country, surfaceProduct, stateProduct,  photoProduct,onDelete, onEdit}) => {
     const [modalActive, setModalActive] = useState(false)
+    // const [modalActive, setModalActive] = useState(false)
+   
    
     const item = { id, nameproduct, type, priceProduct, photoProduct, inStock }
     const img = 'http://localhost/api/uploads/'+photoProduct
@@ -141,13 +143,11 @@ const AdminCard = ({ id, nameproduct, article, type, priceProduct, inStock, desc
                         <ProdCardPrice>
                             {priceProduct} руб
                         </ProdCardPrice>
-                        
-                        
 
                         <button onClick={onDelete}>Удалить</button>
                         <button onClick={onEdit}> <img src={editImg} className="editImg" /></button>
                     </ProdCardFooter>
-                    <button className="moreinfo-btn-prod" onClick={() => setModalActive(true)}>More info
+                    <button className="moreinfo-btn-prod" onClick={() => setModalActive(true)}>Подробнее
                         <img src={toMore} className="img_toMore" />
                     </button>
                 </ProdCardDescription>

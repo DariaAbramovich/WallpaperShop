@@ -41,16 +41,15 @@ export const Constructor = ({ addToCart }) => {
     const [selectedColor, setSelectedColor] = useState('white');
     const [selectedImage, setSelectedImage] = useState('');
     const [width, setWidth] = useState('');
-    const [wallpaperType, setWallpaperType] = useState('paper');
+    const [wallpaperType, setWallpaperType] = useState('');
     const [price, setPrice] = useState(0);
     const [isWidthValid, setIsWidthValid] = useState(false);
-    // const [cart, setCart] = useState([]); // Cart state
     const navigate = useNavigate();
-
 
     const handleColorSelection = (color) => {
         setSelectedColor(color);
     };
+
     const handleImageSelection = (image) => {
         if (image === 'none') {
             setSelectedImage('');
@@ -61,21 +60,23 @@ export const Constructor = ({ addToCart }) => {
         }
         console.log("image", image)
     };
+
     const handleWidthChange = (e) => {
         const newWidth = e.target.value;
         setWidth(newWidth);
         calculatePrice(newWidth, wallpaperType, selectedImage);
-        setIsWidthValid(!isNaN(newWidth) && newWidth !== '');
-       
+        setIsWidthValid(newWidth !== '');
     };
+
     const handleWallpaperTypeChange = (e) => {
         const newType = e.target.value;
         setWallpaperType(newType);
         calculatePrice(width, newType, selectedImage);
     };
+
     const calculatePrice = (width, type, image) => {
         const numericWidth = parseFloat(width);
-        if (!isNaN(numericWidth)) {
+        if (!isNaN(numericWidth) && type) {
             const basePrice = numericWidth * PRICES[type];
             const patternPrice = image ? BASE_PATTERN_PRICE : 0;
             const colibriPrice = image === colibri ? COLIBRI_PATTERN_PRICE : 0;
@@ -84,6 +85,7 @@ export const Constructor = ({ addToCart }) => {
             setPrice(0);
         }
     };
+
     const handleOrder = () => {
         const order = {
             nameproduct: 'Individuai wallpaper',
@@ -94,30 +96,29 @@ export const Constructor = ({ addToCart }) => {
             type: wallpaperType,
             priceProduct: price
         };
-        if (isWidthValid) {
+        if (isWidthValid && wallpaperType) {
             addToCart(order); // Add order to cart
             navigate('/cart/')
         } else {
-            alert('Пожалуйста, введите ширину перед оформлением заказа.');
+            alert('Пожалуйста, выберите тип обоев и введите ширину перед оформлением заказа.');
         }
-       
     };
+
     const resultStyle = {
         backgroundColor: selectedColor,
         backgroundImage: selectedImage ? `url(${selectedImage})` : 'none',
         backgroundRepeat: 'repeat',
         backgroundSize: '70px'
     };
+
     return (
         <>
             <div className='const_wrapper'>
-                <h1 className='wrapp_title'><span className='wrapp_title_span'>Конструктор</span> - создние персональных обоев</h1>
+                <h1 className='wrapp_title'><span className='wrapp_title_span'>Конструктор</span> - создание персональных обоев</h1>
                 <div className='constructor_body'>
-
                     <div className='constructor_result'>
                         <div className='result' style={resultStyle}>
                             {selectedColor && <p>Selected Color: {selectedColor}</p>}
-
                         </div>
                     </div>
                     <div className='constructor_param'>
@@ -150,33 +151,31 @@ export const Constructor = ({ addToCart }) => {
                             <div onClick={() => handleImageSelection(spring64)}><img className='img_picture' src={spring64} alt='spring64' /></div>
                             <div onClick={() => handleImageSelection(spring94)}><img className='img_picture' src={spring94} alt='spring94' /></div>
                             <div onClick={() => handleImageSelection('none')}><img className='img_picture' src={None} alt='None' /></div>
-
                         </div>
                         <div className='choose_type'>
                             <p className='param_title'>Выберите тип обоев:</p>
                             <select className='change_type_prod' value={wallpaperType} onChange={handleWallpaperTypeChange}>
+                                <option value=''>Не выбрано</option>
                                 <option value='paper'>Бумажные</option>
                                 <option value='vinil'>Виниловые</option>
                                 <option value='nonwowen'>Флизилиновые</option>
                             </select>
                         </div>
-                        <p className='param_title'>Введите ширину (в метрах):</p>
-                        <input
-                            className='input_width'
-                            type='number'
-                            value={width}
-                            onChange={handleWidthChange}
-                            placeholder='Введите ширину'
-                        />
+                        <div className='choose_width'>
+                            <p className='param_title'>Выберите ширину обоев:</p>
+                            <select value={width} onChange={handleWidthChange}>
+                                <option value=''>Не выбрано</option>
+                                <option value='0.53'>0.53</option>
+                                <option value='1.6'>1.6</option>
+                            </select>
+                        </div>
                         <div className='bottom_constructor'>
-                            <p className='price_item'>Цена: {price} руб.</p>
-                            
+                            <p className='price_item'>Цена: {price.toFixed(2)} руб.</p>
                             <button className='constr_toOrder' onClick={handleOrder}>Заказать</button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </>
-    )
+    );
 }

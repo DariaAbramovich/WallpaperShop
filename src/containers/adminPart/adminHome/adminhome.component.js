@@ -36,7 +36,7 @@ const AdminHomeComponent = ({user, setUser}) => {
                     <div className="header__content">
                         <h1 className="header__title">Безупречная жизнь начинается дома.</h1>
                         <p>Воплощайте вместе с нами свои самые яркие мечты!</p>
-                            <Search />
+                            {/* <Search /> */}
                     </div>
                 </div>
             </header>
