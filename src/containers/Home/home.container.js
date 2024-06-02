@@ -15,14 +15,6 @@ import { ChatBotContainer } from '../../components/chatBot/chat.container.js';
 const HomeContainer = ({cartItemCount, user, setUser,language,setLanguage}) => {
     return (
         <>
-        {/* {user ? (
-        <div>
-          <h2>Hello, {user.NamePerson}</h2>
-          <p>Email: {user.Email }</p>
-        </div>
-      ) : (
-        <p>Please log in to see your details.</p>
-      )} */}
           <HomeCompanent cartItemCount ={cartItemCount} user={ user} setUser={setUser} language={language} setLanguage={setLanguage}/>
            <ChatBotContainer language={language}/>
            <Footer language={language}/>

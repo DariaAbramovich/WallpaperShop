@@ -6,7 +6,7 @@ import toMore from './../assets/icon/arrov-right.svg'
 import editImg from './../assets/icon/edit.png'
 import defaultImg from './../assets/image/wallpaper/1047301_arteks_622f33852273c.jpeg'
 
-import './../containers/cataloge/cataloge.scss'
+// import './../containers/cataloge/cataloge.scss'
 import Modal from "./modal";
 
 
@@ -119,10 +119,12 @@ const AdminCard = ({ id, nameproduct, article, type, priceProduct, inStock, desc
         <div>
             <ProdCardWrapper >
                     <ProdCardImageWrapper>
-                        <div className='instocks_label'>{stateProduct}</div>
+                    {stateProduct === 'Новинка' && (
+                            <div className='instocks_label'>{stateProduct}</div>
+                        )}
                         <ProdCardImage>
                             <ProdCardPhoto>
-                            <img className='img-card' src={`http://localhost/api/uploads/${photoProduct}`} alt={photoProduct} />
+                            <img className='img-card_adm' src={`http://localhost/api/uploads/${photoProduct}`} alt={photoProduct} />
 
                             </ProdCardPhoto>
                         </ProdCardImage>

@@ -108,12 +108,7 @@ const ProdCardName = styled.div`
         color: var(--text-accent);
     }
 `;
-const Card = ({
-    id, nameproduct, article, type, priceProduct, photoProduct, inStock,
-    describeProduct, baseProduct, collectionProduct, appointment, colorProduct,
-    drawingProduct, themeDrawing, dockingProduct, widthProduct, manufacture,
-    country, surfaceProduct, stateProduct, addItem, addToCart, user, language 
-}) => {
+const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct, themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem, addToCart, user }) =>{
     const [translatedFields, setTranslatedFields] = useState({
         nameproduct, article, type, describeProduct, baseProduct, collectionProduct,
         appointment, colorProduct, drawingProduct, themeDrawing, dockingProduct,
@@ -121,36 +116,19 @@ const Card = ({
     });
     const [modalActive, setModalActive] = useState(false);
 
-    const translateField = async (field, text) => {
-        if (/[\u0400-\u04FF]+/.test(text)) {  // Check if text contains Cyrillic characters
-            const translatedText = await translate(text, { to: 'en' });
-            setTranslatedFields(prevState => ({
-                ...prevState,
-                [field]: translatedText
-            }));
-        }
-    };
+   
 
-    useEffect(() => {
-        Object.keys(translatedFields).forEach(field => {
-            translateField(field, translatedFields[field]);
-        });
-    }, []);
+    const handleOrder = ()=>{
 
-    const handleOrder = () => {
-        const order = {
-            id, nameproduct: translatedFields.nameproduct, article: translatedFields.article,
-            type: translatedFields.type, priceProduct, photoProduct, inStock, 
-            describeProduct: translatedFields.describeProduct, baseProduct: translatedFields.baseProduct,
-            collectionProduct: translatedFields.collectionProduct, appointment: translatedFields.appointment,
-            colorProduct: translatedFields.colorProduct, drawingProduct: translatedFields.drawingProduct,
-            themeDrawing: translatedFields.themeDrawing, dockingProduct: translatedFields.dockingProduct,
-            widthProduct: translatedFields.widthProduct, manufacture: translatedFields.manufacture,
-            country: translatedFields.country, surfaceProduct: translatedFields.surfaceProduct,
-            stateProduct: translatedFields.stateProduct, addItem 
+        const order= {
+            id:id,
+            nameproduct:nameproduct,
+            article:article, type:type, priceProduct:priceProduct, photoProduct:photoProduct,
+            inStock:inStock,describeProduct:describeProduct, baseProduct:baseProduct,collectionProduct:collectionProduct,appointment:appointment,colorProduct:colorProduct,drawingProduct:drawingProduct, themeDrawing:themeDrawing,dockingProduct:dockingProduct,widthProduct,manufacture:manufacture,country:country,surfaceProduct:surfaceProduct,stateProduct:stateProduct, addItem:addItem 
         };
         addToCart(order); 
-    };
+    
+    }
 
     const navigate = useNavigate();
     const toLogin = () => {
@@ -165,8 +143,8 @@ const Card = ({
             <ProdCardWrapper>
                 <ProdCardLink to={`/detailpage/`}>
                     <ProdCardImageWrapper>
-                        {translatedFields.stateProduct === 'Новинка' && (
-                            <div className='instocks_label'>{translatedFields.stateProduct}</div>
+                        {stateProduct === 'Новинка' && (
+                            <div className='instocks_label'>{stateProduct}</div>
                         )}
                         <ProdCardImage>
                             <ProdCardPhoto>
@@ -179,10 +157,10 @@ const Card = ({
                 <ProdCardDescription>
                     <ProdCardLink to={`/detailpage/`}>
                         <ProdCardCategory>
-                            {translatedFields.type}
+                            {type}
                         </ProdCardCategory>
                         <ProdCardName>
-                            {translatedFields.nameproduct}
+                            {nameproduct}
                         </ProdCardName>
                     </ProdCardLink>
                     <ProdCardFooter>
@@ -202,26 +180,26 @@ const Card = ({
             <Modal 
                 active={modalActive} 
                 setActive={setModalActive} 
-                nameprod={translatedFields.nameproduct} 
-                type={translatedFields.type} 
+                nameprod={nameproduct} 
+                type={type} 
                 id={id}  
-                article={translatedFields.article}  
+                article={article}  
                 priceProduct={priceProduct} 
                 photoProduct={photoProduct} 
                 inStock={inStock} 
-                describeProduct={translatedFields.describeProduct} 
-                baseProduct={translatedFields.baseProduct} 
-                collectionProduct={translatedFields.collectionProduct} 
-                appointment={translatedFields.appointment} 
-                colorProduct={translatedFields.colorProduct} 
-                drawingProduct={translatedFields.drawingProduct} 
-                themeDrawing={translatedFields.themeDrawing} 
-                dockingProduct={translatedFields.dockingProduct} 
-                widthProduct={translatedFields.widthProduct} 
-                manufacturer={translatedFields.manufacture} 
-                country={translatedFields.country} 
-                surfaceProduct={translatedFields.surfaceProduct} 
-                stateProduct={translatedFields.stateProduct}
+                describeProduct={describeProduct} 
+                baseProduct={baseProduct} 
+                collectionProduct={collectionProduct} 
+                appointment={appointment} 
+                colorProduct={colorProduct} 
+                drawingProduct={drawingProduct} 
+                themeDrawing={themeDrawing} 
+                dockingProduct={dockingProduct} 
+                widthProduct={widthProduct} 
+                manufacturer={manufacture} 
+                country={country} 
+                surfaceProduct={surfaceProduct} 
+                stateProduct={stateProduct}
             />
         </div>
     );

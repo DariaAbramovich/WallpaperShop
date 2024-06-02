@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import './../adminCataloge.scss'
 import { Link } from 'react-router-dom';
 import AdminCard from '../../../../components/adminCard';
+import { Search } from '../../../Search/search';
 
 export const AdminWowen= () => {
 
@@ -21,6 +22,7 @@ export const AdminWowen= () => {
     const [filterApplied, setFilterApplied] = useState(false); // To track whether filters are applied or not
     const [editProductId, setEditProductId] = useState(null); // Хранит ID редактируемого товара
     const [showEditModal, setShowEditModal] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
        
     const getProducts = async () => {
         try {
@@ -98,17 +100,16 @@ export const AdminWowen= () => {
         // После закрытия формы обновляем список товаров
         getProducts();
     };
+    const displayProducts = searchResults.length > 0 ? searchResults : filteredProducts;
+
     return (
         <>
             <div className="container">
-                <div className="search-position">
-                    {/* <div >
-                        <Search setResult={setResult} />
-                        <div className='search_filter_place' >
-                            <SearchResult result={result} />
-                        </div>
-                    </div> */}
+            <div className="search-position">
+                <div>
+                    <Search setSearchResults={setSearchResults} />
                 </div>
+            </div>
                 <div className="cataloge">
                     <div className="cataloge-wrapper">
                     <div className="cataloge-filter">
@@ -185,8 +186,8 @@ export const AdminWowen= () => {
                             </div>
 
                             <div className="card-wrapper">
-                                {filteredProducts.length > 0 ? (
-                                    filteredProducts.map((pData) => {
+                            {displayProducts.length > 0 ? (
+                                displayProducts.map((pData) => {
                                         const {
                                             IdProduct,
                                             NameProduct,

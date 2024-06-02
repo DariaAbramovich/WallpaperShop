@@ -25,7 +25,9 @@ const Modal = ({ active, setActive, nameprod, type, article, priceProduct, inSto
                         <div className="modal_important_info">
                             <div className="modal_price">Цена: {priceProduct} руб.</div>
                             {/* <div className="modal_instok">{inStock}</div> */}
-                            <div className="modal_stateproduct">{stateProduct}</div>
+                            {stateProduct === 'Новинка' && (
+                            <div className='instocks_label'>{stateProduct}</div>
+                        )}
                         </div>
                         <div className="modal_info_item">
                                 <div className="item_text">Описание:{describeProduct}</div>
