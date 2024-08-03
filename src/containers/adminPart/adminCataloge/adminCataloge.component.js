@@ -15,8 +15,8 @@ const AdminCatalogeComponent = () => {
     const [stateProds, setStateProds] = useState([]);
     const [manufacturer, setManufacturer] = useState('');
     const [manufacturers, setManufacturers] = useState([]);
-    const [filterApplied, setFilterApplied] = useState(false); // To track whether filters are applied or not
-    const [editProductId, setEditProductId] = useState(null); // Хранит ID редактируемого товара
+    const [filterApplied, setFilterApplied] = useState(false); 
+    const [editProductId, setEditProductId] = useState(null); 
     const [showEditModal, setShowEditModal] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [showNewProducts, setShowNewProducts] = useState(false);
@@ -81,7 +81,7 @@ const AdminCatalogeComponent = () => {
         try {
             const response = await axios.delete(`http://localhost/api/product.php?id=${productId}`);
             console.log(response.data);
-            // Обновляем список товаров после удаления
+            
             getProducts();
         } catch (error) {
             console.error('Ошибка удаления товара:', error);
@@ -103,7 +103,7 @@ const AdminCatalogeComponent = () => {
     const handleCloseEditForm = () => {
         setEditProductId(null);
         setShowEditModal(false);
-        // После закрытия формы обновляем список товаров
+       
         getProducts();
     };
 
@@ -148,6 +148,7 @@ const AdminCatalogeComponent = () => {
                                                 value={stateProd}
                                                 onChange={(e) => setStateProd(e.target.value)}
                                             >
+                                                <option value="">Все</option>
                                                 {stateProds.map((stedP, index) => (
                                                     <option key={index} value={stedP}>{stedP}</option>
                                                 ))}

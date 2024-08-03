@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ChatBot from "./chatBot"
-import chatIcon from '../../assets/icon/chat.png'; // Assuming you have a chat icon
+import chatIcon from '../../assets/icon/chat.png'; 
 
 export const ChatBotContainer = ({language})=>{
     const [isChatBotVisible, setIsChatBotVisible] = useState(false);
@@ -10,7 +10,7 @@ export const ChatBotContainer = ({language})=>{
         
     return(
         <>
-        {isChatBotVisible && <ChatBot language={language}/>} {/* Conditionally render ChatBot */}
+        {isChatBotVisible && <ChatBot language={language}/>} 
           <button className="chat-toggle-button" onClick={toggleChatBot}>
             <img src={chatIcon} alt="Chat" />
           </button>

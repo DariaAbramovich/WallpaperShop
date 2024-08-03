@@ -1,65 +1,288 @@
-.payment_title{
-    color: var(  --text-card-dark-blue);
-    font-size: 24px;
-    font-weight: 500;
-    margin: 24px;
-}
-.btns_tab{
-    display: flex;
-    margin: 20px 0;
-    // justify-content:space-between;
-}
-.toPay{
-    background-color: var( --bg-btn-dark-blue);
-    color: rgb(235, 235, 235);
-    margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
-    transition: 0.6s;
-}
-.toPay:hover{
-    background-color: var( --btn-accent);
-}
-.payment_title{
-    color: var(  --text-card-dark-blue);
-    font-size: 24px;
-    font-weight: 500;
-    margin: 24px;
+// // .payment_title{
+// //     color: var(  --text-card-dark-blue);
+// //     font-size: 24px;
+// //     font-weight: 500;
+// //     margin: 24px;
+// // }
+// // .btns_tab{
+// //     display: flex;
+// //     margin: 20px 0;
+// //     // justify-content:space-between;
+// // }
+// // .toPay{
+// //     background-color: var( --bg-btn-dark-blue);
+// //     color: rgb(235, 235, 235);
+// //     margin: 10px;
+// //     padding: 10px;
+// //     border-radius: 10px;
+// //     transition: 0.6s;
+// // }
+// // .toPay:hover{
+// //     background-color: var( --btn-accent);
+// // }
+// // .payment_title{
+// //     color: var(  --text-card-dark-blue);
+// //     font-size: 24px;
+// //     font-weight: 500;
+// //     margin: 24px;
+// // }
+// // .input_item_order{
+// //     margin: 24px;
+// // }
+// // .required {
+// //     color: red;
+// // }
+
+// // .error-message {
+// //     color: red;
+// //     font-size: 0.8rem;
+// //     margin-top: 5px;
+// // }
+
+// // input.error,
+// // select.error {
+// //     border-color: red;
+// // }
+
+// // input.error + .error-message,
+// // select.error + .error-message {
+// //     display: block;
+// // }
+
+// // .toPay {
+// //     display: inline-block;
+// //     // padding: 10px 20px;
+// //     background-color: #090146;
+// //     color: #fff;
+// //     border: none;
+// //     border-radius: 5px;
+// //     cursor: pointer;
+// //     text-decoration: none;
+// //     margin-right: 10px;
+// // }
+
+// // .btns_tab {
+// //     text-align: center;
+// //     margin-top: 20px;
+// // }
+// // .p-select{
+// //     // font-size: 19px;
+// // }
+// // .summ{
+// //     font-size: 19px;
+// //     margin: 24px;
+// // }
+// // .label_payment{
+
+// // }
+// // .input_item_order{
+// // }
+// // .input_item_order input,
+// // .input_item_order select,
+// // .input_item_order .react-input-mask {
+// //     border: 1px solid #ccc;
+// //     padding: 10px;
+// //     font-size: 16px;
+// //     border-radius: 4px;
+// //     margin-top: 5px;
+// //     width: 100%;
+// //     box-sizing: border-box;
+// // }
+
+// // .input_item_order input.error,
+// // .input_item_order select.error,
+// // .input_item_order .react-input-mask.error {
+// //     border-color: red;
+// // }
+// .modal.active .modal_content {
+//     background: #fff;
+//     padding: 20px;
+//     border-radius: 8px;
+//     width: 600px; // увеличим ширину
+//     max-width: 90%;
+//     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+//     position: relative;
+// }
+
+// .form_grid {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//     gap: 20px;
+// }
+
+// .input_item_order input,
+// .input_item_order select,
+// .input_item_order .react-input-mask {
+//     border: 1px solid #ccc;
+//     padding: 10px;
+//     font-size: 16px;
+//     border-radius: 4px;
+//     margin-top: 5px;
+//     width: 100%;
+//     box-sizing: border-box;
+// }
+
+// .input_item_order input.error,
+// .input_item_order select.error,
+// .input_item_order .react-input-mask.error {
+//     border-color: red;
+// }
+
+// .label_payment {
+//     display: block;
+//     margin-bottom: 5px;
+//     font-weight: bold;
+// }
+
+// .input_item_order {
+//     margin-bottom: 15px;
+// }
+
+// .error-message {
+//     color: red;
+//     font-size: 12px;
+//     margin-top: 5px;
+// }
+
+// .summ {
+//     margin-top: 20px;
+//     font-size: 18px;
+//     font-weight: bold;
+//     grid-column: span 2; // занимает всю ширину
+// }
+
+// .btns_tab {
+//     margin-top: 20px;
+//     display: flex;
+//     justify-content: space-between;
+//     grid-column: span 2; // занимает всю ширину
+// }
+
+// .toPay {
+//     padding: 10px 20px;
+//     font-size: 16px;
+//     border: none;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     margin-right: 10px;
+// }
+
+// .toPay:first-child {
+//     background-color: #28a745;
+//     color: white;
+// }
+
+// .toPay:last-child {
+//     background-color: #dc3545;
+//     color: white;
+// }
+
+// .empty-cart-message {
+//     font-size: 18px;
+//     text-align: center;
+// }
+
+// .empty-cart-message a {
+//     color: #007bff;
+//     text-decoration: none;
+// }
+
+// .empty-cart-message a:hover {
+//     text-decoration: underline;
+// }
+.modal.active .modal_content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 600px;
+    max-width: 90%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
-.required {
-    color: red;
+.form_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.input_item_order input,
+.input_item_order select,
+.input_item_order .react-input-mask {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input_item_order input.error,
+.input_item_order select.error,
+.input_item_order .react-input-mask.error {
+    border-color: red;
+}
+
+.label_payment {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input_item_order {
+    margin-bottom: 15px;
 }
 
 .error-message {
     color: red;
-    font-size: 0.8rem;
+    font-size: 12px;
     margin-top: 5px;
 }
 
-input.error,
-select.error {
-    border-color: red;
-}
-
-input.error + .error-message,
-select.error + .error-message {
-    display: block;
-}
-
-.toPay {
-    display: inline-block;
-    // padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    margin-right: 10px;
+.summ {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    grid-column: span 2; /* занимает всю ширину */
 }
 
 .btns_tab {
-    text-align: center;
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    grid-column: span 2; /* занимает всю ширину */
+}
+
+.toPay {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.toPay:first-child {
+    background-color: #28a745;
+    color: white;
+}
+
+.toPay:last-child {
+    background-color: #dc3545;
+    color: white;
+}
+
+.empty-cart-message {
+    font-size: 18px;
+    text-align: center;
+}
+
+.empty-cart-message a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.empty-cart-message a:hover {
+    text-decoration: underline;
 }

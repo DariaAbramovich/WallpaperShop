@@ -13,9 +13,5 @@ const DetailListProductCompanent = ({ items, total }) => {
     )
 
 }
-// const mapStateToProps = ({ delate: {  delatetItems }}) => ({
-//     items: delatetItems,
-//     total:  delatetItems.reduce((acc, item) => acc += item.priceProduct * item.quantity, 0)
-// });
 
 export default DetailListProductCompanent;

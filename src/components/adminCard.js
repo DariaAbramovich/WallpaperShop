@@ -34,13 +34,6 @@ const ProdCardTitle = styled.h4`
 `;
 
 
-// const CardLink = ({onClick,itemsCount })=>{
-//     return(
-//        <Link to={`/detailpage/`} onClick={onClick}>
-
-//        </Link>
-//     )
-// }
 const ProdCardLink = styled(Link)`
   &:hover {
     // opacity: 0.4;

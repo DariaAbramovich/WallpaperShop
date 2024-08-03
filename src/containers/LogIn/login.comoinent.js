@@ -1,13 +1,14 @@
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import './login.scss';
 import back from './../../assets/icon/back.png';
 import close from './../../assets/icon/close.png';
 
-const LoginComponent = ({setUser}) => {
+const LoginComponent = ({ setUser }) => {
 
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({});
@@ -17,103 +18,85 @@ const LoginComponent = ({setUser}) => {
     const [passwordUser, setPasswordUser] = useState("");
     const [dirtyLoginUser, setDirtyLoginUser] = useState(false);
     const [dirtyPasswordUser, setDirtyPasswordUser] = useState(false);
-    const [errorLoginUser, setErrorLoginUser] = useState("Поле логин не должно быть пустым");
-    const [errorPasswordUser, setErrorPasswordUser] = useState("Поле пароль не должно быть пустым");
-    const [authError, setAuthError] = useState(false); 
+    const [errorLoginUser, setErrorLoginUser] = useState("");
+    const [errorPasswordUser, setErrorPasswordUser] = useState("");
+    const [authError, setAuthError] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         getUsers();
     }, [])
 
-    const getUsers = (e) => {
-        axios.get('http://localhost/api/user.php', inputs).
-            then(function (response) {
+    const getUsers = () => {
+        axios.get('http://localhost/api/user.php', inputs)
+            .then(function (response) {
                 console.log(response.data);
                 setUsers(response.data);
-                // navigate('/');
-        })
+            })
+            .catch(function (error) {
+                console.error('Ошибка при получении пользователей:', error);
+            });
     }
-    const loginHanglerUser = (e) => {
-        setLoginUser(e.target.value);
-        if (e.target.value){
-            setErrorLoginUser("");
-            const name = e.target.name;
-            const value = e.target.value;
-            setInputs(values => ({ ...values, [name]: value }))
-        }
-        else {
-            setErrorLoginUser("Некорректный логин");
-        }
-    }
-    const passnHanglerUser = (e) => {
-        setPasswordUser(e.target.value);
-        const  ToLogin = (e)=>{
-        navigate('/admin/')
-       }
-        if (e.target.value) {
-            setErrorPasswordUser("");
-            const name = e.target.name;
-            const value = e.target.value;
-            setInputs(values => ({ ...values, [name]: value }))
 
-            if(Array.isArray(users)){
-                users.map((user, key) => {
-                    let pass = document.getElementById('pass')
-                    let login = document.getElementById('login')
-        
-                    for (var i in user) {
-                         console.log("lodin -", user.Login);
-                       
-                        if (login.value != "" && pass.value != "") {
-                            if(login.value == "admin" && pass.value=="admin"){
-                                setUser(user);
-                                localStorage.setItem('user', JSON.stringify(user));  
-                                navigate('/admin/')
-                                break;
-                            }
-                            if (login.value == user.Login && pass.value == user.Password) {
-                                setUser(user);
-                                localStorage.setItem('user', JSON.stringify(user));   
-                                navigate('/');
-                                break;
-                            }
-                            else {
-                                setErrorPasswordUser("Неверный логин или пароль");
-                            }
-                        }   
-                    }
-                })
-            }
+    const handleLogin = (e) => {
+        e.preventDefault();
+        setDirtyLoginUser(true);
+        setDirtyPasswordUser(true);
+        if (!loginUser || !passwordUser) {
+            alert("Поля 'Логин' и 'Пароль' должны быть заполнены.");
+            return;
         }
-        else {
-            setErrorPasswordUser("Заполните поле");
+        if (loginUser === 'admin' && passwordUser === 'admin') {
+            const adminUser = { Login: 'admin', Password: 'admin', role: 'admin' };
+            setUser(adminUser);
+            localStorage.setItem('user', JSON.stringify(adminUser));
+            navigate('/admin/');
+            return;
         }
-        
+        let matchedUser = null;
+        if (Array.isArray(users)) {
+            matchedUser = users.find(user => user.Login === loginUser && user.Password === passwordUser);
+        }
+        if (matchedUser) {
+            setUser(matchedUser);
+            localStorage.setItem('user', JSON.stringify(matchedUser));
+            navigate('/');
+        } else {
+            alert("Неверный логин или пароль");
+        }
     }
+
     const blurHandlerUser = (e) => {
         switch (e.target.name) {
             case 'login':
                 setDirtyLoginUser(true);
+                if (!e.target.value) {
+                    setErrorLoginUser("Поле логин не должно быть пустым");
+                } else {
+                    setErrorLoginUser("");
+                }
                 break;
             case 'password':
                 setDirtyPasswordUser(true);
+                if (!e.target.value) {
+                    setErrorPasswordUser("Поле пароль не должно быть пустым");
+                } else {
+                    setErrorPasswordUser("");
+                }
                 break;
         }
     }
-   
-    
+
     const handleCange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
         setInputs(values => ({ ...values, [name]: value }));
     }
-        return (
+
+    return (
         <div>
-            <div >
-                <div>
-                </div>
-                <form className="login-form" onSubmit={getUsers}>
+            <div className="wrapper-login">
+                <form className="login-form" onSubmit={handleLogin}>
                     <Link to={'/'}>
                         <img src={close} className='back' />
                     </Link>
@@ -131,13 +114,12 @@ const LoginComponent = ({setUser}) => {
                                 type="text"
                                 name="login"
                                 id="login"
-                                onChange={e => loginHanglerUser(e)}
+                                onChange={e => setLoginUser(e.target.value)}
                                 value={loginUser}
                                 onBlur={e => blurHandlerUser(e)}
-                                placeholder="введите логин" 
-                                className={`input-item ${authError ? 'input-error' : ''}`
-                                }/>
-                                
+                                placeholder="введите логин"
+                                className={`input-item ${authError ? 'input-error' : ''}`}
+                            />
                         </div>
                         <div>
                             <div>
@@ -148,18 +130,17 @@ const LoginComponent = ({setUser}) => {
                                 type="password"
                                 name="password"
                                 id="pass"
-                                onChange={e => passnHanglerUser(e)}
+                                onChange={e => setPasswordUser(e.target.value)}
                                 value={passwordUser}
                                 onBlur={e => blurHandlerUser(e)}
                                 placeholder="введите пароль"
                                 className={`input-item ${authError ? 'input-error' : ''}`}
-                                />
-                                
+                            />
                         </div>
                     </div>
-                  
+
                     <div>
-                        <button className="login-btn">Log in</button>
+                        <button type="submit" className="login-btn">Войти</button>
                         <div className='link-place'>
                             <p className='text-link'>У меня нет аккаунта.<Link to={`/registred/`} className='link'> Регистрация</Link></p>
                         </div>

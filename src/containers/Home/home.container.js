@@ -12,10 +12,11 @@ import Card from '../../components/card.js';
 import { ChatBotContainer } from '../../components/chatBot/chat.container.js';
 
 
-const HomeContainer = ({cartItemCount, user, setUser,language,setLanguage}) => {
+const HomeContainer = ({cartItemCount, user, setUser,language,setLanguage,cartItems,setCartItems}) => {
     return (
         <>
-          <HomeCompanent cartItemCount ={cartItemCount} user={ user} setUser={setUser} language={language} setLanguage={setLanguage}/>
+          <HomeCompanent cartItemCount ={cartItemCount} user={ user} setUser={setUser} language={language} setLanguage={setLanguage} cartItems={cartItems} 
+    setCartItems={setCartItems}/>
            <ChatBotContainer language={language}/>
            <Footer language={language}/>
         </>

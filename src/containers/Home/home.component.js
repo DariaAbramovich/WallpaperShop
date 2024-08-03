@@ -14,7 +14,7 @@ import { InfoBlog } from './infoBlog/infoBlog';
 import './home.scss';
 import { SearchHome } from './searchHome';
 
-const HomeComponent = ({ cartItemCount, user, setUser, language, setLanguage}) => {
+const HomeComponent = ({ cartItemCount, user, setUser, language, setLanguage, cartItems,setCartItems}) => {
     const [inputs, setInputs] = useState({});
     const [productData, setProductData] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -32,7 +32,8 @@ const HomeComponent = ({ cartItemCount, user, setUser, language, setLanguage}) =
         <>
             <header className={`header ${isSearchFocused ? 'header--dimmed' : ''}`}>
                 <div className="container">
-                    <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser} language={language} setLanguage={setLanguage} />
+                    <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser} language={language} setLanguage={setLanguage} cartItems={cartItems} 
+    setCartItems={setCartItems} />
                
                     <div className="header__content">
                         <h1 className="header__title">{language === 'en' ? 'Impeccable life begins at home.' : 'Безупречная жизнь начинается дома.'}</h1>

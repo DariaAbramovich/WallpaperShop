@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { AdminNavbar } from "../adminNavbar/adminavbar";
 import { Header } from "../../../components/header";
 import AdminCatalogeComponent from "./adminCataloge.component";
+import { Footer } from "../../Footer/footer";
 
 const Wrapper = styled.div`
 background-color: rgb(239, 239, 239);
@@ -18,6 +19,7 @@ export const AdminCatalogeContainer = ({user}) => {
                     </div>   
             </Header>
             <AdminCatalogeComponent />
+            <Footer/>
             </Wrapper>
         </>
     )

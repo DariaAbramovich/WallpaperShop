@@ -108,7 +108,8 @@ const ProdCardName = styled.div`
         color: var(--text-accent);
     }
 `;
-const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStock,describeProduct, baseProduct,collectionProduct,appointment,colorProduct,drawingProduct, themeDrawing,dockingProduct, widthProduct,manufacture,country,surfaceProduct,stateProduct, addItem, addToCart, user }) =>{
+
+const Card = ({ id, nameproduct, article, type, priceProduct, photoProduct, inStock, describeProduct, baseProduct, collectionProduct, appointment, colorProduct, drawingProduct, themeDrawing, dockingProduct, widthProduct, manufacture, country, surfaceProduct, stateProduct, addItem, addToCart, user }) => {
     const [translatedFields, setTranslatedFields] = useState({
         nameproduct, article, type, describeProduct, baseProduct, collectionProduct,
         appointment, colorProduct, drawingProduct, themeDrawing, dockingProduct,
@@ -116,19 +117,37 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
     });
     const [modalActive, setModalActive] = useState(false);
 
-   
+    const handleOrder = () => {
+        if (!user) {
+            toLogin();
+            return;
+        }
 
-    const handleOrder = ()=>{
-
-        const order= {
-            id:id,
-            nameproduct:nameproduct,
-            article:article, type:type, priceProduct:priceProduct, photoProduct:photoProduct,
-            inStock:inStock,describeProduct:describeProduct, baseProduct:baseProduct,collectionProduct:collectionProduct,appointment:appointment,colorProduct:colorProduct,drawingProduct:drawingProduct, themeDrawing:themeDrawing,dockingProduct:dockingProduct,widthProduct,manufacture:manufacture,country:country,surfaceProduct:surfaceProduct,stateProduct:stateProduct, addItem:addItem 
+        const order = {
+            id: id,
+            nameproduct: nameproduct,
+            article: article,
+            type: type,
+            priceProduct: priceProduct,
+            photoProduct: photoProduct,
+            inStock: inStock,
+            describeProduct: describeProduct,
+            baseProduct: baseProduct,
+            collectionProduct: collectionProduct,
+            appointment: appointment,
+            colorProduct: colorProduct,
+            drawingProduct: drawingProduct,
+            themeDrawing: themeDrawing,
+            dockingProduct: dockingProduct,
+            widthProduct: widthProduct,
+            manufacture: manufacture,
+            country: country,
+            surfaceProduct: surfaceProduct,
+            stateProduct: stateProduct,
+            addItem: addItem
         };
-        addToCart(order); 
-    
-    }
+        addToCart(order);
+    };
 
     const navigate = useNavigate();
     const toLogin = () => {
@@ -141,7 +160,7 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
     return (
         <div>
             <ProdCardWrapper>
-                <ProdCardLink to={`/detailpage/`}>
+                <ProdCardLink >
                     <ProdCardImageWrapper>
                         {stateProduct === 'Новинка' && (
                             <div className='instocks_label'>{stateProduct}</div>
@@ -155,7 +174,7 @@ const Card = ({id,nameproduct, article, type, priceProduct, photoProduct, inStoc
                 </ProdCardLink>
                 
                 <ProdCardDescription>
-                    <ProdCardLink to={`/detailpage/`}>
+                    <ProdCardLink>
                         <ProdCardCategory>
                             {type}
                         </ProdCardCategory>
@@ -210,4 +229,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(Card);
-

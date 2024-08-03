@@ -1,12 +1,12 @@
 
-.nav{
+.nav {
     display: grid;
     grid-template-columns: 2fr 8fr 2fr;
     gap: 20px;
 }
-.logo{
+
+.logo {
     align-self: center;
-   
     font-weight: 700px;
     font-size: 32px;
     color: #c97208;
@@ -14,45 +14,42 @@
     text-transform: capitalize;
 }
 
-.nav-list{
-    /* центрирует по ширине родителя */
-    display: none;
-    justify-self: center;
+.nav-list {
+    display: flex;
+    justify-content: center;
     font-weight: 500;
     font-size: 21px;
-    justify-content: center;
-    align-items: center;
-    gap: 85px;
-
+    gap: 20px;
 }
-.nav-list__item{
+
+.nav-list__item {
     position: relative;
     padding-bottom: 10px;
 }
-.nav-list__link{
+
+.nav-list__link {
     opacity: 1;
-    transition:  opacity 0.2s ease-in;  
-    
+    transition: opacity 0.2s ease-in;  
 }
-.nav-list__link:hover{
+
+.nav-list__link:hover {
     opacity: 0.6;
 }
 
-.nav__icon{
+.nav__icon {
     align-items: center;
     width: 40px;
 }
 
-.login{
+.login {
     position: relative;
     width: 42px;
     justify-self: end;
-   
 }
 
-.cart_count{
+.cart_count {
     position: absolute;
-    top:-7px;
+    top: -7px;
     right: -15px;
     display: inline-block;
     height: 25px;
@@ -61,4 +58,25 @@
     padding: 1px 7px;
     font-weight: 700;
     line-height: 25px;
+}
+
+/* Медиа-запросы для адаптивности */
+@media screen and (max-width: 768px) {
+    .nav {
+        grid-template-columns: 1fr; /* Один столбец на мобильных устройствах */
+    }
+
+    .logo {
+        font-size: 24px; /* Уменьшаем размер логотипа для мобильных устройств */
+        text-align: center; /* Выравниваем логотип по центру на мобильных устройствах */
+    }
+
+    .nav-list {
+        display: none; /* Скрыть список элементов меню по умолчанию на мобильных устройствах */
+    }
+
+    .nav__icon,
+    .login {
+        display: none; /* Скрыть иконки входа и корзины по умолчанию на мобильных устройствах */
+    }
 }

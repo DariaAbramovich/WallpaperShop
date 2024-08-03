@@ -46,9 +46,9 @@ const ProductsComponent = () => {
             }   
             this.classList.add('active-btn')
     
-            // отображаем нужное и скрываем ненужное
+          
             for(let product of tabProducts){
-                //делаем проверку на отображение всех товаров
+              
                 if(this.dataset.tab == "all"){
                     product.classList.remove('none')
                 }
@@ -62,7 +62,7 @@ const ProductsComponent = () => {
                 }
                
             }
-            //обновляем свайпер
+      
             swiper.update()
         })
     }

@@ -7,7 +7,6 @@ import delete_btn from '../assets/icon/delete.png';
 
 const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
     const navigate = useNavigate();
-
     const handleRemove = (index) => {
         
         removeFromCart(index);
@@ -22,6 +21,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
 
     const handleIncrement = (index) => {
         updateQuantity(index, cartItems[index].quantity + 1);
+       
     };
 
     const handleDecrement = (index) => {
@@ -37,6 +37,7 @@ const Cart = ({ cartItems, removeFromCart, updateQuantity }) => {
 
         <div className="basket-card_wrapper">
             {cartItems.length === 0 ? (
+                
                 <div className='wrapperr-not-product'>
                     <div>
                         <p className='not-product'>Ваша корзина пуста</p>

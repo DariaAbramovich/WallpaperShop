@@ -138,17 +138,17 @@ export const AdminPaper = () => {
                                             />
                                         </div>
                                         <div>
-                                            <div className='filter_param'>Состояние товара:</div>
-                                            <select
-                                                className='select_area'
-                                                value={stateProd}
-                                                onChange={(e) => setStateProd(e.target.value)}
-                                            >
-                                                {stateProds.map((stedP, index) => (
-                                                    <option key={index} value={stedP}>{stedP}</option>
-                                                ))}
-                                            </select>
-                                        </div>
+                                    <div className='filter_param'>Помещение:</div>
+                                    <select className='select_area'
+                                        value={stateProd}
+                                        onChange={(e) => setStateProd(e.target.value)}
+                                    >
+                                        <option value="">Все</option>
+                                        {stateProds.map((stedP, index) => (
+                                            <option key={index} value={stedP}>{stedP}</option>
+                                        ))}
+                                    </select>
+                                </div>
                                         <div>
                                             <div className='filter_param'>Страна производитель:</div>
                                             <select

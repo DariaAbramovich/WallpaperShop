@@ -146,6 +146,7 @@ export const AdminWowen = () => {
                                                 value={stateProd}
                                                 onChange={(e) => setStateProd(e.target.value)}
                                             >
+                                                <option value="">Все</option>
                                                 {stateProds.map((stedP, index) => (
                                                     <option key={index} value={stedP}>{stedP}</option>
                                                 ))}

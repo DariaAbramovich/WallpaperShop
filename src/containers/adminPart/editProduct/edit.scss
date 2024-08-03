@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 .modalEdit_content{
     padding: 20px;
@@ -36,7 +37,7 @@
     border-radius: 5px;
     background-color: var( --bg-btn-dark-blue);
     transition: 0.6s;
-    background-color: #ee5f00;
+    background-color: #c87100;
 }
 .save-edit_btn:hover{
     background-color: var(--btn-accent);
@@ -52,8 +53,15 @@
     border-radius: 5px;
     background-color: var( --bg-btn-dark-blue);
     transition: 0.6s;
-    background-color: #0045bc;
+    background-color: #001b4a;
 }
 .close-edit_btn:hover{
     background-color: var(--btn-accent);
+}
+input {
+    flex: 2;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    padding: 5px; /* Убрано */
+    outline: none;
 }

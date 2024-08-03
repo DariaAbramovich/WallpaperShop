@@ -86,3 +86,53 @@
     top: 50%;
     transform: translate(50%, -50%);
 }
+
+
+
+/* Slider */
+.swiper {
+   
+    @media screen and (max-width: 768px) {
+        slidesPerView: 2;
+    }
+}
+
+
+.products__title {
+  
+    font-size: 32px;
+    margin-bottom: 20px; 
+}
+
+.tab-controls {
+  
+    margin-bottom: 40px;
+}
+
+.tub-controls__btn {
+  
+    height: 35px;
+    padding: 5px 15px;
+    font-size: 16px;
+}
+
+
+.swiper-card-wrapper {
+  
+    margin-top: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+
+.slider__button {
+   
+    width: 40px;
+    height: 40px;
+}
+
+
+.slider__button img {
+ 
+    width: 20px;
+    height: 20px;
+}

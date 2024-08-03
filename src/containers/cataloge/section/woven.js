@@ -121,7 +121,7 @@ export const NonWowen = ({ addToCart, user }) => {
                                                 value={stateProd}
                                                 onChange={(e) => setStateProd(e.target.value)}
                                             >
-                                                <option value="">Не выбрано</option>
+                                                <option value="">Все</option>
                                                 {stateProds.map((stedP, index) => (
                                                     <option key={index} value={stedP}>{stedP}</option>
                                                 ))}
@@ -133,7 +133,7 @@ export const NonWowen = ({ addToCart, user }) => {
                                                 value={manufacturer}
                                                 onChange={(e) => setManufacturer(e.target.value)}
                                             >
-                                                <option value="">Не выбрано</option>
+                                                <option value="">Все</option>
                                                 {manufacturers.map((manuf, index) => (
                                                     <option key={index} value={manuf}>{manuf}</option>
                                                 ))}

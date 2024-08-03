@@ -10,16 +10,17 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const CatalogeContainer = ({ addToCart,cartItemCount, user, setUser,language,setLanguage}) => {
+export const CatalogeContainer = ({ addToCart,cartItemCount, user, setUser,language,setLanguage, cartItems,setCartItems}) => {
     return (
         <>
         <Wrapper>
             <Header>
                     <div className="container">
-                        <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser} language={language} setLanguage={setLanguage}/>
+                        <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser} language={language} setLanguage={setLanguage} cartItems={cartItems} 
+    setCartItems={setCartItems}/>
                     </div>   
             </Header>
-            <CatalogeComponent  addToCart={ addToCart} language={language}/>
+            <CatalogeComponent  addToCart={ addToCart} user={user} setUser={setUser} language={language} />
             <ChatBotContainer language={language}/>
             <Footer language={language}/>
             </Wrapper>

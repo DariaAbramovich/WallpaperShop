@@ -5,7 +5,7 @@ import Card from '../../components/card';
 import { Search } from '../Search/search';
 import { Link } from 'react-router-dom';
 
-const CatalogeComponent = ({ addToCart, user, language }) => {
+const CatalogeComponent = ({ addToCart, user,  setUser, language }) => {
     const [productData, setProductData] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [minPrice, setMinPrice] = useState('');
@@ -74,6 +74,8 @@ const CatalogeComponent = ({ addToCart, user, language }) => {
         return true;
     });
 
+   
+    
     const displayProducts = searchResults.length > 0 ? searchResults : filteredProducts;
 
     return (
@@ -113,7 +115,7 @@ const CatalogeComponent = ({ addToCart, user, language }) => {
                                         value={stateProd}
                                         onChange={(e) => setStateProd(e.target.value)}
                                     >
-                                        <option value="">Не выбрано</option>
+                                        <option value="">Все</option>
                                         {stateProds.map((stedP, index) => (
                                             <option key={index} value={stedP}>{stedP}</option>
                                         ))}
@@ -125,7 +127,7 @@ const CatalogeComponent = ({ addToCart, user, language }) => {
                                         value={manufacturer}
                                         onChange={(e) => setManufacturer(e.target.value)}
                                     >
-                                        <option value="">Не выбрано</option>
+                                        <option value="">Все</option>
                                         {manufacturers.map((manuf, index) => (
                                             <option key={index} value={manuf}>{manuf}</option>
                                         ))}
@@ -212,8 +214,8 @@ const CatalogeComponent = ({ addToCart, user, language }) => {
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
     );
 };
 

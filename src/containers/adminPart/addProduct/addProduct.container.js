@@ -4,6 +4,7 @@ import AddProductComponent from "./addProduct.component";
 import { Navbar } from "../../Navbar/navbar";
 import { Header } from "../../../components/header";
 import { AdminNavbar } from "../adminNavbar/adminavbar";
+import { Footer } from "../../Footer/footer";
 
 const Wrapper = styled.div`
 background-color: rgb(239, 239, 239);
@@ -20,6 +21,7 @@ export const AddProductContainer = ({user}) => {
                     </div>
                 </Header>
                 <AddProductComponent />
+                <Footer/>
         </>
     )
 }

@@ -1,14 +1,14 @@
 
 import { Provider } from 'react-redux';
-import {ThemeProvider} from "styled-components";
+import { ThemeProvider } from "styled-components";
 import axios from 'axios'
-import {BrowserRouter, createBrowserRouter, Navigate, Route, Router, RouterProvider, Routes, useLocation, useNavigate} from "react-router-dom";
+import { BrowserRouter, createBrowserRouter, Navigate, Route, Router, RouterProvider, Routes, useLocation, useNavigate } from "react-router-dom";
 import 'swiper/css';
 import './css/App.css';
 import './css/reset.css';
 import './css/base.css';
 import './css/vars.scss';
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { LoginContainer } from "./containers/LogIn/login.container";
 import { RegistredContainer } from "./containers/LogIn/Registred/registred.container";
 
@@ -32,6 +32,7 @@ import { AdminVinilContainer } from './containers/adminPart/adminCataloge/sectio
 import { AdminPaperContainer } from './containers/adminPart/adminCataloge/sectionAdmin/paperAdmin/paper.container';
 import { AddProductContainer } from './containers/adminPart/addProduct/addProduct.container';
 import CheckoutForm from './containers/basket/checkOutForm.component';
+import { compose } from 'redux';
 
 const colors = {
   bgColor: '#0D1B39',
@@ -57,142 +58,167 @@ const theme = {
   ...breakpoints,
 }
 
-
-
-const App = ()=>{
+const App = () => {
   const [cartItems, setCartItems] = useState([]);
-  const [showScrollToTop, setShowScrollToTop] = useState(false); // State to manage scroll to top button visibility
-  // const [user, setUser] = useState(null); // State to store logged-in user data
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))); // State to store logged-in user data
- 
-  const [isChatBotVisible, setIsChatBotVisible] = useState(true); // Initialize chatbot as visible by default
-  const [language, setLanguage] = useState('ru'); // default language
+  const [showScrollToTop, setShowScrollToTop] = useState(false);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
+  const [isChatBotVisible, setIsChatBotVisible] = useState(true);
+  const [language, setLanguage] = useState('ru');
+
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        if (user && user.IdPerson) {
+          const response = await axios.get('http://localhost/api/cart.php', {
+            params: {
+                userId: user.IdPerson
+            }
+        });
+
+          setCartItems((prevCartItems) => [...prevCartItems, ...response.data]);
+        }
+      } catch (error) {
+        console.error('Error fetching cart items:', error);
+      }
+    };
+
+    fetchCartItems();
+  }, [user]);
 
   useEffect(() => {
     const storedCartItems = localStorage.getItem('cartItems');
     if (storedCartItems) {
-        setCartItems(JSON.parse(storedCartItems));
+      setCartItems(JSON.parse(storedCartItems));
     }
-}, []);
+  }, []);
+  useEffect(() => {
+    const storedCartItems = localStorage.getItem('cartItems');
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems));
+    }
+  }, []);
 
-useEffect(() => {
+  useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
-}, [cartItems]);
+  }, [cartItems]);
 
-useEffect(() => {
-  const handleScroll = () => {
-    if (window.scrollY > 300) {
-      setShowScrollToTop(true);
-    } else {
-      setShowScrollToTop(false);
-    }
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollToTop(true);
+      } else {
+        setShowScrollToTop(false);
+      }
+    };
+
+
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-  // useEffect(() => {
-  //   const userParam =()=>{
-  //   if (location.pathname === '/login' || location.pathname === '/registred') {
-  //     setIsChatBotVisible(false);
-  //   } else {
-  //     setIsChatBotVisible(true);
-  //   }
-  //   }
-  // }, [location]);
 
-
-  window.addEventListener('scroll', handleScroll);
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
-}, []);
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-const addToCart = (item) => {
-  setCartItems((prevCartItems) => {
+  const addToCart = (item) => {
+    setCartItems((prevCartItems) => {
       const existingItemIndex = prevCartItems.findIndex(
-          (cartItem) =>
-              cartItem.nameproduct === item.nameproduct &&
-              cartItem.type === item.type &&
-              cartItem.colorProduct === item.colorProduct &&
-              cartItem.image === item.image &&
-              cartItem.widthProduct === item.widthProduct
+        (cartItem) =>
+          cartItem.nameProduct === item.nameProduct &&
+          cartItem.type === item.type &&
+          cartItem.colorProduct === item.colorProduct &&
+          cartItem.image === item.image &&
+          cartItem.widthProduct === item.widthProduct
       );
+     
 
       if (existingItemIndex > -1) {
-          const updatedCart = [...prevCartItems];
-          updatedCart[existingItemIndex].quantity += 1;
-          return updatedCart;
-      } else {
-          return [...prevCartItems, { ...item, quantity: 1 }];
-      }
-  });
-};
-const removeAllItems = () => {
-  setCartItems([]);
-};
-const removeFromCart = (index) => {
-  setCartItems((prevCartItems) => prevCartItems.filter((_, i) => i !== index));
-};
+        const updatedCart = [...prevCartItems];
+        updatedCart[existingItemIndex].quantity += 1;
+        return updatedCart;
 
-const updateQuantity = (index, quantity) => {
-  setCartItems((prevCartItems) => {
+      } else {
+        return [...prevCartItems, { ...item, quantity: 1 }];
+      }
+    });
+  };
+  const removeAllItems = () => {
+    setCartItems([]);
+  };
+  const removeFromCart = (index) => {
+    setCartItems((prevCartItems) => prevCartItems.filter((_, i) => i !== index));
+  };
+
+  const updateQuantity = (index, quantity) => {
+    setCartItems((prevCartItems) => {
       const updatedCart = [...prevCartItems];
       if (quantity > 0) {
-          updatedCart[index].quantity = quantity;
+        updatedCart[index].quantity = quantity;
       } else {
-          updatedCart.splice(index, 1);
+        updatedCart.splice(index, 1);
       }
       return updatedCart;
-  });
-};
+    });
+  };
+  const getTotalItems = () => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  };
 
-const getTotalItems = () => {
-  return cartItems.reduce((total, item) => total + item.quantity, 0);
-};
-
-const handleSetUser = (userData) => {
-  setUser(userData);
-  localStorage.setItem('user', JSON.stringify(userData));
-};
-  return (
+  const handleSetUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
    
+  };
+
+  return (
+
     <ThemeProvider theme={theme}>
       <div className="App">
         <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/login/" element={<LoginContainer setUser={handleSetUser}/>} />
-            <Route path="/registred/" element={<RegistredContainer/>} />
-            <Route path="/constructor/" element={user ? <ConstructorContainer user={user} setUser={handleSetUser} addToCart={addToCart} cartItemCount={getTotalItems()} language={language} setLanguage={setLanguage} /> : <Navigate to="/login" />} />
-            <Route path="cataloge/" element={<CatalogeContainer  addToCart={addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/nonWoven/" element={<WowenContainer  addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/vinil/" element={<VinilContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/> } />
-            <Route path="/paperwall/" element={<PaperContainer addToCart={ addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/cart/" element={user ? 
-                                    <BasketContainer user={user} setUser={handleSetUser} cartItems={cartItems}  removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} language={language} setLanguage={setLanguage} />
-                                    : <Navigate to="/login" />} />
-            
-            <Route path="/admin/" element={<AdminHomeContainer user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage}/>}  />
-            <Route path="/admin:cataloge/" element={<AdminCatalogeContainer user={user} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/admin:nonWoven/" element={<WowenContainerAdmin user={user} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/admin:vinil/" element={<AdminVinilContainer  user={user} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/admin:paperwall/" element={<AdminPaperContainer user={user} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/addedproducts/" element={<AddProductContainer user={user} language={language} setLanguage={setLanguage}/>} />
-            <Route path="/admin:aboute/" element={<AboutContainerAdmin user={user} language={language} setLanguage={setLanguage}/>} />
-           
+          <Routes>
+            <Route path="/" element={<HomeContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage} cartItems={cartItems}
+              setCartItems={setCartItems} />} />
+            <Route path="/login/" element={<LoginContainer setUser={handleSetUser} />} />
+            <Route path="/registred/" element={<RegistredContainer />} />
+            <Route path="/constructor/" element={user ? <ConstructorContainer user={user} setUser={handleSetUser} addToCart={addToCart} cartItemCount={getTotalItems()} language={language} setLanguage={setLanguage} cartItems={cartItems}
+              setCartItems={setCartItems} /> : <Navigate to="/login" />} />
+            <Route path="cataloge/" element={<CatalogeContainer addToCart={addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage} cartItems={cartItems}
+              setCartItems={setCartItems} />} />
+            <Route path="/nonWoven/" element={<WowenContainer addToCart={addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage} cartItems={cartItems}
+              setCartItems={setCartItems} />} />
+            <Route path="/vinil/" element={<VinilContainer addToCart={addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage} cartItems={cartItems}
+              setCartItems={setCartItems} />} />
+            <Route path="/paperwall/" element={<PaperContainer addToCart={addToCart} cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage} cartItems={cartItems}
+              setCartItems={setCartItems} />} />
+            <Route path="/about/" element={<AboutContainer cartItemCount={getTotalItems()} user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage} cartItems={cartItems}
+              setCartItems={setCartItems} />} />
+            <Route path="/cart/" element={user ?
+              <BasketContainer user={user} setUser={handleSetUser} cartItems={cartItems} setCartItems={setCartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} cartItemCount={getTotalItems()} removeAllItems={removeAllItems} language={language} setLanguage={setLanguage}/>
+              : <Navigate to="/login" />} />
 
-        </Routes>
-        {showScrollToTop && (
+            <Route path="/admin/" element={<AdminHomeContainer user={user} setUser={handleSetUser} language={language} setLanguage={setLanguage} />} />
+            <Route path="/admin:cataloge/" element={<AdminCatalogeContainer user={user} language={language} setLanguage={setLanguage} />} />
+            <Route path="/admin:nonWoven/" element={<WowenContainerAdmin user={user} language={language} setLanguage={setLanguage} />} />
+            <Route path="/admin:vinil/" element={<AdminVinilContainer user={user} language={language} setLanguage={setLanguage} />} />
+            <Route path="/admin:paperwall/" element={<AdminPaperContainer user={user} language={language} setLanguage={setLanguage} />} />
+            <Route path="/addedproducts/" element={<AddProductContainer user={user} language={language} setLanguage={setLanguage} />} />
+            <Route path="/admin:aboute/" element={<AboutContainerAdmin user={user} language={language} setLanguage={setLanguage} />} />
+
+
+          </Routes>
+          {showScrollToTop && (
             <button className="scroll-to-top-button" onClick={scrollToTop}>
               <img className='scroll-to-top-img' src={top}></img>
             </button>
           )}
-        {/* <Footer /> */}
+          {/* <Footer /> */}
         </BrowserRouter>
       </div>
     </ThemeProvider>
-   
+
   );
 }
 

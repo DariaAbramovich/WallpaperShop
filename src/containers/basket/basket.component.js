@@ -1,15 +1,20 @@
-import { useState } from 'react';
+
+
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import Cart from '../../components/cart';
 import './basket.scss';
 import Payment from './Payment/payment';
 
-const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7dc');
 
-const BasketComponent = ({ cartItems, removeFromCart, updateQuantity, removeAllItems }) => {
+
+const BasketComponent = ({ cartItems, removeFromCart, updateQuantity, removeAllItems,user }) => {
     const [paymentActive, setPaymentActive] = useState(false);
 
+    const [userCart, setUserCart] = useState([]);
+
+    
     const calculateTotalPrice = () => {
         const total = cartItems.reduce((total, item) => total + item.priceProduct * item.quantity, 0);
         return Math.round(total * 100) / 100; // Round to 2 decimal places
@@ -22,7 +27,7 @@ const BasketComponent = ({ cartItems, removeFromCart, updateQuantity, removeAllI
     return (
         <div className="container">
             <div className='basket-wrapper'>
-                <div className='basket_title'>Basket</div>
+                <div className='basket_title'>Корзина</div>
                 <div className='product-container'>
                     <div className='product-container_item'>
                         <Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} />
@@ -45,9 +50,9 @@ const BasketComponent = ({ cartItems, removeFromCart, updateQuantity, removeAllI
                     </div>
                 </div>
                 {paymentActive && (
-                    <Elements stripe={stripePromise}>
-                        <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={totalPrice} />
-                    </Elements>
+                    <div>
+                        <Payment pactive={paymentActive} setPactive={setPaymentActive} sum={totalPrice} handleRemoveAll={handleRemoveAll} dataOrder={cartItems} />
+                    </div>
                 )}
             </div>
         </div>

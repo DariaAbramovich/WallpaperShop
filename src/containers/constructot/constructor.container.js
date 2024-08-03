@@ -10,13 +10,14 @@ background-color: rgb(239, 239, 239);
 // background-color: grey;
 
 `
-export const ConstructorContainer = ({addToCart, cartItemCount, user, setUser }) => {
+export const ConstructorContainer = ({addToCart, cartItemCount, user, setUser,cartItems,setCartItems}) => {
     return (
         <>
         <Wrapper>
             <Header>
                     <div className="container">
-                        <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser}/>
+                        <Navbar cartItemCount={cartItemCount} user={user} setUser={setUser} cartItems={cartItems} 
+    setCartItems={setCartItems}/>
                     </div>   
             </Header>
             <Constructor addToCart={addToCart}/>

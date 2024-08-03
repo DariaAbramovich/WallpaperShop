@@ -21,9 +21,9 @@ export const Footer = ({ language }) => {
                                 {language === 'en' ? 'Our Addresses' : 'Наши адреса'}
                             </h3>
                             <div className="footer__block-content">
-                                Minsk, ul. Peravaya<br />
-                                Minsk, ul. Vtoraya<br />
-                                Minsk, ul. Tretya<br />
+                                г.Минск ул.Первая<br />
+                                г.Минск ул.Вторая<br />
+                                г.Минск ул.Третья<br />
                             </div>
                         </div>
                         <div className="schedule">
@@ -31,8 +31,8 @@ export const Footer = ({ language }) => {
                                 {language === 'en' ? 'Working Hours' : 'График работы'}
                             </h3>
                             <div className="footer__block-content">
-                                Mon — Fri: 10:00 AM — 8:00 PM<br />
-                                Sat — Sun: 10:00 AM — 6:00 PM<br />
+                                Пн-Пт: 10:00  - 20:00<br />
+                                Сб-Вс: 10:00 — 18:00<br />
                             </div>
                         </div>
                     </div>  

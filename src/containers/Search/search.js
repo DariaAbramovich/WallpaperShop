@@ -31,7 +31,7 @@ export const Search = ({ setSearchResults }) => {
                 className="search-form__input" 
                 value={inputs} 
                 onChange={(e) => handleChange(e.target.value)} 
-                placeholder='Search...' 
+                placeholder='Искать...' 
             />
             <button className="search-form__btn" type='submit'>
                 <img src={search_icon} className="search-img" alt="search icon" />
